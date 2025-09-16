@@ -18,7 +18,13 @@ public class Driver{
    *The tests should print the intended output in addition to the actual output.
    *You should also replace the placeholder text with an actual function call.
    */
-   System.out.println("makeBricks(1,1,2) expected false result: " + "REPLACE THIS");
-   System.out.println("makeBricks(1,1,6) expected true  result: " + "REPLACE THIS" );
+   System.out.println("makeBricks(1,1,2) expected false result: " + Functions.makeBricks(1,1,2));
+   System.out.println("makeBricks(1,1,6) expected true  result: " + Functions.makeBricks(1, 1, 6));
+   System.out.println("makeBricks(3,1,9) expected false  result: " + Functions.makeBricks(3, 1, 9));
+   System.out.println("makeBricks(3,2,10) expected true  result: " + Functions.makeBricks(3, 2, 10));
+   System.out.println("makeBricks(3,2,8) expected true  result: " + Functions.makeBricks(3, 2, 8));
+   System.out.println("makeBricks(3,2,9) expected false  result: " + Functions.makeBricks(3, 2, 9));
+   System.out.println("makeBricks(7,1,13) expected false  result: " + Functions.makeBricks(7, 1, 13));
+   System.out.println("makeBricks(43,1,46) expected true  result: " + Functions.makeBricks(43, 1, 46));
  }
 }
