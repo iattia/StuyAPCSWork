@@ -5,7 +5,12 @@ public class StringMethods{
   //precondition s and target both have length > 0
   //Do not use indexOf() or similar.
   public static int myIndexOf(String s, String target){
-    return 0;
+    for (int i=0;i<s.length()-target.length();i++){
+      if (s.substring(i,i+target.length()).equals(target)){
+        return i;
+      }
+    }
+    return -1;
   }
   
   //return 0 if the strings are equal
