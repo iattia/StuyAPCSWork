@@ -22,8 +22,13 @@ public class Driver{
   a="prefix";
   b="prefixOf";
   System.out.println("Expected same sign: "+ a.compareTo(b) +" vs my function: "+StringMethods.myCompareTo(a,b)); 
-
-
+  a="zalphabetical";
+  b="alphabetical";
+  System.out.println("Expected same sign: "+ a.compareTo(b) +" vs my function: "+StringMethods.myCompareTo(a,b)); 
+  a="a";
+  b="a";
+  System.out.println("Expected same sign: "+ a.compareTo(b) +" vs my function: "+StringMethods.myCompareTo(a,b)); 
+  
   //test cases myIndexOf:
   whole = "Hello";
   part = "He";
