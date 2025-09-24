@@ -31,6 +31,19 @@ public class StringMethods{
   //precondition: s is formatted as a valid integer.
   //Do not use Integer.parseInt() or similar.
   public static int parseInt(String s){
-    return 0;
+    boolean isNegative = false;
+    int i = 0;
+    int result = 0;
+    if (s.charAt(0)=='-'){
+      isNegative = true;
+      i = 1;
+    }
+    for (;i<s.length();i++){
+      result = result*10 + s.charAt(i) - '0';
+    }
+    if (isNegative){
+      return -result;
+    }
+    return result;
   }
 }
