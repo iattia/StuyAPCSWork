@@ -28,7 +28,7 @@ public class Driver{
   a="a";
   b="a";
   System.out.println("Expected same sign: "+ a.compareTo(b) +" vs my function: "+StringMethods.myCompareTo(a,b)); 
-  
+
   //test cases myIndexOf:
   whole = "Hello";
   part = "He";
@@ -40,10 +40,22 @@ public class Driver{
   part = "dT";
   System.out.println("Expected "+ whole.indexOf(part) +" vs my function: "+ StringMethods.myIndexOf(whole, part) );
     
-  //Single test case parseInt:
+  //test cases parseInt:
   number = "152";
   int actual = Integer.parseInt(number);
-  int guess  = -9999999;//replace with your parse function
+  int guess  = StringMethods.parseInt(number);//replace with your parse function
+  System.out.println("Expected "+ actual +" vs my function: "+ guess+" "+(actual==guess));
+  number = "-452";
+  actual = Integer.parseInt(number);
+  guess  = StringMethods.parseInt(number);//replace with your parse function
+  System.out.println("Expected "+ actual +" vs my function: "+ guess+" "+(actual==guess));
+  number = "54329";
+  actual = Integer.parseInt(number);
+  guess  = StringMethods.parseInt(number);//replace with your parse function
+  System.out.println("Expected "+ actual +" vs my function: "+ guess+" "+(actual==guess));
+  number = "-452345";
+  actual = Integer.parseInt(number);
+  guess  = StringMethods.parseInt(number);//replace with your parse function
   System.out.println("Expected "+ actual +" vs my function: "+ guess+" "+(actual==guess));
  }
 }
