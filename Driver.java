@@ -15,10 +15,16 @@ public class Driver{
   System.out.println("Expected same sign: "+ a.compareTo(b) +" vs my function: "+StringMethods.myCompareTo(a,b)); 
 
   
-  //Single test case myIndexOf:
+  //test cases myIndexOf:
   whole = "Hello";
   part = "He";
-  System.out.println("Expected "+ whole.indexOf(part) +" vs my function: "+ "REPLACE THIS WITH YOUR myIndexOf CALL" );  
+  System.out.println("Expected "+ whole.indexOf(part) +" vs my function: "+ StringMethods.myIndexOf(whole, part) );
+  whole = "SecondTest";
+  part = "est"; 
+  System.out.println("Expected "+ whole.indexOf(part) +" vs my function: "+ StringMethods.myIndexOf(whole, part) );
+  whole = "ThirdTest";
+  part = "dT";
+  System.out.println("Expected "+ whole.indexOf(part) +" vs my function: "+ StringMethods.myIndexOf(whole, part) );
     
   //Single test case parseInt:
   number = "152";
