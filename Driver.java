@@ -9,12 +9,21 @@ public class Driver{
   String number;
   
   
-  //Single test case myCompareTo:
+  //test cases myCompareTo:
   a="cat";
   b="dog";
   System.out.println("Expected same sign: "+ a.compareTo(b) +" vs my function: "+StringMethods.myCompareTo(a,b)); 
+  a="first";
+  b="second";
+  System.out.println("Expected same sign: "+ a.compareTo(b) +" vs my function: "+StringMethods.myCompareTo(a,b)); 
+  a="alphabetical";
+  b="zalphabetical";
+  System.out.println("Expected same sign: "+ a.compareTo(b) +" vs my function: "+StringMethods.myCompareTo(a,b)); 
+  a="prefix";
+  b="prefixOf";
+  System.out.println("Expected same sign: "+ a.compareTo(b) +" vs my function: "+StringMethods.myCompareTo(a,b)); 
 
-  
+
   //test cases myIndexOf:
   whole = "Hello";
   part = "He";
