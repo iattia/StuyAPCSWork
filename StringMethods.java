@@ -18,7 +18,13 @@ public class StringMethods{
   //return a negative number if other is greater than s
   //Do not use compareTo()  or similar.
   public static int myCompareTo(String s, String other){
-    return 0;
+    int minLength = Math.min(s.length(),other.length());
+    for (int i=0; i<minLength;i++){
+      if (s.charAt(i) != other.charAt(i)){
+        return s.charAt(i) - other.charAt(i);
+      }
+    }
+    return s.length()-other.length();
   }
 
   //return the integer value of the String.
