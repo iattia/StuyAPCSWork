@@ -9,7 +9,7 @@ public class arrays {
     System.out.println(anArray[10]);
     System.out.println(anArray[5]);
     for (int i=0;i<anArray.length;i++){
-      System.out.println(anArray[i]);
+      System.out.print(anArray[i]+" ");
     }
   }
 }
