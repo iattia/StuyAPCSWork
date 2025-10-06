@@ -39,7 +39,13 @@ public class ArrayMethods{
   }
 
   public static int[][] copy(int[][] nums){
-    int[][] newArray = new int[nums.length][]
+    int[][] copy2d = new int[nums.length][];
+    for (int i=0;i<nums.length;i++){
+      for (int j=0;j<nums[i].length;j++){
+        copy2d[i][j] = nums[i][j];
+      }
+    }
+    return copy2d;
   }
 
   public static void main(String[] args){
