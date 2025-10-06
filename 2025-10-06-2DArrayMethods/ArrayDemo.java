@@ -110,7 +110,7 @@ public class ArrayDemo{
         swapped[i][j] = nums[j][i];
       }
     }
-    return swapped2d
+    return swapped2d;
   }
 
   //6. Make an HTML table by putting a table tag around the entire 2d array,
