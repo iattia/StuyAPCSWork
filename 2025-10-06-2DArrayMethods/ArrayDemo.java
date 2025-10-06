@@ -11,6 +11,7 @@ public class ArrayDemo{
     System.out.println("Expected 0, got " + Arrays.toString(arr1).compareTo(arrToString(arr1)));
     int[][] arr2 = new int[]{{1,2,3,4,5},{2,3,4,5}};
     System.out.println("Expected 0, got " + Arrays.deepToString(arr2).compareTo(arrToString(arr2)));
+    arr2 = new int[][]{{0,0,1,2,3},{0,0,2,3,5}};
   }
 
   //0. Include your prior methods to help you print a 1D/2D array of ints.
