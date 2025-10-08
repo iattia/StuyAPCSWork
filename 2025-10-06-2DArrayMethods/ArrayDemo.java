@@ -11,8 +11,29 @@ public class ArrayDemo{
     System.out.println("Expected 0, got " + Arrays.toString(arr1).compareTo(arrToString(arr1)));
     int[][] arr2 = new int[][]{{1, 2, 3, 4, 5}, {2, 3, 4, 5}};
     System.out.println("Expected 0, got " + Arrays.deepToString(arr2).compareTo(arrToString(arr2)));
-    arr2 = new int[][]{{0, 0, 1, 2, 3}, {0, 0, 2, 3, 5}};
+    int[][] zeroTest = new int[][]{{0, 1, 0}, {2, 3, 4}, {0, 0, 0}};
+    int zeroCount = countZeros2D(zeroTest);
+    System.out.println("Expected 5, got " + zeroCount);
+    int[][] sumTest = new int[][]{{1, 2}, {3, 4}, {5}};
+    int sum = arr2DSum(sumTest);
+    System.out.println("Expected 15, got " + sum);
+    int[][] negTest = {{-1, -2, -3}, {4, -5, 6}, {7, 8, -9}};
+    replaceNegative(negTest);
+    System.out.println("Expected [[1, 0, 0], [4, 1, 6], [7, 8, 1]], got " + Arrays.deepToString(negTest));
+    int[][] original = {{10, 20}, {30, 40}};
+    int[][] copied = copy(original);
+    original[0][0] = 999;
+    System.out.println("Expected [[10, 20], [30, 40]], got " + Arrays.deepToString(copied));
+    int[][] toSwap = {{1, 2, 3}, {4, 5, 6}};
+    int[][] swapped = swapRC(toSwap);
+    System.out.println("Expected [[1, 4], [2, 5], [3, 6]], got " + Arrays.deepToString(swapped));
+    int[][] htmlData = {{1, 2}, {3}};
+    String html = htmlTable(htmlData);
+    String expectedHtml = "<table><tr><td>1</td><td>2</td></tr><tr><td>3</td></tr></table>";
+    System.out.println("Expected HTML: " + expectedHtml);
+    System.out.println("Got HTML:      " + html);
   }
+
   //0. Include your prior methods to help you print a 1D/2D array of ints.
   public static String arrToString(int[]ary){
     String newStr = "[";
