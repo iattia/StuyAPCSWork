@@ -7,13 +7,12 @@ public class ArrayDemo{
     //Compare Arrays.toString(yourArray) to YOUR arrayToString() method to make sure yours is correct
     //Compare Arrays.deeoToString(your2DArray) to YOUR arrayToString() method to make sure yours is correct
     //do not use any other Arrays.method()
-    int[] arr1 = new int[]{1,2,3,4,5};
+    int[] arr1 = new int[]{1, 2, 3, 4, 5};
     System.out.println("Expected 0, got " + Arrays.toString(arr1).compareTo(arrToString(arr1)));
-    int[][] arr2 = new int[]{{1,2,3,4,5},{2,3,4,5}};
+    int[][] arr2 = new int[][]{{1, 2, 3, 4, 5}, {2, 3, 4, 5}};
     System.out.println("Expected 0, got " + Arrays.deepToString(arr2).compareTo(arrToString(arr2)));
-    arr2 = new int[][]{{0,0,1,2,3},{0,0,2,3,5}};
+    arr2 = new int[][]{{0, 0, 1, 2, 3}, {0, 0, 2, 3, 5}};
   }
-
   //0. Include your prior methods to help you print a 1D/2D array of ints.
   public static String arrToString(int[]ary){
     String newStr = "[";
@@ -33,7 +32,7 @@ public class ArrayDemo{
   public static String arrToString(int[][]ary){
     String newStr = "[";
     for (int i=0; i<ary.length; i++){
-      newStr += aryToString(ary[i]);
+      newStr += arrToString(ary[i]);
       if (i<ary.length-1){
         newStr += ", ";
       }
@@ -45,7 +44,7 @@ public class ArrayDemo{
   public static int countZeros2D(int[][] nums){
     int count = 0;
     for (int i=0;i<nums.length;i++){
-      for (int j=0;j<nums[i].length;i++){
+      for (int j=0;j<nums[i].length;j++){
         if (nums[i][j] == 0){
           count++;
         }
@@ -60,7 +59,7 @@ public class ArrayDemo{
   public static int arr2DSum(int[][]nums){
     int count = 0;
     for (int i=0;i<nums.length;i++){
-      for (int j=0;j<nums[i].length;i++){
+      for (int j=0;j<nums[i].length;j++){
         count += nums[i][j];
       }
     }
@@ -94,6 +93,7 @@ public class ArrayDemo{
   public static int[][] copy(int[][] nums){
     int[][] copy2d = new int[nums.length][];
     for (int i=0;i<nums.length;i++){
+      copy2d[i] = new int[nums[i].length];
       for (int j=0;j<nums[i].length;j++){
         copy2d[i][j] = nums[i][j];
       }
@@ -106,9 +106,9 @@ public class ArrayDemo{
   //   e.g. swapRC({{1,2,3},{4,5,6}}) returns {{1,4},{2,5},{3,6}}
   public static int[][] swapRC(int[][]nums){
     int[][] swapped2d = new int[nums[0].length][nums.length];
-    for (int i=0;i<nums.length;i++){
-      for (int j=0;j<nums[0].length;i++){
-        swapped[i][j] = nums[j][i];
+    for (int i=0; i<nums.length; i++){
+      for (int j=0; j<nums[0].length; j++){
+        swapped2d[j][i] = nums[i][j];
       }
     }
     return swapped2d;
