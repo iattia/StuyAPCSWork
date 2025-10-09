@@ -4,10 +4,8 @@ public class Driver{
     
     //0.CONSTRUCTORS
     //constructor that takes the name and age of the Kitty.
-    /*
     Kitty a = new Kitty("Matcha", 3);
     System.out.println(a);
-    */
     //should print The address. Later it will print "The amazing Matcha."
     
     //2nd constructor makes a Kitty named Mittens that is 2 years old
