@@ -19,8 +19,17 @@ public class Triangle{
       return v0;
     } else if (v == 1){
       return v1;
-    } else {
-      return v2;
     }
+    return v2;
+  }
+
+  public String toString(){
+    String triangleString = "[";
+    for (int i=0;i<3;i++){
+      Point currentVertex = this.getVertex(i);
+      triangleString += "(" + currentVertex.getX(); + ", " + currentVertex.getY(); + ")";
+    }
+    triangleString += "]";
+    return triangleString;
   }
 }
