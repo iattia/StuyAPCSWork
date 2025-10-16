@@ -14,5 +14,13 @@ public class Triangle{
     this.v2 = new Point(v2);
   }
   //Methods
-
+  public Point getVertex(int v){
+    if (v == 0){
+      return v0;
+    } else if (v == 1){
+      return v1;
+    } else {
+      return v2;
+    }
+  }
 }
