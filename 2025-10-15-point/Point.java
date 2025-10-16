@@ -38,7 +38,7 @@ public class Point{
   do not write redundant code. Do not try to use your main's version.
   */
   public static double distance(Point a, Point b){
-    return 0.0;
+    return a.distanceTo(b);
   }
 
 
