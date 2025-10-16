@@ -7,21 +7,24 @@ public class Point{
   */
   public String toString(){
     //your code here
-    return "";
-  }
-  
-  public static double distance(Point a, Point b){
-   //your code here 
-    return -1.0;
-  }
-  
-  public double distanceTo(Point other){
-   //your code here 
-    return -1.0;
+    return "(" + x + ", " + y + ")";
   }
 
-  
-  
+  public static double distance(Point a, Point b){
+    double x1 = a.getX();
+    double y1 = a.getY();
+    double x2 = b.getX();
+    double y2 = b.getY();
+    return Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1, 2));
+  }
+
+  public double distanceTo(Point other){
+   //your code here
+   return Math.sqrt(Math.pow(this.x-other.getX(),2)+Math.pow(this.y-other.getY(), 2));
+  }
+
+
+
   //#####################################
   //STOP! DO NOT DO THIS PARTS UNTIL YOU ARE TOLD TO DO SO
   //####################################
@@ -30,7 +33,7 @@ public class Point{
     //you write this later
     return false;
   }
-  
+
   /*Return true when the respective x and y values of the two points differ by at most 0.001% each.
   *To avoid issues: If one is 0.0, the other must be exactly 0.0.
   */
@@ -57,4 +60,3 @@ public class Point{
     return y;
   }
 }
-
