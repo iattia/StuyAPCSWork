@@ -9,7 +9,9 @@ public class Triangle{
     this.v2 = new Point(x2, y2);
   }
   public Triangle(Point v0,Point v1,Point v2){
-    
+    this.v0 = new Point(v0);
+    this.v1 = new Point(v1);
+    this.v2 = new Point(v2);
   }
   //Methods
 
