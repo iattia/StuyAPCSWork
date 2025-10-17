@@ -1,6 +1,5 @@
 public class Triangle{
   //Instance Variables
-  private double x0, y0, x1, y1, x2, y2;
   private Point v0, v1, v2;
   //Constructors
   public Triangle(double x0, double y0, double x1, double y1, double x2, double y2){
@@ -27,7 +26,7 @@ public class Triangle{
     String triangleString = "{";
     for (int i=0;i<3;i++){
       triangleString += this.getVertex(i);
-      if (i<3){
+      if (i<2){
         triangleString += ", ";
       }
     }
@@ -39,4 +38,13 @@ public class Triangle{
     return this.v0.distanceTo(this.v1) + this.v1.distanceTo(this.v2) + this.v0.distanceTo(this.v2);
   }
 
+  public void setVertex(int v, Point p){
+    if (v == 0) {
+      v0 = new Point(p);
+    } else if (v == 1) {
+      v1 = new Point(p);
+    } else if (v == 2) {
+      v2 = new Point(p);
+    }
+  }
 }
