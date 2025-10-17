@@ -24,12 +24,19 @@ public class Triangle{
   }
 
   public String toString(){
-    String triangleString = "[";
+    String triangleString = "{";
     for (int i=0;i<3;i++){
-      Point currentVertex = this.getVertex(i);
-      triangleString += "(" + currentVertex.getX(); + ", " + currentVertex.getY(); + ")";
+      triangleString += this.getVertex(i);
+      if (i<3){
+        triangleString += ", ";
+      }
     }
-    triangleString += "]";
+    triangleString += "}";
     return triangleString;
   }
+
+  public double getPerimeter(){
+    return this.v0.distanceTo(this.v1) + this.v1.distanceTo(this.v2) + this.v0.distanceTo(this.v2);
+  }
+
 }
