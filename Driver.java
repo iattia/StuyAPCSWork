@@ -23,5 +23,11 @@ public class Driver{
     Triangle t2 = new Triangle(a, b, c);
     System.out.println("Triangle t2: " + t2 + " (Expected: {(1.0, 1.0), (4.0, 1.0), (1.0, 5.0)})");
     System.out.println("Perimeter of t2: " + t2.getPerimeter() + " (Expected: 12.0)");
+
+    Triangle t3 = new Triangle(0, 0, 1, 0, 0, 1);
+    System.out.println("t3: " + t3);
+    System.out.println("Expected perimeter: 1 + 1 + √2 ≈ 3.4142");
+    System.out.println("Actual perimeter: " + t3.getPerimeter());
+    System.out.println();
   }
 }
