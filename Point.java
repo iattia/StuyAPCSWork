@@ -31,10 +31,10 @@ public class Point{
   public static boolean closeEnough(double a, double b){
     //How can you determine if two values are close enough to eachother?
     //you write this later
-    if (a == 0 || b == 0){
-      return a == 0 && b == 0;
+    if (a == 0.0 || b == 0.0){
+      return a == 0.0 && b == 0.0;
     }
-    return Math.abs(a-b)/((a+b)/2) >= 0.99999;
+    return Math.abs(a-b)/a >= 0.00001;
   }
 
   /*Return true when the respective x and y values of the two points differ by at most 0.001% each.
@@ -42,7 +42,10 @@ public class Point{
   */
   public boolean equals(Point other){
     //You write this later
-    return true;
+    if (closeEnough(this.x,other.x)){
+      return closeEnough(this.y,other.y);
+    }
+    return false;
   }
 
   //#####################################
