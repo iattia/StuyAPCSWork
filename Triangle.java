@@ -47,4 +47,12 @@ public class Triangle{
       v2 = new Point(p);
     }
   }
+
+  /*Return true when the Points of the triangles are
+  *all equal() to the corresponding points of the
+  *other Triangle.
+  */
+  public boolean equals(Triangle other){
+    return this.v0.equals(other.v0) && this.v1.equals(other.v1) && this.v2.equals(other.v2);
+  }
 }
