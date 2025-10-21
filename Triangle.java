@@ -55,4 +55,22 @@ public class Triangle{
   public boolean equals(Triangle other){
     return this.v0.equals(other.v0) && this.v1.equals(other.v1) && this.v2.equals(other.v2);
   }
+
+  /*Return "scalene", "isosceles", or "equilateral"
+  *All other spelling/capitalization will be graded as incorrect.
+  *Make sure to use closeEnough() to determine if
+  *two sides are equal because of rounding!
+  */
+  public String classify(){
+    double side1 = this.v0.distanceTo(this.v1);
+    double side2 = this.v1.distanceTo(this.v2);
+    double side3 = this.v0.distanceTo(this.v2);
+    if (side1.equals(side2) && side2.equals(side3)){
+      return "equilateral";
+    } else if (side1.equals(side2) || side2.equals(side3)){
+      return "isosceles";
+    } else{
+      return "scalene";
+    }
+  }
 }
