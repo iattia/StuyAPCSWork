@@ -73,4 +73,18 @@ public class Triangle{
       return "scalene";
     }
   }
+
+  /*Return the area of the triangle
+   *Make sure to use the formula:
+   *Area = sqrt ( s(s-a)(s-b)(s-c) )
+   *given: s = perimeter/2 (semi-perimeter),
+   *       a,b,c are the side lengths.
+   */
+  public double area(){
+    double semiPerimeter = this.getPerimeter()/2;
+    double side1 = this.v0.distanceTo(this.v1);
+    double side2 = this.v1.distanceTo(this.v2);
+    double side3 = this.v0.distanceTo(this.v2);
+    return Math.sqrt(semiPerimeter*(semiPerimeter-side1)*(semiPerimeter-side2)*(semiPerimeter-side3));
+  }
 }
