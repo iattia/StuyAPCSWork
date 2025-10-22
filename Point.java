@@ -34,7 +34,7 @@ public class Point{
     if (a == 0.0 || b == 0.0){
       return a == 0.0 && b == 0.0;
     }
-    return Math.abs(a-b)/a >= 0.00001;
+    return Math.abs(a-b)/Math.abs(a) <= 0.00001;
   }
 
   /*Return true when the respective x and y values of the two points differ by at most 0.001% each.
