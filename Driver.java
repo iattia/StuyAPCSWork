@@ -29,5 +29,26 @@ public class Driver{
     System.out.println("Expected perimeter: 1 + 1 + √2 ≈ 3.4142");
     System.out.println("Actual perimeter: " + t3.getPerimeter());
     System.out.println();
+
+    Triangle eq = new Triangle(0, 0, 1, Math.sqrt(3), 2, 0);
+    System.out.println("eq.classify(): " + eq.classify() + " (Expected: equilateral)");
+
+    Triangle iso = new Triangle(0, 0, 2, 0, 1, 5);
+    System.out.println("iso.classify(): " + iso.classify() + " (Expected: isosceles)");
+
+    Triangle sca = new Triangle(0, 0, 3, 0, 1, 4);
+    System.out.println("sca.classify(): " + sca.classify() + " (Expected: scalene)");
+
+
+    Triangle areaT = new Triangle(0, 0, 3, 0, 0, 4);
+    System.out.println("areaT.area(): " + areaT.area() + " (Expected: 6.0)");
+
+
+    Triangle tA = new Triangle(0, 0, 1, 1, 2, 2);
+    Triangle tB = new Triangle(new Point(0, 0), new Point(1, 1), new Point(2, 2));
+    System.out.println("tA.equals(tB): " + tA.equals(tB) + " (Expected: true)");
+
+    Triangle tC = new Triangle(0, 0, 1, 1, 2, 3);
+    System.out.println("tA.equals(tC): " + tA.equals(tC) + " (Expected: false)");
   }
 }
