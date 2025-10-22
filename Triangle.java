@@ -65,9 +65,9 @@ public class Triangle{
     double side1 = this.v0.distanceTo(this.v1);
     double side2 = this.v1.distanceTo(this.v2);
     double side3 = this.v0.distanceTo(this.v2);
-    if (closeEnough(side1, side2) && closeEnough(side2, side3)){
+    if (Point.closeEnough(side1, side2) && Point.closeEnough(side2, side3)){
       return "equilateral";
-    } else if (side1.closeEnough(side2) || side2.closeEnough(side3)){
+    } else if (Point.closeEnough(side1, side2) || Point.closeEnough(side2, side3)){
       return "isosceles";
     } else{
       return "scalene";
