@@ -7,24 +7,25 @@ public class SuperArray{
     size = 0;
   }
   public int size(){
-    return this.size;
+    return size;
   }
   public boolean add(String value){
-    if (this.size<this.length){
-      this.data[size+1] = value;
+    if (size<length){
+      data[size] = value;
+      size++;
       return true;
     }
     return false;
   }
   public String toString(){
     String arrString = "[";
-    if (this.size == 0){
+    if (size == 0){
       return "[]";
     }
-    for (int i=0;i<this.size;i++){
-      arrString += this.data[i] + ", ";
+    for (int i=0;i<size;i++){
+      arrString += data[i] + ", ";
     }
     arrString = arrString.substring(0,arrString.length()-2);
-    return arrString;
+    return arrString+"]";
   }
 }
