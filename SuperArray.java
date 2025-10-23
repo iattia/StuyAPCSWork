@@ -1,6 +1,6 @@
 public class SuperArray{
   private int size, length;
-  private String[] data = new String[];
+  private String[] data = new String[10];
   public SuperArray(){
     length = 10;
     data = new String[length];
@@ -11,7 +11,7 @@ public class SuperArray{
   }
   public boolean add(String value){
     if (this.size<this.length){
-      this[size+1] = value;
+      this.data[size+1] = value;
       return true;
     }
     return false;
@@ -22,9 +22,9 @@ public class SuperArray{
       return "[]";
     }
     for (int i=0;i<this.size;i++){
-      arrString += this[i] + ", ";
+      arrString += this.data[i] + ", ";
     }
     arrString = arrString.substring(0,arrString.length()-2);
-    return arrString
+    return arrString;
   }
 }
