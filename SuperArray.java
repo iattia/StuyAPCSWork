@@ -28,4 +28,12 @@ public class SuperArray{
     arrString = arrString.substring(0,arrString.length()-2);
     return arrString+"]";
   }
+  /* Phase 2 */
+  public String get(int index){
+    if (index < 0 || index >= size){
+      System.out.println("Error");
+      return null;
+    }
+    return data[index];
+  }
 }
