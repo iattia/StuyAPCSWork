@@ -36,4 +36,13 @@ public class SuperArray{
     }
     return data[index];
   }
+  public String set(int index, String newVal){
+    if (index < 0 || index >= size){
+      System.out.println("Error");
+      return null;
+    }
+    String replaced = data[index];
+    data[index] = newVal;
+    return replaced;
+  }
 }
