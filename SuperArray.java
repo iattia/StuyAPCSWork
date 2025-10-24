@@ -31,8 +31,9 @@ public class SuperArray{
   /* Phase 2 */
   public String get(int index){
     if (index < 0 || index >= size){
-      System.out.println("Error");
-      return null;
+      throw new IndexOutOfBoundsException(
+        System.out.println()
+      )
     }
     return data[index];
   }
