@@ -31,14 +31,13 @@ public class SuperArray{
   /* Phase 2 */
   public String get(int index){
     if (index < 0 || index >= size){
-      throw new IndexOutOfBoundsException("Index is either negative or less than size. Received: "+i);
+      throw new IndexOutOfBoundsException("Index is either negative or less than size. Received: "+index);
     }
     return data[index];
   }
   public String set(int index, String newVal){
     if (index < 0 || index >= size){
       throw new IndexOutOfBoundsException("Index is either negative or less than size. Received: "+index);
-      return null;
     }
     String replaced = data[index];
     data[index] = newVal;
@@ -48,7 +47,6 @@ public class SuperArray{
   public SuperArray(int initialCapacity){
     if (initialCapacity < 0){
       throw new IllegalArgumentException("Initial capacity is negative. Received: "+initialCapacity);
-      initialCapacity = 10;
     }
     data = new String[initialCapacity];
     size = 0;
@@ -64,7 +62,7 @@ public class SuperArray{
   /* Phase 4 */
   public int indexOf(String target){
     for (int i=0;i<size;i++){
-      if data[i].equals(target){
+      if (data[i].equals(target)){
         return i;
       }
     }
@@ -72,11 +70,23 @@ public class SuperArray{
   }
   public int lastIndexOf(String target){
     for (int i=size-1;i>=0;i--){
-      if data[i].equals(target){
+      if (data[i].equals(target)){
         return i;
       }
     }
     return -1;
+  }
+  public void add(int index,String value){
+    if (index < 0 || index >= size){
+      throw new IndexOutOfBoundsException("Index is either negative or less than size. Received: "+index);
+    }
+    if (size-1==data.length){
+      resize();
+    }
+    for (int i=size-1;i>=index;i--){
+      this.set(i+1,data[i]);
+    }
+    this.set(index, value);
   }
   /* Test for private methods (resize) */
   public static void main(String[] args) {
