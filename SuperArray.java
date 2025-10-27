@@ -31,15 +31,13 @@ public class SuperArray{
   /* Phase 2 */
   public String get(int index){
     if (index < 0 || index >= size){
-      throw new IndexOutOfBoundsException(
-        System.out.println()
-      )
+      throw new IndexOutOfBoundsException("Index is either negative or less than size. Received: "+i);
     }
     return data[index];
   }
   public String set(int index, String newVal){
     if (index < 0 || index >= size){
-      System.out.println("Error");
+      throw new IndexOutOfBoundsException("Index is either negative or less than size. Received: "+index);
       return null;
     }
     String replaced = data[index];
@@ -49,7 +47,7 @@ public class SuperArray{
   /* Phase 3 */
   public SuperArray(int initialCapacity){
     if (initialCapacity < 0){
-      System.out.println("Error");
+      throw new IllegalArgumentException("Initial capacity is negative. Received: "+initialCapacity);
       initialCapacity = 10;
     }
     data = new String[initialCapacity];
