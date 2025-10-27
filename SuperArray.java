@@ -98,6 +98,15 @@ public class SuperArray{
     }
     return removedElement;
   }
+  public boolean remove(String target){
+    for (int i=0;i<size;i++){
+      if (data[i].equals(target)){
+        this.remove(i);
+        return true;
+      }
+    }
+    return false;
+  }
   /* Test for private methods (resize) */
   public static void main(String[] args) {
     SuperArray sup = new SuperArray();
