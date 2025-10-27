@@ -61,7 +61,15 @@ public class SuperArray{
     }
     data = newData;
   }
-
+  /* Phase 4 */
+  public int indexOf(String target){
+      for (int i=0;i<size;i++){
+        if data[i].equals(target){
+          return i;
+        }
+      }
+      return -1;
+  }
   /* Test for private methods (resize) */
   public static void main(String[] args) {
     SuperArray sup = new SuperArray();
