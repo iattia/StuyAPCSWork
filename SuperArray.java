@@ -88,6 +88,16 @@ public class SuperArray{
     }
     this.set(index, value);
   }
+  public String remove(int index){
+    if (index < 0 || index >= size){
+      throw new IndexOutOfBoundsException("Index is either negative or less than size. Received: "+index);
+    }
+    String removedElement = data[index];
+    for (int i=size-1;i>=index;i--){
+      this.set(i-1,data[i]);
+    }
+    return removedElement;
+  }
   /* Test for private methods (resize) */
   public static void main(String[] args) {
     SuperArray sup = new SuperArray();
