@@ -60,61 +60,69 @@ public class SuperArray{
     data = newData;
   }
   /* Phase 4 */
-  public int indexOf(String target){
-    for (int i=0;i<size;i++){
-      if (data[i].equals(target)){
-        return i;
+  public int indexOf(String target) {
+    if (target == null) {
+      for (int i = 0; i < size; i++) {
+        if (data[i] == null) {
+          return i;
+        }
+      }
+    } else {
+      for (int i = 0; i < size; i++) {
+        if (target.equals(data[i])) { 
+          return i;
+        }
       }
     }
     return -1;
   }
-  public int lastIndexOf(String target){
-    for (int i=size-1;i>=0;i--){
-      if (data[i].equals(target)){
-        return i;
+  public int lastIndexOf(String target) {
+    if (target == null) {
+      for (int i = size - 1; i >= 0; i--) {
+        if (data[i] == null) {
+          return i;
+        }
+      }
+    } else {
+      for (int i = size - 1; i >= 0; i--) {
+        if (target.equals(data[i])) {
+          return i;
+        }
       }
     }
     return -1;
   }
   public void add(int index,String value){
-    if (index < 0 || index >= size){
+    if (index < 0 || index > size){
       throw new IndexOutOfBoundsException("Index is either negative or less than size. Received: "+index);
     }
-    if (size-1==data.length){
+    if (size==data.length){
       resize();
     }
-    for (int i=size-1;i>=index;i--){
-      this.set(i+1,data[i]);
+    for (int i = size; i > index; i--) {
+      data[i] = data[i - 1];
     }
-    this.set(index, value);
+    data[index] = value;
+    size++;
   }
   public String remove(int index){
     if (index < 0 || index >= size){
       throw new IndexOutOfBoundsException("Index is either negative or less than size. Received: "+index);
     }
     String removedElement = data[index];
-    for (int i=size-1;i>=index;i--){
-      this.set(i-1,data[i]);
+    for (int i=index;i<size-1;i++){
+      data[i] = data[i+1];
     }
+    size--;
     return removedElement;
   }
-  public boolean remove(String target){
-    for (int i=0;i<size;i++){
-      if (data[i].equals(target)){
-        this.remove(i);
-        return true;
-      }
+  public boolean remove(String target) {
+    int index = this.indexOf(target);  
+    if (index == -1) {
+      return false;
+    } else {
+      this.remove(index);
+      return true;
     }
-    return false;
-  }
-  /* Test for private methods (resize) */
-  public static void main(String[] args) {
-    SuperArray sup = new SuperArray();
-    for (int i = 1; i <= 15; i++) {
-      sup.add("Item" + i);
-    }
-    System.out.println(sup);
-    System.out.println("Size: " + sup.size());
-    System.out.println("Internal array length: " + sup.data.length);
   }
 }
