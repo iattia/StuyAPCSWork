@@ -23,7 +23,7 @@ public class RealNumber{
   */
   public boolean equals(RealNumber other){
     //complete this method
-    return true;
+    return this.getValue() == other.getValue();
   }
 
   /**
