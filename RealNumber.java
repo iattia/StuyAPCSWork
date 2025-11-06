@@ -33,7 +33,17 @@ public class RealNumber{
   */
   public int compareTo(RealNumber other){
     //complete this method
-    return 0;
+    if (this.equals(other)){
+      return 0;
+    }
+    double diff = this.getValue()-other.getValue();
+    if (diff > 1 || diff < -1){
+      return (int) diff;
+    } else if (diff < 0){
+      return -1;
+    } else{
+      return 1;
+    }
   }
 
   /**
