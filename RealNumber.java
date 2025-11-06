@@ -52,7 +52,7 @@ public class RealNumber{
   */
   public double add(RealNumber other){
     //COMPLETE THIS METHOD
-    return 0;
+    return this.getValue()+other.getValue();
   }
 
   /**
@@ -61,7 +61,7 @@ public class RealNumber{
   */
   public double multiply(RealNumber other){
     //COMPLETE THIS METHOD
-    return 0;
+    return this.getValue()*other.getValue();
   }
 
   /**
@@ -69,7 +69,7 @@ public class RealNumber{
   */
   public double divide(RealNumber other){
     //COMPLETE THIS METHOD
-    return 0;
+    return this.getValue()/other.getValue();
   }
 
   /**
@@ -77,7 +77,7 @@ public class RealNumber{
   */
   public double subtract(RealNumber other){
     //COMPLETE THIS METHOD
-    return 0;
+    return this.getValue()-other.getValue();
   }
 
 
