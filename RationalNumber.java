@@ -19,6 +19,7 @@ public class RationalNumber extends RealNumber
     super(0.0);//this value is ignored!
     numerator = nume;
     denominator = deno;
+    reduce();
   }
 
   /**
@@ -41,7 +42,7 @@ public class RationalNumber extends RealNumber
   @Override
   public double getValue(){
     //COMPLETE THIS METHOD
-    return numerator/denominator;
+    return (double) numerator/denominator;
   }
 
   /**
@@ -66,7 +67,6 @@ public boolean equals(RationalNumber other){
     return false;
   }
 
-
   /**
   *@return the value expressed as "3/4" or "8/3",
   *however 4/1 should be "4", and 0/1 should be 0.
@@ -88,7 +88,10 @@ public boolean equals(RationalNumber other){
     *Clever: use euclids method if you want to be efficient
     * http://sites.math.rutgers.edu/~greenfie/gs2004/euclid.html
     */
-    return 0;
+    if (n2 == 0) {
+      return n1;
+    }
+    return gcdByEuclidsAlgorithm(n2, n1 % n2);
   }
 
   /**
@@ -97,7 +100,9 @@ public boolean equals(RationalNumber other){
   *reduced upon construction.
   */
   public void reduce(){
-
+    int gcdNumDen = gcd(numerator, denominator);
+    numerator/=gcdNumDen;
+    denominator/=gcdNumDen;
   }
 
   /******************new math operations Return a new RationalNumber!!!!****************/
