@@ -127,6 +127,8 @@ public boolean equals(RationalNumber other){
   */
   public RationalNumber multiply(RationalNumber other){
     //COMPLETE THIS METHOD
+    int newNume = this.getNumerator() * other.getNumerator();
+    int newDen = this.getDenominator() * other.getDenominator();
     return null;
   }
 
