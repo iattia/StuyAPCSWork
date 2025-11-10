@@ -42,7 +42,7 @@ public class RationalNumber extends RealNumber
   @Override
   public double getValue(){
     //COMPLETE THIS METHOD
-    return (double) numerator/denominator;
+    return (double) getNumerator()/getDenominator();
   }
 
   /**
@@ -51,7 +51,7 @@ public class RationalNumber extends RealNumber
   */
   public RationalNumber reciprocal(){
     //COMPLETE THIS METHOD
-    RationalNumber rec = new RationalNumber(denominator, numerator);
+    RationalNumber rec = new RationalNumber(getDenominator(), getNumerator());
     return rec;
   }
 
@@ -64,7 +64,7 @@ public class RationalNumber extends RealNumber
   */
 public boolean equals(RationalNumber other){
     //COMPLETE THIS METHOD
-    return false;
+    return (this.getNumerator() == other.getNumerator() && this.getDenominator == other.getDenominator());
   }
 
   /**
@@ -74,8 +74,22 @@ public boolean equals(RationalNumber other){
   @Override
   public String toString(){
     //COMPLETE THIS METHOD
-    return "0";
-  }
+    boolean isPositive = this.getValue() >= 0;
+    if (getDenominator() == 0 || getNumerator() == 0){
+      return "0";
+    }
+    if (getDenominator() == 1){
+      if (isPositive){
+        return "" + getNumerator();
+      } else {
+        return "-" + getNumerator();
+      }
+    }
+    if (isPositive){
+      return "" + getNumerator() + "/" + getDenominator();
+    } else {
+      return "-" + getNumerator() + "/" + getDenominator();
+    }
 
   /**Calculate the GCD of two integers.
   *@param a the first integers
