@@ -41,7 +41,7 @@ public class RationalNumber extends RealNumber
   @Override
   public double getValue(){
     //COMPLETE THIS METHOD
-    return 0.0;
+    return numerator/denominator;
   }
 
   /**
@@ -50,7 +50,8 @@ public class RationalNumber extends RealNumber
   */
   public RationalNumber reciprocal(){
     //COMPLETE THIS METHOD
-    return null;
+    RationalNumber rec = new RationalNumber(denominator, numerator);
+    return rec;
   }
 
   /**
