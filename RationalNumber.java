@@ -17,8 +17,20 @@ public class RationalNumber extends RealNumber
   */
   public RationalNumber(int nume, int deno){
     super(0.0);//this value is ignored!
-    numerator = nume;
-    denominator = deno;
+    if (deno == 0){
+      numerator = 0;
+      denominator = 1;
+    } else if (deno < 0){
+      numerator = -nume;
+      denominator = -deno;
+    } else{
+      denominator = deno;
+      numerator = nume;
+    }
+
+    if (numerator == 0 && denominator != 0){
+      denominator = 1;
+    }
     reduce();
   }
 
@@ -64,7 +76,7 @@ public class RationalNumber extends RealNumber
   */
 public boolean equals(RationalNumber other){
     //COMPLETE THIS METHOD
-    return (this.getNumerator() == other.getNumerator() && this.getDenominator == other.getDenominator());
+    return (this.getNumerator() == other.getNumerator() && this.getDenominator() == other.getDenominator());
   }
 
   /**
@@ -74,23 +86,14 @@ public boolean equals(RationalNumber other){
   @Override
   public String toString(){
     //COMPLETE THIS METHOD
-    boolean isPositive = this.getValue() >= 0;
-    if (getDenominator() == 0 || getNumerator() == 0){
+    if (getNumerator() == 0){
       return "0";
     }
     if (getDenominator() == 1){
-      if (isPositive){
-        return "" + getNumerator();
-      } else {
-        return "-" + getNumerator();
-      }
+      return "" + getNumerator();
     }
-    if (isPositive){
-      return "" + getNumerator() + "/" + getDenominator();
-    } else {
-      return "-" + getNumerator() + "/" + getDenominator();
-    }
-
+    return getNumerator() + "/" + getDenominator();
+  }
   /**Calculate the GCD of two integers.
   *@param a the first integers
   *@param b the second integer
@@ -102,10 +105,10 @@ public boolean equals(RationalNumber other){
     *Clever: use euclids method if you want to be efficient
     * http://sites.math.rutgers.edu/~greenfie/gs2004/euclid.html
     */
-    if (n2 == 0) {
-      return n1;
+    if (b == 0) {
+      return a;
     }
-    return gcdByEuclidsAlgorithm(n2, n1 % n2);
+    return gcd(b, a % b);
   }
 
   /**
@@ -114,9 +117,11 @@ public boolean equals(RationalNumber other){
   *reduced upon construction.
   */
   public void reduce(){
-    int gcdNumDen = gcd(numerator, denominator);
-    numerator/=gcdNumDen;
-    denominator/=gcdNumDen;
+    if (getNumerator() != 0){
+      int gcdNumDen = gcd(numerator, denominator);
+      numerator/=gcdNumDen;
+      denominator/=gcdNumDen;
+    }
   }
 
   /******************new math operations Return a new RationalNumber!!!!****************/
@@ -129,7 +134,7 @@ public boolean equals(RationalNumber other){
     //COMPLETE THIS METHOD
     int newNume = this.getNumerator() * other.getNumerator();
     int newDen = this.getDenominator() * other.getDenominator();
-    return null;
+    return new RationalNumber(newNume, newDen);
   }
 
   /**
@@ -137,7 +142,7 @@ public boolean equals(RationalNumber other){
   */
   public RationalNumber divide(RationalNumber other){
     //COMPLETE THIS METHOD
-    return null;
+    return this.multiply(other.reciprocal());
   }
 
   /**
@@ -145,7 +150,9 @@ public boolean equals(RationalNumber other){
   */
   public RationalNumber add(RationalNumber other){
     //COMPLETE THIS METHOD
-    return null;
+    int newNume = (this.getNumerator() * other.getDenominator() + other.getDenominator()*this.getDenominator());
+    int newDen = this.getDenominator() * other.getDenominator();
+    return new RationalNumber(newNume, newDen);
   }
   /**
   *@return a new RationalNumber that this minus the other
