@@ -159,6 +159,8 @@ public boolean equals(RationalNumber other){
   */
   public RationalNumber subtract(RationalNumber other){
     //COMPLETE THIS METHOD
-    return null;
+    int newNume = (this.getNumerator()*other.getDenominator() - other.getNumerator()*this.getDenominator());
+    int newDen = this.getDenominator() * other.getDenominator();
+    return new RationalNumber(newNume, newDen);
   }
 }
