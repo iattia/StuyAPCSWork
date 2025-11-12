@@ -105,6 +105,8 @@ public boolean equals(RationalNumber other){
     *Clever: use euclids method if you want to be efficient
     * http://sites.math.rutgers.edu/~greenfie/gs2004/euclid.html
     */
+    a = Math.abs(a);
+    b = Math.abs(b);
     if (b == 0) {
       return a;
     }
@@ -150,7 +152,7 @@ public boolean equals(RationalNumber other){
   */
   public RationalNumber add(RationalNumber other){
     //COMPLETE THIS METHOD
-    int newNume = (this.getNumerator() * other.getDenominator() + other.getDenominator()*this.getDenominator());
+    int newNume = (this.getNumerator() * other.getDenominator() + other.getNumerator()*this.getDenominator());
     int newDen = this.getDenominator() * other.getDenominator();
     return new RationalNumber(newNume, newDen);
   }
