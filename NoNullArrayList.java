@@ -11,18 +11,14 @@ public class NoNullArrayList<T> extends ArrayList<T>{
     this.add(value);
   }
   public boolean add(T value){
-    if (value != null){
+    if (value == null){
       throw new IllegalArgumentException("Cannot add null!");
     } else{
-      this.add(this.whereToPlace(value), value);
+      super.add(this.whereToPlace(value), value);
       return true;
     }
   }
   public int whereToPlace(T value){
-    if (value == null){
-      return 0;
-    } else{
-      return this.size()-1;
-    }
+    return this.size();
   }
 }
