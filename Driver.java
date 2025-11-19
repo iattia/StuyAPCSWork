@@ -11,10 +11,16 @@ public class Driver{
       System.out.println(nn1);
       nn1.add("B");
       System.out.println(nn1);
+      nn1.set(0,"B");
+      System.out.println(nn1);
+      nn1.add(3,"A");
+      System.out.println(nn1);
+      nn1.add(3, null);
+      System.out.println(nn1);
       nn1.add(null);
       System.out.println(nn1);
     } catch (IllegalArgumentException e){
-      e.printStackTrace();
+      // e.printStackTrace();
     }
     try{
       oa1.add("l");
@@ -25,10 +31,16 @@ public class Driver{
       System.out.println(oa1);
       oa1.add("B");
       System.out.println(oa1);
+      oa1.set(0,"B");
+      System.out.println(oa1);
+      oa1.add(3,"A");
+      System.out.println(oa1);
+      oa1.add(3, null);
+      System.out.println(oa1);
       oa1.add(null);
       System.out.println(oa1);
     } catch (IllegalArgumentException e){
-      e.printStackTrace();
+      // e.printStackTrace();
     }
   }
 }
