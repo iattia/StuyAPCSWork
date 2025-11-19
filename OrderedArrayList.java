@@ -11,14 +11,11 @@ public class OrderedArrayList<T extends Comparable<T>> extends NoNullArrayList<T
     }
     for (int i=0;i<this.size();i++){
       int comparison = value.compareTo(this.get(i));
-      if (i == 0 && comparison < 0){
-        return 0;
-      }
-      if (comparison>0){
-        return i+1;
+      if (comparison < 0){
+        return i;
       }
     }
-    return 0;
+    return this.size();
   }
   public boolean add(T value){
     try{
