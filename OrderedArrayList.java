@@ -5,7 +5,7 @@ public class OrderedArrayList<T extends Comparable<T>> extends NoNullArrayList<T
   public OrderedArrayList(){
     super();
   }
-  public int whereToPlace(T value){
+  private int whereToPlace(T value){
     if (value == null){
       return 0;
     }
@@ -19,5 +19,23 @@ public class OrderedArrayList<T extends Comparable<T>> extends NoNullArrayList<T
       }
     }
     return 0;
+  }
+  public boolean add(T value){
+    try{
+      super.add(this.whereToPlace(value), value);
+      return true;
+    } catch (IllegalArgumentException e){
+      e.printStackTrace();
+    }
+    return false;
+  }
+  public void add(int index, T value){
+    this.add(value);
+  }
+  public T set(int index, T value){
+    T replaced = this.get(index);
+    super.remove(index);
+    this.add(value);
+    return replaced;
   }
 }
