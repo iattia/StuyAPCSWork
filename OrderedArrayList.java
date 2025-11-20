@@ -18,21 +18,16 @@ public class OrderedArrayList<T extends Comparable<T>> extends NoNullArrayList<T
     return this.size();
   }
   public boolean add(T value){
-    try{
-      super.add(this.whereToPlace(value), value);
-      return true;
-    } catch (IllegalArgumentException e){
-      e.printStackTrace();
-    }
-    return false;
+    super.add(this.whereToPlace(value), value);
+    return true;
   }
   public void add(int index, T value){
     this.add(value);
   }
   public T set(int index, T value){
     T replaced = this.get(index);
-    super.remove(index);
     this.add(value);
+    this.remove(index);
     return replaced;
   }
 }
