@@ -1,19 +1,16 @@
 public class Sorts{
-  public static void bubblesort(int[]data){
-    boolean hasSorted = true;
-    boolean didSort = false;
-    while (hasSorted){
-      for (int i=0;i<data.length-1-i;i++){
-        if (data[i]>(data[i+1])){
-          int temp = data[i];
-          data[i] = data[i+1];
-          data[i+1] = temp;
-          didSort = true;
+  public static void bubblesort(int[] arr) {
+    for (int i = 0; i < arr.length - 1; i++) {
+      for (int j = 0; j < arr.length - 1 - i; j++) {
+        if (arr[j] > arr[j + 1]) {
+          int temp = arr[j];
+          arr[j] = arr[j + 1];
+          arr[j + 1] = temp;
         }
       }
-      hasSorted = didSort;
     }
   }
+
 
   /*Do not implement until directions are posted*/
   public static void selectionsort(int[]data){}
