@@ -17,10 +17,16 @@ public class Sorts{
     }
   }
 
-
   /*Do not implement until directions are posted*/
-  public static void selectionsort(int[]data){}
-
+  public static void selectionsort(int[]data){
+    int iterator = data.length -1;
+    for (int i=0;i<iterator;i++){
+      for (int j=0;j<iterator;j++){
+        
+      }
+    }
+  }
   /*Do not implement until directions are posted*/
-  public static void insertionsort(int[]data){}
-}
+  public static void insertionsort(int[]data){
+
+  }
