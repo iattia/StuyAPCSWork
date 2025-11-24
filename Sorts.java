@@ -21,8 +21,12 @@ public class Sorts{
   public static void selectionsort(int[]data){
     int iterator = data.length -1;
     for (int i=0;i<iterator;i++){
-      for (int j=0;j<iterator;j++){
-        
+      for (int j=i+1;j<iterator+1;j++){
+        if (data[j] < data[i]){
+          int temp = data[j];
+          data[j] = data[i];
+          data[i] = temp;
+        }
       }
     }
   }
@@ -30,3 +34,4 @@ public class Sorts{
   public static void insertionsort(int[]data){
 
   }
+}
