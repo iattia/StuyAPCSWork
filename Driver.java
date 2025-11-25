@@ -3,6 +3,7 @@ import java.util.Arrays;
 public class Driver{
   public static void main(String[] args){
     int[] arr1 = genArray(-5,5,20);
+    Sorts.insertionsort(arr1);
     System.out.println(Arrays.toString(arr1));
   }
   public static int[] genArray(int min, int max, int length){
