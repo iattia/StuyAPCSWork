@@ -32,13 +32,14 @@ public class Sorts{
   }
   /*Do not implement until directions are posted*/
   public static void insertionsort(int[]data){
-    for (int i=0;i<data.length-1;i++){
-      for (int j=0; j<i;j++){
-        if (data[i]<data[j]){
-          int temp = data[i];
-          data[i] = data[j];
-        }
+    for (int i=1;i<data.length;i++){
+      int current = data[i];
+      int indexChecker = i-1;
+      while (indexChecker >= 0 && current < data[indexChecker]){
+        data[indexChecker + 1] = data[indexChecker];
+        indexChecker--;
       }
+      data[indexChecker + 1] = current;
     }
   }
 }
