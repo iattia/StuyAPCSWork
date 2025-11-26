@@ -2,8 +2,16 @@ import java.util.Arrays;
 
 public class Driver{
   public static void main(String[] args){
-    int[] arr1 = genArray(-5,5,20);
-    Sorts.insertionsort(arr1);
+    int[] arr1 = genArray(-5000,5000,Integer.parseInt(args[0]));
+    if (args[1].equals("insertion")){
+      Sorts.insertionsort(arr1);
+    }
+    if (args[1].equals("selection")){
+      Sorts.selectionsort(arr1);
+    }
+    if (args[1].equals("bubble")){
+      Sorts.bubblesort(arr1);
+    }
     System.out.println(Arrays.toString(arr1));
   }
   public static int[] genArray(int min, int max, int length){
