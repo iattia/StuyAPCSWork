@@ -12,7 +12,7 @@ public class Driver{
     if (args[1].equals("bubble")){
       Sorts.bubblesort(arr1);
     }
-    System.out.println(Arrays.toString(arr1));
+    //System.out.println(Arrays.toString(arr1));
   }
   public static int[] genArray(int min, int max, int length){
     int[] randArray = new int[length];
