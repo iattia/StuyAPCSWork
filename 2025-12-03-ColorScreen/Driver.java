@@ -61,13 +61,29 @@ public class Driver{
     System.out.print(Text.RESET);
   }
 
-  public static void makeExtra(){
-    int midRow = HEIGHT/2;
-    int midCol = (WIDTH/2)-3;
+public static void makeExtra() {
+  int centerX = WIDTH / 2;
+  int topY = 6;
+  int treeHeight = 15;
+  for (int i = 0; i < treeHeight; i++) {
+    int width = (i * 2) + 1;
+    Text.go(topY + i, centerX - i);   
+    Text.color(Text.GREEN);
+    System.out.print("*".repeat(width));
   }
+  int trunkTop = topY + treeHeight;
+  for (int i = 0; i < 6; i++) {
+    Text.go(trunkTop + i, centerX - 1); 
+    Text.color(Text.YELLOW); 
+    System.out.print("|||");
+  }
+  Text.go(HEIGHT+1,1);
+  System.out.print(Text.RESET);
+}
   public static void main(String[] args){
     makeBorder();
     printNumbers();
     makeSeparator();
+    makeExtra();
   }
 }
