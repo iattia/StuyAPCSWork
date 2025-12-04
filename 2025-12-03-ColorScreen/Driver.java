@@ -51,8 +51,23 @@ public class Driver{
     Text.go(HEIGHT+1,1);
     System.out.print(Text.RESET);
   }
+
+  public static void makeSeparator(){
+    int separatorStart = 3;
+    Text.go(separatorStart,2);
+    Text.color(Text.CYAN);
+    System.out.print("-".repeat(WIDTH-2));
+    Text.go(HEIGHT+1,1);
+    System.out.print(Text.RESET);
+  }
+
+  public static void makeExtra(){
+    int midRow = HEIGHT/2;
+    int midCol = (WIDTH/2)-3;
+  }
   public static void main(String[] args){
     makeBorder();
     printNumbers();
+    makeSeparator();
   }
 }
