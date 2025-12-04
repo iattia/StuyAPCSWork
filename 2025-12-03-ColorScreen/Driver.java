@@ -23,7 +23,7 @@ public class Driver{
     System.out.print(Text.RESET);
   }
 
-  public static int[] generateNums(){
+  private static int[] generateNums(){
     int size = 4;
     int[] randInts = new int[size];
     for (int i=0;i<size;i++){
@@ -31,7 +31,28 @@ public class Driver{
     }
     return randInts;
   }
+
+  public static void printNumbers(){
+    int[] nums = generateNums();
+    int spacing = WIDTH/(nums.length+1);
+    for (int i=0;i<nums.length;i++){
+      int num = nums[i];
+      int pos = (i+1)*spacing;
+      Text.go(2,pos);
+      if (num<25){
+        Text.color(Text.RED, Text.BRIGHT);
+      } else if (num > 75){
+        Text.color(Text.GREEN, Text.BRIGHT);
+      } else{
+        Text.color(Text.WHITE);
+      }
+      System.out.print(num);
+    }
+    Text.go(HEIGHT+1,1);
+    System.out.print(Text.RESET);
+  }
   public static void main(String[] args){
     makeBorder();
+    printNumbers();
   }
 }
