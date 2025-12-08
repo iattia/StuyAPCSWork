@@ -1,8 +1,8 @@
 public class Driver {
     public static void main(String[] args) {
 
-        Witch w1 = new Witch("Harry");
-        Witch w2 = new Witch("Selene", 60, 80);
+        Adventurer w1 = new Witch("Harry");
+        Adventurer w2 = new Witch("Selene", 60, 80);
 
         System.out.println("=== Initial Stats ===");
         System.out.println(w1);
