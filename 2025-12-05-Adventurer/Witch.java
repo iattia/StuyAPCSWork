@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Witch extends Adventurer{
   private int mana;
   private static final int MAX_MANA = 100;
@@ -28,5 +30,16 @@ public class Witch extends Adventurer{
     } else{
       mana = n;
     }
+  }
+
+  public int getSepcialMax(){
+    return MAX_MANA;
+  }
+
+  public String attack(Adventurer other){
+    Random rand = new Random();
+    int damage = new rand.nextInt(10)+5;
+    other.applyDamage(damage);
+    return this.getName()+" casts a spell and deals " + damage + " damage to " + other.getName();
   }
 }
