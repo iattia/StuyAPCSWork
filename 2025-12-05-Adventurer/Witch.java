@@ -1,18 +1,32 @@
 public class Witch extends Adventurer{
-  private int mana, maxMana;
-
-  public Witch(String name, int hp){
-    super(name, hp);
-    maxHP = 70;
-    mana = 50;
-    maxMana = 100;
-  }
+  private int mana;
+  private static final int MAX_MANA = 100;
 
   public Witch(String name){
-    this(name, 50);
+    super(name, 50);
+    this.mana = 50;
+  }
+
+  public Witch(String name, int hp, int mana){
+    super(name, hp);
+    this.mana = mana;
   }
 
   public String getSpecialName(){
-    return "mana";
+    return "Mana";
+  }
+
+  public int getSpecial(){
+    return mana;
+  }
+
+  public void setSepcial(int n){
+    if (n > MAX_MANA){
+      mana = MAX_MANA;
+    } else if (n<0){
+      mana = 0;
+    } else{
+      mana = n;
+    }
   }
 }
