@@ -42,4 +42,24 @@ public class Witch extends Adventurer{
     other.applyDamage(damage);
     return this.getName()+" casts a spell and deals " + damage + " damage to " + other.getName();
   }
+
+  public String support(Adventurer other){
+    int healAmount = 10;
+    int newHP = other.getHP() + healAmount;
+    if (newHP > other.getmaxHP()){
+      newHP = other.getmaxHP();
+    }
+    other.setHP(newHP);
+    return this.getName() + " casts a healing spell on " + other.getName() + " for " + healAmount + "HP.";
+  }
+
+  public String support(){
+    int healAmount = 10;
+    int newHP = getHP() + healAmount;
+    if (newHP > getmaxHP()){
+      newHP = getmaxHP();
+    }
+    setHP(newHP);
+    return this.getName() + " casts a healing spell on themselves for " + healAmount + " HP.";
+  }
 }
