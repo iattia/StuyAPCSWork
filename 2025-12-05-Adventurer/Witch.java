@@ -22,7 +22,7 @@ public class Witch extends Adventurer{
     return mana;
   }
 
-  public void setSepcial(int n){
+  public void setSpecial(int n){
     if (n > MAX_MANA){
       mana = MAX_MANA;
     } else if (n<0){
@@ -32,13 +32,13 @@ public class Witch extends Adventurer{
     }
   }
 
-  public int getSepcialMax(){
+  public int getSpecialMax(){
     return MAX_MANA;
   }
 
   public String attack(Adventurer other){
     Random rand = new Random();
-    int damage = new rand.nextInt(10)+5;
+    int damage = rand.nextInt(10)+5;
     other.applyDamage(damage);
     return this.getName()+" casts a spell and deals " + damage + " damage to " + other.getName();
   }
@@ -61,5 +61,20 @@ public class Witch extends Adventurer{
     }
     setHP(newHP);
     return this.getName() + " casts a healing spell on themselves for " + healAmount + " HP.";
+  }
+
+  public String specialAttack(Adventurer other){
+    if (mana < 20){
+      return this.getName() + " doesn't have enough mana for a special attack.";
+    }
+    Random rand = new Random();
+    int damage = rand.nextInt(20)+15;
+    other.applyDamage(damage);
+    mana -= 20;
+    return this.getName() + " uses a powerful spell to deal " + damage + " damage to " + other.getName() + " and consumes 20 mana.";
+  }
+
+  public String toString(){
+    return this.getName() + " (Witch) - HP: " + getHP() + "/" + getmaxHP() + " | Mana: " + getSpecial() + "/" + getSpecialMax();
   }
 }
