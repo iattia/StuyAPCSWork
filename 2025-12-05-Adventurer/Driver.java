@@ -23,7 +23,10 @@ public class Driver {
         if (selection.toLowerCase().equals("a") || selection.toLowerCase().equals("attack")){
           player.attack(opponent);
         } else if (selection.toLowerCase().equals("sp") || selection.toLowerCase().equals("special")){
-          player.specialAttack(opponent);
+          if (player.specialAttack(opponent).equals(player.getName() + " doesn't have enough mana for a special attack.")){
+            System.out.println("Not enough "+ player.getSpecialName()+", please try again.");
+            continue;
+          }
         } else if (selection.toLowerCase().equals("su") || selection.toLowerCase().equals("support")){
           player.support();
         } else if (selection.toLowerCase().equals("quit")){
@@ -32,7 +35,14 @@ public class Driver {
           System.out.println("Please check for typos and try again.");
           continue;
         }
-
+        int oppMove = (int) (Math.random()*3)+1;
+        if (oppMove == 1){
+          opponent.attack(player);
+        } else if (oppMove == 2){
+          opponent.specialAttack(player);
+        } else{
+          opponent.support();
+        }
       }
     }
 }
