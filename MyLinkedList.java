@@ -51,8 +51,31 @@ public class MyLinkedList{
     return listString;
   }
 
+  public String backwardsToString(){
+    return "";
+  }
+
    public void add(int index, String element){
-    //Inserts the specified element at the specified position in this list.
+     if (index == size){
+       this.add(element);
+       return;
+     }
+     ListNode newNode = new ListNode(element);
+     if (index == 0){
+       newNode.setNext(front);
+       front.setPrev(newNode);
+       front = newNode;
+     } else {
+       ListNode current = front;
+       for (int i=1;i<index;i++){
+         current = current.next();
+       }
+       current.next().setPrev(newNode);
+       newNode.setNext(current.next());
+       newNode.setPrev(current);
+       current.setNext(newNode);
+     }
+     size++;
   }
 
    public String set(int index, String value){
