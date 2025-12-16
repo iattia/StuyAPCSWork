@@ -81,7 +81,13 @@ public class MyLinkedList{
    public String set(int index, String value){
     //Replaces the value at the specified index in this list with the specified value.
     //Return the original String that was present
-    return "";
+    ListNode current = front;
+    for (int i=0;i<index;i++){
+      current = current.next();
+    }
+    String originalString = current.getData();
+    current.setData(value);
+    return originalString;
   }
 
   public boolean contains(String element){
