@@ -16,7 +16,7 @@ public class MyLinkedList{
   public String get(int index){
     //Return the value at the specified index.
     ListNode current = front;
-    for (int i=0;i<index-1;i++){
+    for (int i=0;i<index;i++){
       current = current.next();
     }
     return current.getData();
@@ -29,8 +29,11 @@ public class MyLinkedList{
     newNode.setPrev(back);
     if (size==0){
       front = newNode;
+      back = newNode;
+    }else{
+      back.setNext(newNode);
+      back = newNode;
     }
-    back = newNode;
     size++;
     return true;
   }
