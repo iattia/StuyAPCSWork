@@ -86,7 +86,12 @@ public class MyLinkedList{
 
   public boolean contains(String element){
     //Returns true if this list contains the specified element, false otherwise.
-    return true;
+    for (int i=0;i<size;i++){
+      if (this.get(i).equals(element)){
+        return true;
+      }
+    }
+    return false;
   }
 
   public String remove(int index){
