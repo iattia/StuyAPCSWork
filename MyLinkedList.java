@@ -107,7 +107,13 @@ public class MyLinkedList{
 
   public boolean remove(String element){
     //Removes the first occurrence of the specified element from this list, if it is present..
-    return true;
+    for (int i=0;i<size;i++){
+      if (this.get(i).equals(element)){
+        this.remove(i);
+        return true;
+      }
+    }
+    return false;
   }
 
 
