@@ -7,7 +7,9 @@ Complete the Node and List classes, then test your list class.
 
 Add by index:
 
-![Alt text](cat.jpeg?raw=true "Title" ) 
+![Diagram for adding to an empty linked list](add_empty.jpeg?raw=true "Add to empty" )
+![Diagram for adding to the front of a linked list](add_front.jpeg?raw=true "Add to front" )
+![Diagram for adding to the middle of a linked list](add_middle.jpeg?raw=true "Add to middle" )
 
 Remove:
 
