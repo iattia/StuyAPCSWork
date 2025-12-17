@@ -102,7 +102,26 @@ public class MyLinkedList{
 
   public String remove(int index){
     //Removes the element at the specified position in this list..
-    return "";
+    ListNode current = front;
+    for (int i=0;i<index;i++){
+      current = current.next();
+    }
+    String toRemove = current.getData();
+    if (size == 1){
+      front = null;
+      back = null;
+    } else if (index == 0){
+      front = front.next();
+      front.setPrev(null);
+    } else if (index == size-1){
+      back = back.prev();
+      back.setNext(null);
+    } else{
+      current.prev().setNext(current.next());
+      current.next().setPrev(current.prev());
+    }
+    size--;
+    return toRemove;
   }
 
   public boolean remove(String element){
