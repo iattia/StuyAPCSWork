@@ -15,23 +15,29 @@ public class MyLinkedList{
   }
   public String get(int index){
     //Return the value at the specified index.
+    return getNthNode(index).getData();
+  }
+
+  private ListNode getNthNode(int index){
+    if (index < 0 || index > size) {
+      throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+    }
     ListNode current = front;
-    for (int i=0;i<index;i++){
+    for (int i = 0; i < index; i++) {
       current = current.next();
     }
-    return current.getData();
+    return current;
   }
 
   public boolean add(String e){
     //Appends the specified element to the end of this list.
     ListNode newNode = new ListNode(e);
-    newNode.setNext(null);
-    newNode.setPrev(back);
-    if (size==0){
+    if (size == 0){
       front = newNode;
       back = newNode;
-    }else{
+    } else{
       back.setNext(newNode);
+      newNode.setPrev(back);
       back = newNode;
     }
     size++;
@@ -67,36 +73,34 @@ public class MyLinkedList{
     return listReversed;
   }
 
-   public void add(int index, String element){
-     if (index == size){
-       this.add(element);
-       return;
-     }
-     ListNode newNode = new ListNode(element);
-     if (index == 0){
-       newNode.setNext(front);
-       front.setPrev(newNode);
-       front = newNode;
-     } else {
-       ListNode current = front;
-       for (int i=1;i<index;i++){
-         current = current.next();
-       }
-       current.next().setPrev(newNode);
-       newNode.setNext(current.next());
-       newNode.setPrev(current);
-       current.setNext(newNode);
-     }
-     size++;
+  public void add(int index, String element){
+    if (index < 0 || index > size) {
+      throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+    }
+    if (index == size){
+      this.add(element);
+      return;
+    }
+    ListNode newNode = new ListNode(element);
+    if (index == 0){
+      newNode.setNext(front);
+      front.setPrev(newNode);
+      front = newNode;
+    } else {
+        ListNode current = getNthNode(index);
+        ListNode prevNode = current.prev();
+        prevNode.setNext(newNode);
+        newNode.setPrev(prevNode);
+        newNode.setNext(current);
+        current.setPrev(newNode);
+      }
+    size++;
   }
 
-   public String set(int index, String value){
+  public String set(int index, String value){
     //Replaces the value at the specified index in this list with the specified value.
     //Return the original String that was present
-    ListNode current = front;
-    for (int i=0;i<index;i++){
-      current = current.next();
-    }
+    ListNode current = getNthNode(index);
     String originalString = current.getData();
     current.setData(value);
     return originalString;
@@ -114,10 +118,7 @@ public class MyLinkedList{
 
   public String remove(int index){
     //Removes the element at the specified position in this list..
-    ListNode current = front;
-    for (int i=0;i<index;i++){
-      current = current.next();
-    }
+    ListNode current = getNthNode(index);
     String toRemove = current.getData();
     if (size == 1){
       front = null;
@@ -146,6 +147,4 @@ public class MyLinkedList{
     }
     return false;
   }
-
-
 }
