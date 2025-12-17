@@ -41,8 +41,10 @@ public class MyLinkedList{
   public String toString(){
     //same format as ArrayList "[A, B, C]" or "[]"
     String listString = "[";
+    ListNode current = front;
     for (int i=0;i<size;i++){
-      listString += this.get(i);
+      listString += current.getData();
+      current = current.next();
       if (i!= size-1){
         listString += ", ";
       }
@@ -51,8 +53,18 @@ public class MyLinkedList{
     return listString;
   }
 
-  public String backwardsToString(){
-    return "";
+  public String toStringReversed(){
+    String listReversed = "[";
+    ListNode current = back;
+    for (int i=0;i<size;i++){
+      listReversed += current.getData();
+      current = current.prev();
+      if (i!= size-1){
+        listReversed += ", ";
+      }
+    }
+    listReversed += "]";
+    return listReversed;
   }
 
    public void add(int index, String element){
