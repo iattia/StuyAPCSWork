@@ -13,7 +13,8 @@ Add by index:
 
 Remove:
 
-![Alt text](cat.jpeg?raw=true "Title" ) 
+![Diagram for removing the front of a linked list](remove_front.jpg?raw=true "Remove front" )
+![Diagram for removing the middle of a linked list](remove_middle.jpg?raw=true "Remove middle" )
 
 
 
