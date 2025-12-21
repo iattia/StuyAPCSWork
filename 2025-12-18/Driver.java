@@ -3,5 +3,6 @@
 public class Driver{
   public static void main(String[] args){
     System.out.println(Fibonacci.fib(Integer.parseInt(args[0])));
+    MakeWords.makeWords(3, "", "abc");
   }
 }
