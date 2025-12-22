@@ -11,7 +11,7 @@ public class Recursion{
     public static void printNoDoubleLetterWords(int length,String alphabet){
       //This is the wrapper method
       //do not change this method
-      printNoDoubleLetterWords(length,"",letters);
+      printNoDoubleLetterWords(length,"",alphabet);
     }
 
     /*Print all words that are made of the characters in letters. There may not be consecutive equal letters,
