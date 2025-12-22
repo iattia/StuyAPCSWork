@@ -21,12 +21,12 @@ public class Recursion{
     *@param alphabet: the letters you should be using
     */
     private static void printNoDoubleLetterWords(int length,String word, String alphabet){
-      if (word.length() == length){
+      if (length == 0){
         System.out.println(word);
       } else{
         for (int i=0; i<alphabet.length(); i++){
-          if (word.charAt(word.length()) != alphabet[i]){
-            printNoDoubleLetterWords(length, word+alphabet[i], alphabet);
+          if (word.charAt(word.length()-1) != alphabet.charAt(i)){
+            printNoDoubleLetterWords(length - 1, word+alphabet.charAt(i), alphabet);
           }
         }
       }
@@ -44,6 +44,7 @@ public class Recursion{
       //THIS SHOULD BE A WRAPPER METHOD
       //call toWordsRec
       //Write this method, and the recursive method it calls.
+      return "";
     }
 
     // private static String toWordsRec(...){
