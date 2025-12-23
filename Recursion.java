@@ -49,20 +49,33 @@ public class Recursion{
         return "zero";
       }
       if (n<0){
-        return "negative" + toWordsRec(n, 1, "");
+        return "negative" + toWordsRec(n, 0, "");
       }
-      return toWordsRec(n,1,"");
+      return toWordsRec(n,0,"");
     }
 
     private static String toWordsRec(int n, int place, String word){
-      String[] ones = new String{"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
+      String[] ones = new String{"", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
       String[] specials = new String{"ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"};
-      String[] tens = new String{"ten", "twenty", "thirty", "fourty", "fifty", "sixty", "seventy", "eighty", "ninety"};
-      String[] keyWords = new String{"zero", "-", "hundred", "and", "thousand", "million", "billion"};
+      String[] tens = new String{"", "ten", "twenty", "thirty", "fourty", "fifty", "sixty", "seventy", "eighty", "ninety"};
+      String[] places = new String{"", "thousand", "million", "billion"};
       if (n==0){
         return word;
       }else{
-
-      }
+        int hundreds = n%1000/100;
+        int tens = n%100/10;
+        int ones = n%10;
+        if (hundreds > 0){
+          word += ones[hundreds] + " hundred ";
+          if (tens > 0){
+            word += "and ";
+          }
+        )
+        if (tens > 2){
+          word += tens[tens];
+          if (ones > 0){
+            word += 
+          }
+        }
     }
 }
