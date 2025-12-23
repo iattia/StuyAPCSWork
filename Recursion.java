@@ -23,9 +23,10 @@ public class Recursion{
     private static void printNoDoubleLetterWords(int length,String word, String alphabet){
       if (length == 0){
         System.out.println(word);
+        return;
       } else{
         for (int i=0; i<alphabet.length(); i++){
-          if (word.charAt(word.length()-1) != alphabet.charAt(i)){
+          if (word.length() == 0 || word.charAt(word.length()-1) != alphabet.charAt(i)){
             printNoDoubleLetterWords(length - 1, word+alphabet.charAt(i), alphabet);
           }
         }
@@ -44,9 +45,24 @@ public class Recursion{
       //THIS SHOULD BE A WRAPPER METHOD
       //call toWordsRec
       //Write this method, and the recursive method it calls.
-      return "";
+      if (n==0){
+        return "zero";
+      }
+      if (n<0){
+        return "negative" + toWordsRec(n, 1, "");
+      }
+      return toWordsRec(n,1,"");
     }
 
-    // private static String toWordsRec(...){
-    // }
+    private static String toWordsRec(int n, int place, String word){
+      String[] ones = new String{"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
+      String[] specials = new String{"ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"};
+      String[] tens = new String{"ten", "twenty", "thirty", "fourty", "fifty", "sixty", "seventy", "eighty", "ninety"};
+      String[] keyWords = new String{"zero", "-", "hundred", "and", "thousand", "million", "billion"};
+      if (n==0){
+        return word;
+      }else{
+
+      }
+    }
 }
