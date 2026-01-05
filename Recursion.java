@@ -85,7 +85,14 @@ public class Recursion {
           }
         }
       }
+      currentString += places[place];
     }
-    return currentString;
+    if (higherOrder.isEmpty()) {
+      return currentString;
+    } else if (currentString.isEmpty()) {
+      return higherOrder;
+    } else {
+      return higherOrder + " " + currentString;
+    }
   }
 }
