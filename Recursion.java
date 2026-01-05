@@ -73,6 +73,18 @@ public class Recursion {
           currentString += " and ";
         }
       }
+      if (t > 0) {
+        if (t < 10) {
+          currentString += ones[t];
+        } else if (t < 20) {
+          currentString += teens[t - 10];
+        } else {
+          currentString += tens[t / 10];
+          if (t % 10 > 0) {
+            currentString += "-" + ones[t % 10];
+          }
+        }
+      }
     }
     return currentString;
   }
