@@ -50,10 +50,10 @@ A turn-based combat game where players control Adventurers with unique resources
 ### Evolution System
 - Each Adventurer can **evolve once per game**.
 - Evolution:
- - Consumes the Adventurer’s turn.
- - Consumes 25% of max Special Resource
- - Restores **10% of current health** (cannot exceed max health).
- - Grants a **team-wide shield**, reducing incoming damage by **25% for that turn only**.
+  - Consumes the Adventurer’s turn.
+  - Consumes 25% of max Special Resource
+  - Restores **10% of current health** (cannot exceed max health).
+  - Grants a **team-wide shield**, reducing incoming damage by **25% for that turn only**.
 
 
 
@@ -67,9 +67,9 @@ A turn-based combat game where players control Adventurers with unique resources
 - **Special Resource:** Cows
 - **Attack:** Punch
 - **Special Attack:**
- - Throws cows to deal **area damage**.
+  - Throws cows to deal **area damage**.
 - **Support:**
- - Heals a target for **5% of their max health**.
+  - Heals a target for **5% of their max health**.
 
 
 
@@ -78,9 +78,9 @@ A turn-based combat game where players control Adventurers with unique resources
 - **Special Resource:** Mana
 - **Attack:** Spell
 - **Special Attack:**
- - Casts a denser spell that deals **increased damage**.
+  - Casts a denser spell that deals **increased damage**.
 - **Support:**
- - Heals a target for **10% of their max health**.
+  - Heals a target for **10% of their max health**.
 
 
 
@@ -89,9 +89,9 @@ A turn-based combat game where players control Adventurers with unique resources
 - **Special Resource:** Vitality
 - **Attack:** Hit
 - **Special Attack:**
- - Deflects **10% of incoming damage** back to the original enemy.
+  - Deflects **10% of incoming damage** back to the original enemy.
 - **Support:**
- - Heals the **entire team** for **15% of their max health**.
+  - Heals the **entire team** for **15% of their max health**.
 
 
 
@@ -103,10 +103,10 @@ A turn-based combat game where players control Adventurers with unique resources
 - **Special Resource:** 5G Waves
 - **Attack:** Call
 - **Special Attack:**
-- Emits 5G waves that irradiate enemies.
+  - Emits 5G waves that irradiate enemies.
 - All enemies lose **10% of their health per turn for 2 turns**.
 - **Support:**
-- Heals self for **30% of max health**.
+  - Heals self for **30% of max health**.
 
 
 
