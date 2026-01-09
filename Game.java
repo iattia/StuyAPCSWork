@@ -6,8 +6,9 @@ public class Game{
   private static final int BORDER_BACKGROUND = Text.WHITE + Text.BACKGROUND;
 
   public static void main(String[] args) {
-    drawBackground();
-    run();
+    //drawBackground();
+    //run();
+    TextBox(5,3,10,3,"cac");
   }
 
   //Display the borders of your screen that will not change.
@@ -41,21 +42,28 @@ public class Game{
   */
   public static void TextBox(int row, int col, int width, int height, String text){
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
+    Text.clear();
     Text.go(row, col);
     while (true){
-      if (text.length > width){
-        System.out.println(text.substring(0, width+1));
+      if (height == 0){
+        return;
+      }
+      if (text.length() > width){
+        System.out.print(text.substring(0, width+1));
         text = text.substring(width+1);
-        col++;
+        height--;
+        row++;
         Text.go(row,col);
         continue;
       } else{
         System.out.println(text+" ".repeat(width-text.length()));
         text = "";
-        col++;
       }
-      if (col<height){
-        System.out.println(" ".repeat(width));
+      if (height > 0){
+        System.out.print(" ".repeat(width));
+        row++;
+        Text.go(row, col);
+        height--;
       } else{
         return;
       }
