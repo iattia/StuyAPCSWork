@@ -6,7 +6,6 @@ public class Game{
   private static final int BORDER_BACKGROUND = Text.WHITE + Text.BACKGROUND;
 
   public static void main(String[] args) {
-
     drawBackground();
     run();
   }
@@ -25,7 +24,8 @@ public class Game{
   //use this method in your other text drawing methods to make things simpler.
   public static void drawText(String s,int startRow, int startCol){
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-    //YOUR CODE HERE
+    Text.go(startRow, startCol);
+    System.out.println(s);
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
   }
 
@@ -41,7 +41,26 @@ public class Game{
   */
   public static void TextBox(int row, int col, int width, int height, String text){
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-    //YOUR CODE HERE
+    Text.go(row, col);
+    while (true){
+      if (text.length > width){
+        System.out.println(text.substring(0, width+1));
+        text = text.substring(width+1);
+        col++;
+        Text.go(row,col);
+        continue;
+      } else{
+        System.out.println(text+" ".repeat(width-text.length()));
+        text = "";
+        col++;
+      }
+      if (col<height){
+        System.out.println(" ".repeat(width));
+      } else{
+        return;
+      }
+    }
+
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
   }
 
