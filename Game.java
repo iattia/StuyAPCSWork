@@ -6,7 +6,7 @@ public class Game{
   private static final int BORDER_BACKGROUND = Text.WHITE + Text.BACKGROUND;
 
   public static void main(String[] args) {
-    
+
     drawBackground();
     run();
   }
@@ -17,7 +17,7 @@ public class Game{
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
     //YOUR CODE HERE
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
-    
+
   }
 
   //Display a line of text starting at
@@ -51,10 +51,10 @@ public class Game{
     //return a random adventurer (choose between all available subclasses)
     //feel free to overload this method to allow specific names/stats.
     public static Adventurer createRandomAdventurer(){
-      
+
       //you replace this body with your own code
       return new CodeWarrior("Bob"+(int)(Math.random()*100));
-      
+
     }
 
     /*Display a List of 1-4 adventurers on the rows row through row+3 (4 rows max)
@@ -141,7 +141,7 @@ public class Game{
     //YOUR CODE HERE
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
     party.add(new CodeWarrior());
-    
+
     boolean partyTurn = true;
     int whichPlayer = 0;
     int whichOpponent = 0;
