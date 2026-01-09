@@ -7,16 +7,41 @@ public class Game{
 
   public static void main(String[] args) {
     drawBackground();
-    run();
+    //un();
   }
 
   //Display the borders of your screen that will not change.
   //Do not write over the blank areas where text will appear or parties will appear.
   public static void drawBackground(){
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-    //YOUR CODE HERE
+    System.out.print("\033[;" + BORDER_BACKGROUND + "m");
+    for (int i = 0; i <= 80; i++){
+      Text.go(30, i);
+      System.out.print(" ");
+      Text.go(0, i);
+      System.out.println(" ");
+    }
+    for (int i = 1; i  < 30; i++){
+      Text.go(i, 0);
+      System.out.print(" ");
+      Text.go(i, 80);
+      System.out.print(" ");
+    }
+    //Text.color(Text.background(39));
+    /*
+    System.out.print("\033[;" + BORDER_BACKGROUND + "m");
+    String horizontalStr = "";
+    for (int i = 0; i < 80; i++){
+      horizontalStr+= " ";
+    }
+    drawText(horizontalStr, 1, 1);
+    drawText(horizontalStr, 30, 1);
+    for (int i = 1; i < 29; i++){
+      drawText(" ", i, 1);
+      drawText(" ", i, 80);
+    }
+    */
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
-
   }
 
   //Display a line of text starting at
