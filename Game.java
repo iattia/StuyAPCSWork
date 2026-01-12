@@ -8,7 +8,7 @@ public class Game{
   public static void main(String[] args) {
     //drawBackground();
     //run();
-    TextBox(5,3,10,3,"cac");
+    TextBox(5,3,10,3,"caccaccaccaccaccac");
   }
 
   //Display the borders of your screen that will not change.
@@ -26,7 +26,7 @@ public class Game{
   public static void drawText(String s,int startRow, int startCol){
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
     Text.go(startRow, startCol);
-    System.out.println(s);
+    System.out.print(s);
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
   }
 
@@ -56,11 +56,11 @@ public class Game{
         Text.go(row,col);
         continue;
       } else{
-        System.out.println(text+" ".repeat(width-text.length()));
+        System.out.println(text+" ".repeat(width-text.length()+1));
         text = "";
       }
       if (height > 0){
-        System.out.print(" ".repeat(width));
+        System.out.print(" ".repeat(width+1));
         row++;
         Text.go(row, col);
         height--;
@@ -68,7 +68,6 @@ public class Game{
         return;
       }
     }
-
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
   }
 
