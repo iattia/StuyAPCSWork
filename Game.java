@@ -7,7 +7,7 @@ public class Game{
 
   public static void main(String[] args) {
     drawBackground();
-    //un();
+    run();
   }
 
   //Display the borders of your screen that will not change.
@@ -15,18 +15,20 @@ public class Game{
   public static void drawBackground(){
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
     System.out.print("\033[;" + BORDER_BACKGROUND + "m");
-    for (int i = 0; i <= 80; i++){
+    for (int i = 1; i <= 80; i++){
       Text.go(30, i);
       System.out.print(" ");
-      Text.go(0, i);
-      System.out.println(" ");
+      Text.go(1, i);
+      System.out.print(" ");
     }
-    for (int i = 1; i  < 30; i++){
-      Text.go(i, 0);
+    for (int i = 2; i  < 30; i++){
+      Text.go(i, 1);
       System.out.print(" ");
       Text.go(i, 80);
       System.out.print(" ");
     }
+    Text.reset();
+
     //Text.color(Text.background(39));
     /*
     System.out.print("\033[;" + BORDER_BACKGROUND + "m");
@@ -50,7 +52,7 @@ public class Game{
   public static void drawText(String s,int startRow, int startCol){
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
     Text.go(startRow, startCol);
-    System.out.println(s);
+    System.out.print(s);
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
   }
 
@@ -66,7 +68,33 @@ public class Game{
   */
   public static void TextBox(int row, int col, int width, int height, String text){
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-    //YOUR CODE HERE
+    Text.clear();
+    Text.go(row, col);
+    while (true){
+      if (height == 0){
+        return;
+      }
+      if (text.length() > width){
+        System.out.print(text.substring(0, width+1));
+        text = text.substring(width+1);
+        height--;
+        row++;
+        Text.go(row,col);
+        continue;
+      } else{
+        System.out.println(text+" ".repeat(width-text.length()));
+        text = "";
+      }
+      if (height > 0){
+        System.out.print(" ".repeat(width));
+        row++;
+        Text.go(row, col);
+        height--;
+      } else{
+        return;
+      }
+    }
+
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
   }
 
