@@ -82,11 +82,11 @@ public class Game{
         Text.go(row,col);
         continue;
       } else{
-        System.out.println(text+" ".repeat(width-text.length()));
+        System.out.println(text+" ".repeat(width-text.length()+1));
         text = "";
       }
       if (height > 0){
-        System.out.print(" ".repeat(width));
+        System.out.print(" ".repeat(width+1));
         row++;
         Text.go(row, col);
         height--;
@@ -94,7 +94,6 @@ public class Game{
         return;
       }
     }
-
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
   }
 
