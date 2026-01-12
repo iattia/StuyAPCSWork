@@ -14,6 +14,7 @@ public class Game{
   //Do not write over the blank areas where text will appear or parties will appear.
   public static void drawBackground(){
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
+    Text.clear();
     System.out.print("\033[;" + BORDER_BACKGROUND + "m");
     for (int i = 1; i <= 80; i++){
       Text.go(30, i);
@@ -82,7 +83,7 @@ public class Game{
         Text.go(row,col);
         continue;
       } else{
-        System.out.println(text+" ".repeat(width-text.length()+1));
+        System.out.print(text+" ".repeat(width-text.length()+1));
         text = "";
       }
       if (height > 0){
@@ -104,7 +105,6 @@ public class Game{
     //feel free to overload this method to allow specific names/stats.
     public static Adventurer createRandomAdventurer(){
 
-      //you replace this body with your own code
       return new CodeWarrior("Bob"+(int)(Math.random()*100));
 
     }
@@ -173,7 +173,7 @@ public class Game{
   public static void run(){
     //Clear and initialize
     Text.hideCursor();
-    Text.clear();
+
 
 
     //Things to attack:
