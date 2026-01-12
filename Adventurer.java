@@ -2,6 +2,7 @@ import java.util.*;
 public abstract class Adventurer{
   private String name;
   private int HP,maxHP;
+  private boolean hasEvolved = false;
 
   //Abstract methods are meant to be implemented in child classes.
   /*
@@ -33,11 +34,11 @@ public abstract class Adventurer{
 
 
   /*
-  *These methods have been modified! You can pass in all of the enemies and the index of which enemy to target. 
+  *These methods have been modified! You can pass in all of the enemies and the index of which enemy to target.
   *This will give flexibility and allow you to target more than one Adventuer, or all Adventuers with the same method
   */
-  
-  
+
+
   //hurt or hinder the target adventurer
   public abstract String attack(ArrayList<Adventurer> others, int index);
 
@@ -55,7 +56,18 @@ public abstract class Adventurer{
   */
 
   public void applyDamage(int amount){
-    this.HP -= amount;
+    if (!hasShield){
+      this.HP -= amount;
+    } else{
+      this.HP -= amount/4;
+    }
+  }
+
+  public String evolve(){
+    if (!hasEvolved && getSpecial() >= getSpecialMax()/4){
+      setSpecial(getSpecial()-getSpecialMax()/4);
+      setHP(getHP()*1.1);
+    }
   }
 
   //You did it wrong if this happens.
