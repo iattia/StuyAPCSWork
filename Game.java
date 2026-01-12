@@ -6,18 +6,45 @@ public class Game{
   private static final int BORDER_BACKGROUND = Text.WHITE + Text.BACKGROUND;
 
   public static void main(String[] args) {
-    //drawBackground();
-    //run();
-    TextBox(5,3,10,3,"caccaccaccaccaccac");
+    drawBackground();
+    run();
   }
 
   //Display the borders of your screen that will not change.
   //Do not write over the blank areas where text will appear or parties will appear.
   public static void drawBackground(){
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-    //YOUR CODE HERE
-    /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
+    Text.clear();
+    System.out.print("\033[;" + BORDER_BACKGROUND + "m");
+    for (int i = 1; i <= 80; i++){
+      Text.go(30, i);
+      System.out.print(" ");
+      Text.go(1, i);
+      System.out.print(" ");
+    }
+    for (int i = 2; i  < 30; i++){
+      Text.go(i, 1);
+      System.out.print(" ");
+      Text.go(i, 80);
+      System.out.print(" ");
+    }
+    Text.reset();
 
+    //Text.color(Text.background(39));
+    /*
+    System.out.print("\033[;" + BORDER_BACKGROUND + "m");
+    String horizontalStr = "";
+    for (int i = 0; i < 80; i++){
+      horizontalStr+= " ";
+    }
+    drawText(horizontalStr, 1, 1);
+    drawText(horizontalStr, 30, 1);
+    for (int i = 1; i < 29; i++){
+      drawText(" ", i, 1);
+      drawText(" ", i, 80);
+    }
+    */
+    /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
   }
 
   //Display a line of text starting at
@@ -56,7 +83,7 @@ public class Game{
         Text.go(row,col);
         continue;
       } else{
-        System.out.println(text+" ".repeat(width-text.length()+1));
+        System.out.print(text+" ".repeat(width-text.length()+1));
         text = "";
       }
       if (height > 0){
@@ -78,7 +105,6 @@ public class Game{
     //feel free to overload this method to allow specific names/stats.
     public static Adventurer createRandomAdventurer(){
 
-      //you replace this body with your own code
       return new CodeWarrior("Bob"+(int)(Math.random()*100));
 
     }
@@ -147,7 +173,7 @@ public class Game{
   public static void run(){
     //Clear and initialize
     Text.hideCursor();
-    Text.clear();
+
 
 
     //Things to attack:
