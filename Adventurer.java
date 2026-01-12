@@ -68,6 +68,7 @@ public abstract class Adventurer{
       setSpecial(getSpecial()-getSpecialMax()/4);
       setHP(getHP()*1.1);
     }
+    return this.name + " has evolved, consuming their turn and " + getSpecialMax()/4 + " of their " + getSpecialName() + ", but retrieving " + "getshielding their team from 25% of incoming damage!"
   }
 
   //You did it wrong if this happens.
