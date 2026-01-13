@@ -11,7 +11,7 @@ public class Game{
   }
 
   //Display the borders of your screen that will not change.
-  //Do not write over the blank areas where text will appear or parties will appear.
+  //Do not write over the blank areas where text will appeasr or parties will appear.
   public static void drawBackground(){
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
     Text.clear();
@@ -104,15 +104,19 @@ public class Game{
     //return a random adventurer (choose between all available subclasses)
     //feel free to overload this method to allow specific names/stats.
     public static Adventurer createRandomAdventurer(){
-      int randomNum = Math.random() * 3;
-      if (randomNum == 0){
-        return new Giant("Big Boy");
-      }
-      else if (randomNum == 1){
-        return new Witch("");
-      }
-      return new CodeWarrior();
+      int choice = (int) (Math.random() * 3);
+      String[] names = {"Bob", "Charlie", "Eve", "Diana", "Alice"};
+      String name = names[(int) (Math.random() * names.length)];
 
+      if (choice == 0){
+        return new CodeWarrior(name);
+      } else if (choice == 1){
+        return new Giant(name);
+      } else if (choice == 2){
+        return new Witch(name);
+      } else {
+        return new CodeWarrior(name);
+      }
     }
 
     /*Display a List of 1-4 adventurers on the rows row through row+3 (4 rows max)
@@ -127,10 +131,25 @@ public class Game{
     public static void drawParty(ArrayList<Adventurer> party,int startRow){
 
       /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-      //YOUR CODE HERE
-      /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
+     int boxWidth = 19;
+      int boxHeight = 5;
+      // Determine color based on startRow: enemies at row 4 (red), party at row 11 (green)
+      int borderColor = (startRow < 10) ? Text.RED : Text.GREEN;
+      for (int i = 0; i < 4; i++){
+        int col = 2 + (i * boxWidth);
+        Adventurer a;
+        if (i < party.size()) {
+          a = party.get(i);
+        } else {
+          a = null;
+        }
+        drawPlayerBox(startRow, col, boxWidth, boxHeight, a, i, borderColor);
+      }
     }
+      /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
 
+    public static void drawPlayerBox(int row, int col, int width, int height, Adventurer a, int index, int borderColor){
+    }
 
   //Use this to create a colorized number string based on the % compared to the max value.
   public static String colorByPercent(int hp, int maxHP){

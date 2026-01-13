@@ -3,6 +3,7 @@ public abstract class Adventurer{
   private String name;
   private int HP,maxHP;
   private boolean hasEvolved = false;
+  private boolean hasShield = false;
 
   //Abstract methods are meant to be implemented in child classes.
   /*
@@ -63,14 +64,27 @@ public abstract class Adventurer{
     }
   }
 
-  public String evolve(){
+  public String evolve(ArrayList<Adventurer> team){
     if (!hasEvolved && getSpecial() >= getSpecialMax()/4){
       setSpecial(getSpecial()-getSpecialMax()/4);
-      setHP(getHP()*1.1);
+      setHP((int)(getHP()*1.1));
+      hasEvolved = true;
+      // Grant team-wide shield
+      for (Adventurer a : team) {
+        a.setShield(true);
+      }
     }
-    return this.name + " has evolved, consuming their turn and " + getSpecialMax()/4 + " of their " + getSpecialName() + ", but retrieving " + "getshielding their team from 25% of incoming damage!"
+    return this.name + " has evolved, consuming their turn and " + getSpecialMax()/4 + " of their " + getSpecialName() + ", restoring 10% HP and shielding their team from 25% of incoming damage!";
   }
 
+  public void setShield(boolean shield){
+    this.hasShield = shield;
+  }
+
+  public boolean getShield(){
+    return this.hasShield;
+  }
+  
   //You did it wrong if this happens.
   public Adventurer(){
     this("Lester-the-noArg-constructor-string");
