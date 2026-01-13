@@ -79,8 +79,4 @@ public class Giant extends Adventurer{
     }
     return getName() + " ate 5 cows and threw a tantrum on top of " + other.getName() + " and their all(ies). Their all(ies) lost 10 HP. " + other.getName() + " lost 70 HP. " + getName() + " lost 5 cows.";
   }
-
-  public String toString(){
-    return this.getName() + " - HP: " + getHP() + "/" + getmaxHP() + " | Cows: " + getSpecial() + "/" + getSpecialMax();
-  }
 }
