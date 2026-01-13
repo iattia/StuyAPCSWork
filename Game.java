@@ -131,10 +131,13 @@ public class Game{
     public static void drawParty(ArrayList<Adventurer> party,int startRow){
 
       /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-     int boxWidth = 19;
+      int boxWidth = 19;
       int boxHeight = 5;
-      // Determine color based on startRow: enemies at row 4 (red), party at row 11 (green)
-      int borderColor = (startRow < 10) ? Text.RED : Text.GREEN;
+      if (startRow < 10){
+        int borderColor = Text.RED
+      } else{
+        int borderColo = Text.GREEN
+      }
       for (int i = 0; i < 4; i++){
         int col = 2 + (i * boxWidth);
         Adventurer a;
