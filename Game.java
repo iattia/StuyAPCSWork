@@ -115,7 +115,7 @@ public class Game{
       } else if (choice == 2){
         return new Witch(name);
       } else {
-        return new CodeWarrior(name)
+        return new CodeWarrior(name);
       }
     }
 
@@ -131,10 +131,25 @@ public class Game{
     public static void drawParty(ArrayList<Adventurer> party,int startRow){
 
       /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-      //YOUR CODE HERE
-      /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
+     int boxWidth = 19;
+      int boxHeight = 5;
+      // Determine color based on startRow: enemies at row 4 (red), party at row 11 (green)
+      int borderColor = (startRow < 10) ? Text.RED : Text.GREEN;
+      for (int i = 0; i < 4; i++){
+        int col = 2 + (i * boxWidth);
+        Adventurer a;
+        if (i < party.size()) {
+          a = party.get(i);
+        } else {
+          a = null;
+        }
+        drawPlayerBox(startRow, col, boxWidth, boxHeight, a, i, borderColor);
+      }
     }
+      /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
 
+    public static void drawPlayerBox(int row, int col, int width, int height, Adventurer a, int index, int borderColor){
+    }
 
   //Use this to create a colorized number string based on the % compared to the max value.
   public static String colorByPercent(int hp, int maxHP){
