@@ -1,4 +1,4 @@
-import java.util.Random;
+import java.util.*;
 
 public class Witch extends Adventurer{
   private int mana;
