@@ -26,15 +26,17 @@ public class Giant extends Adventurer{
   }
 
   //attack & support
-  public String attack(Adventurer other){
+  public String attack(ArrayList<Adventurer> others, int index){
+    Adventurer other = others.get(index);
     other.applyDamage(50);
     this.applyDamage(20);
-    return getName() + " headbutted " + other.getName() + " and got a concussion. " + other.getName() + " lost 50 HP. " + getName() + " lost 20 HP.";
+    return getName() + " punched " + other.getName() + " and gave them a concussion " + other.getName() + " lost 50 HP. " + getName() + " lost 20 HP.";
   }
 
-  public String support(Adventurer other){
-    if (getSpecial() - 5 < 0){
-      support();
+  public String support(ArrayList<Adventurer> others, int index){
+    Adventurer other = others.get(index);
+    if (getSpecial() < 5){
+      return support();
     }
     int restoreAmt = (int)(other.getSpecialMax()/3);
     if (restoreAmt > other.getSpecialMax() - other.getSpecial()){
@@ -42,7 +44,7 @@ public class Giant extends Adventurer{
     }
     other.restoreSpecial(restoreAmt);
     Cows -= 5;
-    return getName() + " compressed 5 cow and turned it into " + other.getSpecialName() + " for " + other.getName() + ". " + other.getName() + " gained " + restoreAmt + " " + other.getSpecialName() + ". " + getName() + " lost five cows.";
+    return getName() + " compressed 5 cows and turned it into " + other.getSpecialName() + " for " + other.getName() + ". " + other.getName() + " gained " + restoreAmt + " " + other.getSpecialName() + ". " + getName() + " lost five cows.";
   }
 
   //heall or buff self
@@ -61,12 +63,22 @@ public class Giant extends Adventurer{
   }
 
   //hurt or hinder the target adventurer, consume some special resource
-  public String specialAttack(Adventurer other){
-    if (getSpecial() - 5 < 0){
-      attack(other);
+  public String specialAttack(ArrayList<Adventurer> others, int index){
+    Adventurer other = others.get(index);
+    if (getSpecial() < 5){
+      return attack(other);
     }
     setSpecial(getSpecial() - 5);
     other.applyDamage(70);
-    return getName() + " ate 5 cows and threw a tantrum on top of " + other.getName() + ". " + other.getName() + " lost 70 HP. " + getName() + " lost 5 cows.";
+    for (int i=0;i<others.length;i++){
+      if (i != index){
+        others.get(i).applyDamage(10);
+      }
+    }
+    return getName() + " ate 5 cows and threw a tantrum on top of " + other.getName() + " and their all(ies). Their all(ies) lost 10 HP. " + other.getName() + " lost 70 HP. " + getName() + " lost 5 cows.";
+  }
+
+  public String toString(){
+    return this.getName() + " - HP: " + getHP() + "/" + getmaxHP() + " | Cows: " + getSpecial() + "/" + getSpecialMax();
   }
 }
