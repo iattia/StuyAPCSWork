@@ -66,6 +66,10 @@ public class Witch extends Adventurer{
       newHP = getmaxHP();
       healAmount = getmaxHP() - getHP();
     }
+    int restoreSPAmt = 10;
+    if (restoreSPAmt > getSpecialMax() - getSpecial()){
+      restoreSPAmt = getSpecialMax() - getSpecial();
+    }
     setHP(newHP);
     return this.getName() + " casts a healing spell on themselves for " + healAmount + " HP.";
   }
