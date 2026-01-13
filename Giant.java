@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Giant extends Adventurer{
   private int Cows, maxCows = 10;
   private String name;
@@ -66,11 +68,11 @@ public class Giant extends Adventurer{
   public String specialAttack(ArrayList<Adventurer> others, int index){
     Adventurer other = others.get(index);
     if (getSpecial() < 5){
-      return attack(other);
+      return attack(others, index);
     }
     setSpecial(getSpecial() - 5);
     other.applyDamage(70);
-    for (int i=0;i<others.length;i++){
+    for (int i=0;i<others.size();i++){
       if (i != index){
         others.get(i).applyDamage(10);
       }
