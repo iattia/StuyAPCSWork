@@ -6,11 +6,14 @@ public class Witch extends Adventurer{
 
   public Witch(String name){
     super(name, 50);
+    super.setName(name + " the Witch")
+    super.setmaxHP(50);
     this.mana = 50;
   }
 
   public Witch(String name, int hp, int mana){
     super(name, hp);
+    super.setmaxHP(hp);
     this.mana = mana;
   }
 
@@ -36,18 +39,21 @@ public class Witch extends Adventurer{
     return MAX_MANA;
   }
 
-  public String attack(Adventurer other){
+  public String attack(ArrayList<Adventurer> others, int index){
+    Adventurer other = others.get(index);
     Random rand = new Random();
     int damage = rand.nextInt(10)+5;
     other.applyDamage(damage);
     return this.getName()+" casts a spell and deals " + damage + " damage to " + other.getName();
   }
 
-  public String support(Adventurer other){
-    int healAmount = 10;
+  public String support(ArrayList<Adventurer> others, int index){
+    Adventurer other = others.get(index);
+    int healAmount = (int)(other.getmaxHP() * 0.1);
     int newHP = other.getHP() + healAmount;
     if (newHP > other.getmaxHP()){
       newHP = other.getmaxHP();
+      healAmount = other.getmaxHP() - other.getHP();
     }
     other.setHP(newHP);
     return this.getName() + " casts a healing spell on " + other.getName() + " for " + healAmount + "HP.";
@@ -58,6 +64,7 @@ public class Witch extends Adventurer{
     int newHP = getHP() + healAmount;
     if (newHP > getmaxHP()){
       newHP = getmaxHP();
+      healAmount = getmaxHP() - getHP();
     }
     setHP(newHP);
     return this.getName() + " casts a healing spell on themselves for " + healAmount + " HP.";
