@@ -84,7 +84,7 @@ public abstract class Adventurer{
   public boolean getShield(){
     return this.hasShield;
   }
-  
+
   //You did it wrong if this happens.
   public Adventurer(){
     this("Lester-the-noArg-constructor-string");
@@ -102,7 +102,7 @@ public abstract class Adventurer{
 
   //toString method
   public String toString(){
-    return this.getName();
+    return this.getName() + " - HP: " + getHP() + "/" + getmaxHP() + " | " + getSpecialName()+": " + getSpecial() + "/" + getSpecialMax();
   }
 
   //Get Methods

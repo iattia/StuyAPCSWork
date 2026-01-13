@@ -66,6 +66,10 @@ public class Witch extends Adventurer{
       newHP = getmaxHP();
       healAmount = getmaxHP() - getHP();
     }
+    int restoreSPAmt = 10;
+    if (restoreSPAmt > getSpecialMax() - getSpecial()){
+      restoreSPAmt = getSpecialMax() - getSpecial();
+    }
     setHP(newHP);
     return this.getName() + " casts a healing spell on themselves for " + healAmount + " HP.";
   }
@@ -80,9 +84,5 @@ public class Witch extends Adventurer{
     other.applyDamage(damage);
     mana -= 20;
     return this.getName() + " casts a powerful dense spell dealing " + damage + " damage to " + other.getName() + " and consumes 20 mana.";
-  }
-
-  public String toString(){
-    return this.getName() + " - HP: " + getHP() + "/" + getmaxHP() + " | Mana: " + getSpecial() + "/" + getSpecialMax();
   }
 }

@@ -68,19 +68,15 @@ public class Giant extends Adventurer{
   public String specialAttack(ArrayList<Adventurer> others, int index){
     Adventurer other = others.get(index);
     if (getSpecial() < 5){
-      return attack(other);
+      return attack(others, index);
     }
     setSpecial(getSpecial() - 5);
     other.applyDamage(70);
-    for (int i=0;i<others.length;i++){
+    for (int i=0;i<others.size();i++){
       if (i != index){
         others.get(i).applyDamage(10);
       }
     }
     return getName() + " ate 5 cows and threw a tantrum on top of " + other.getName() + " and their all(ies). Their all(ies) lost 10 HP. " + other.getName() + " lost 70 HP. " + getName() + " lost 5 cows.";
-  }
-
-  public String toString(){
-    return this.getName() + " - HP: " + getHP() + "/" + getmaxHP() + " | Cows: " + getSpecial() + "/" + getSpecialMax();
   }
 }
