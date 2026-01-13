@@ -134,9 +134,9 @@ public class Game{
       int boxWidth = 19;
       int boxHeight = 5;
       if (startRow < 10){
-        int borderColor = Text.RED
+        int borderColor = Text.RED;
       } else{
-        int borderColo = Text.GREEN
+        int borderColo = Text.GREEN;
       }
       for (int i = 0; i < 4; i++){
         int col = 2 + (i * boxWidth);
