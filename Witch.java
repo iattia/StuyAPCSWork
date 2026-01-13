@@ -6,7 +6,7 @@ public class Witch extends Adventurer{
 
   public Witch(String name){
     super(name, 50);
-    super.setName(name + " the Witch")
+    super.setName(name + " the Witch");
     super.setmaxHP(50);
     this.mana = 50;
   }
