@@ -70,18 +70,19 @@ public class Witch extends Adventurer{
     return this.getName() + " casts a healing spell on themselves for " + healAmount + " HP.";
   }
 
-  public String specialAttack(Adventurer other){
+  public String specialAttack(ArrayList<Adventurer> others, int index){
+    Adventurer other = others.get(index);
     if (mana < 20){
-      return this.getName() + " doesn't have enough mana for a special attack.";
+      return this.getName() + " doesn't have enough mana for a special attack!" + attack(others, index);
     }
     Random rand = new Random();
-    int damage = rand.nextInt(20)+15;
+    int damage = rand.nextInt(20)+25;
     other.applyDamage(damage);
     mana -= 20;
-    return this.getName() + " uses a powerful spell to deal " + damage + " damage to " + other.getName() + " and consumes 20 mana.";
+    return this.getName() + " casts a powerful dense spell dealing " + damage + " damage to " + other.getName() + " and consumes 20 mana.";
   }
 
   public String toString(){
-    return this.getName() + " (Witch) - HP: " + getHP() + "/" + getmaxHP() + " | Mana: " + getSpecial() + "/" + getSpecialMax();
+    return this.getName() + " - HP: " + getHP() + "/" + getmaxHP() + " | Mana: " + getSpecial() + "/" + getSpecialMax();
   }
 }
