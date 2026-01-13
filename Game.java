@@ -29,21 +29,6 @@ public class Game{
       System.out.print(" ");
     }
     Text.reset();
-
-    //Text.color(Text.background(39));
-    /*
-    System.out.print("\033[;" + BORDER_BACKGROUND + "m");
-    String horizontalStr = "";
-    for (int i = 0; i < 80; i++){
-      horizontalStr+= " ";
-    }
-    drawText(horizontalStr, 1, 1);
-    drawText(horizontalStr, 30, 1);
-    for (int i = 1; i < 29; i++){
-      drawText(" ", i, 1);
-      drawText(" ", i, 80);
-    }
-    */
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
   }
 
@@ -152,11 +137,22 @@ public class Game{
       /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
 
     public static void drawPlayerBox(int row, int col, int width, int height, Adventurer a, int index, int borderColor){
+
     }
 
   //Use this to create a colorized number string based on the % compared to the max value.
   public static String colorByPercent(int hp, int maxHP){
     String output = String.format("%2s", hp+"")+"/"+String.format("%2s", maxHP+"");
+    double percent = hp / maxHP;
+    if (percent < 0.25){
+      System.out.print("\033[;" + Text.RED + "m");
+    }
+    else if (percent < 0.75){
+      System.out.print("\033[;" + Text.YELLOW + "m");
+    }
+    else{
+      System.out.print("\033[;" + Text.WHITE + "m");
+    }
     //COLORIZE THE OUTPUT IF HIGH/LOW:
     // under 25% : red
     // under 75% : yellow
@@ -210,7 +206,21 @@ public class Game{
     //start with 1 boss and modify the code to allow 2-3 adventurers later.
     ArrayList<Adventurer>enemies = new ArrayList<Adventurer>();
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-    //YOUR CODE HERE
+    int numEnemies = Math.random() * 2 + 1;
+    if (numEnemies == 1){
+      enemies.add(new JohnPork);
+    }
+    else if (numEnemies == 2){
+      for (int i = 0; i < 2; i++){
+        int rand = Math.random() * 2;
+        if (rand == 0){
+          enemies.add(new Witch());
+        }
+        else if (rand == 1){
+          enemies.add(new Giant());
+        }
+      }
+    }
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
     enemies.add(new CodeWarrior());
 
@@ -218,7 +228,14 @@ public class Game{
     //Make an ArrayList of Adventurers and add 2-4 Adventurers to it.
     ArrayList<Adventurer> party = new ArrayList<>();
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-    //YOUR CODE HERE
+    for (int i = 0; i < 2; ++){
+      int rand = Math.random() * 2;
+      if (rand == 0){
+        party.add(new Witch());
+      }
+      else if (rand == 1){
+        party.add(new Giant());
+      }
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
     party.add(new CodeWarrior());
 
