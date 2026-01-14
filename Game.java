@@ -21,8 +21,10 @@ public class Game{
       System.out.print(" ");
       Text.go(1, i);
       System.out.print(" ");
+      Text.go(9, i);
+      System.out.print(" ");
     }
-    for (int i = 2; i  < 30; i++){
+    for (int i = 2; i  <= 30; i++){
       Text.go(i, 1);
       System.out.print(" ");
       Text.go(i, 80);
@@ -155,7 +157,7 @@ public class Game{
         Text.go(row + r, col + width - 1);
         System.out.print(Text.colorize(vertical, borderColor));
       }
-      
+
       Text.go(row + height - 1, col);
       System.out.print(Text.colorize(bottomLeft + horizontal.repeat(width - 2) + bottomRight, borderColor));
 
@@ -222,7 +224,7 @@ public class Game{
     Text.go(3, 3);
     System.out.print(Text.colorize("ENEMIES", Text.RED, Text.BOLD));
     drawParty(enemies, 4);
-    
+
   }
 
   public static String userInput(Scanner in){
