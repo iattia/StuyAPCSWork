@@ -121,7 +121,7 @@ public class Game{
       if (startRow < 10){
         int borderColor = Text.RED;
       } else{
-        int borderColo = Text.GREEN;
+        int borderColor = Text.GREEN;
       }
       for (int i = 0; i < 4; i++){
         int col = 2 + (i * boxWidth);
@@ -137,7 +137,26 @@ public class Game{
       /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
 
     public static void drawPlayerBox(int row, int col, int width, int height, Adventurer a, int index, int borderColor){
+      String topLeft = "┌";
+      String topRight = "┐";
+      String bottomLeft = "└";
+      String bottomRight = "┘";
+      String horizontal = "─";
+      String vertical = "│";
 
+      Text.go(row, col);
+      System.out.print(Text.colorize(topLeft + horizontal.repeat(width - 2) + topRight, borderColor));
+
+      for (int r = 1; r < height - 1; r++){
+        Text.go(row + r, col);
+        System.out.print(Text.colorize(vertical, borderColor));
+        System.out.print(" ".repeat(width - 2));
+        Text.go(row + r, col + width - 1);
+        System.out.print(Text.colorize(vertical, borderColor));
+      }
+      
+      Text.go(row + height - 1, col);
+      System.out.print(Text.colorize(bottomLeft + horizontal.repeat(width - 2) + bottomRight, borderColor));
     }
 
   //Use this to create a colorized number string based on the % compared to the max value.
