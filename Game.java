@@ -208,7 +208,10 @@ public class Game{
   //Place the cursor at the place where the user will by typing their input at the end of this method.
   public static void drawScreen(ArrayList<Adventurer> enemies, ArrayList<Adventurer> party){
 
-    Text.clear();
+    for (int row = 2; row < 30; row++){
+      Text.go(row, 2);
+      System.out.print(" ".repeat(77));
+    }
 
     //draw player party
     Text.go(10, 3);
