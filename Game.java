@@ -157,6 +157,25 @@ public class Game{
       
       Text.go(row + height - 1, col);
       System.out.print(Text.colorize(bottomLeft + horizontal.repeat(width - 2) + bottomRight, borderColor));
+
+      if (a != null){
+        String name = "[" + index + "] " + a.getName();
+        if (name.length() > width - 4) name = name.substring(0, width - 4);
+        Text.go(row + 1, col + 2);
+        System.out.print(String.format("%-" + (width - 4) + "s", name));
+        Text.go(row + 2, col + 2);
+        String hpStr = "HP:" + colorByPercent(a.getHP(), a.getmaxHP());
+        System.out.print(hpStr);
+        Text.go(row + 3, col + 2);
+        String spName = a.getSpecialName();
+        if (spName.length() > 6) spName = spName.substring(0, 6);
+        String spStr = spName + ":" + a.getSpecial() + "/" + a.getSpecialMax();
+        if (spStr.length() > width - 4) spStr = spStr.substring(0, width - 4);
+        System.out.print(String.format("%-" + (width - 4) + "s", spStr));
+      } else {
+        Text.go(row + 2, col + 2);
+        System.out.print(Text.colorize("  (empty)", Text.BLACK + Text.BRIGHT));
+      }
     }
 
   //Use this to create a colorized number string based on the % compared to the max value.
@@ -227,7 +246,7 @@ public class Game{
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
     int numEnemies = Math.random() * 2 + 1;
     if (numEnemies == 1){
-      enemies.add(new JohnPork);
+      //enemies.add(new JohnPork);
     }
     else if (numEnemies == 2){
       for (int i = 0; i < 2; i++){
@@ -247,7 +266,7 @@ public class Game{
     //Make an ArrayList of Adventurers and add 2-4 Adventurers to it.
     ArrayList<Adventurer> party = new ArrayList<>();
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-    for (int i = 0; i < 2; ++){
+    for (int i = 0; i < 2; i++){
       int rand = Math.random() * 2;
       if (rand == 0){
         party.add(new Witch());
@@ -255,6 +274,7 @@ public class Game{
       else if (rand == 1){
         party.add(new Giant());
       }
+    }
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
     party.add(new CodeWarrior());
 
