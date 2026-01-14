@@ -118,10 +118,11 @@ public class Game{
       /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
       int boxWidth = 19;
       int boxHeight = 5;
+      int borderColor;
       if (startRow < 10){
-        int borderColor = Text.RED;
+        borderColor = Text.RED;
       } else{
-        int borderColor = Text.GREEN;
+        borderColor = Text.GREEN;
       }
       for (int i = 0; i < 4; i++){
         int col = 2 + (i * boxWidth);
@@ -207,11 +208,18 @@ public class Game{
   //Place the cursor at the place where the user will by typing their input at the end of this method.
   public static void drawScreen(ArrayList<Adventurer> enemies, ArrayList<Adventurer> party){
 
+    Text.clear();
 
     //draw player party
+    Text.go(10, 3);
+    System.out.print(Text.colorize("YOUR PARTY", Text.GREEN, Text.BOLD));
+    drawParty(party, 11);
 
     //draw enemy party
-
+    Text.go(3, 3);
+    System.out.print(Text.colorize("ENEMIES", Text.RED, Text.BOLD));
+    drawParty(enemies, 4);
+    
   }
 
   public static String userInput(Scanner in){
@@ -244,18 +252,18 @@ public class Game{
     //start with 1 boss and modify the code to allow 2-3 adventurers later.
     ArrayList<Adventurer>enemies = new ArrayList<Adventurer>();
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-    int numEnemies = Math.random() * 2 + 1;
+    int numEnemies = (int) Math.random() * 2 + 1;
     if (numEnemies == 1){
       //enemies.add(new JohnPork);
     }
     else if (numEnemies == 2){
       for (int i = 0; i < 2; i++){
-        int rand = Math.random() * 2;
+        int rand = (int) Math.random() * 2;
         if (rand == 0){
-          enemies.add(new Witch());
+          enemies.add(new Witch("W"));
         }
         else if (rand == 1){
-          enemies.add(new Giant());
+          enemies.add(new Giant("G"));
         }
       }
     }
@@ -267,12 +275,12 @@ public class Game{
     ArrayList<Adventurer> party = new ArrayList<>();
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
     for (int i = 0; i < 2; i++){
-      int rand = Math.random() * 2;
+      int rand = (int) Math.random() * 2;
       if (rand == 0){
-        party.add(new Witch());
+        party.add(new Witch("W"));
       }
       else if (rand == 1){
-        party.add(new Giant());
+        party.add(new Giant("G"));
       }
     }
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
