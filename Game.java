@@ -6,6 +6,7 @@ public class Game{
   private static final int BORDER_BACKGROUND = Text.WHITE + Text.BACKGROUND;
 
   public static void main(String[] args) {
+    
     drawBackground();
     run();
   }
@@ -231,8 +232,8 @@ public class Game{
       //show cursor
 
       String input = in.nextLine();
-      for (int i = 0; i < 80; i++){
-        drawText(" ", 80, i);
+      for (int i = 1; i < 80; i++){
+        drawText(" ", 29, 2);
       }
 
       return input;
@@ -256,39 +257,26 @@ public class Game{
     //start with 1 boss and modify the code to allow 2-3 adventurers later.
     ArrayList<Adventurer>enemies = new ArrayList<Adventurer>();
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-    int numEnemies = (int) Math.random() * 2 + 1;
+    int numEnemies = (int) (Math.random() * 2 + 1);
     if (numEnemies == 1){
-      //enemies.add(new JohnPork);
+      enemies.add(new Witch("Boss"));
     }
     else if (numEnemies == 2){
       for (int i = 0; i < 2; i++){
-        int rand = (int) Math.random() * 2;
-        if (rand == 0){
-          enemies.add(new Witch("W"));
-        }
-        else if (rand == 1){
-          enemies.add(new Giant("G"));
-        }
+        enemies.add(createRandomAdventurer());
       }
+      enemies.add(new CodeWarrior());
     }
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
-    enemies.add(new CodeWarrior());
 
     //Adventurers you control:
     //Make an ArrayList of Adventurers and add 2-4 Adventurers to it.
     ArrayList<Adventurer> party = new ArrayList<>();
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
     for (int i = 0; i < 2; i++){
-      int rand = (int) Math.random() * 2;
-      if (rand == 0){
-        party.add(new Witch("W"));
-      }
-      else if (rand == 1){
-        party.add(new Giant("G"));
-      }
+      party.add(createRandomAdventurer());
     }
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
-    party.add(new CodeWarrior());
 
     boolean partyTurn = true;
     int whichPlayer = 0;
@@ -314,7 +302,7 @@ public class Game{
       input = userInput(in);
 
       //example debug statment
-      TextBox(24,2,1,78,"input: "+input+" partyTurn:"+partyTurn+ " whichPlayer="+whichPlayer+ " whichOpp="+whichOpponent );
+      //TextBox(24,2,1,78,"input: "+input+" partyTurn:"+partyTurn+ " whichPlayer="+whichPlayer+ " whichOpp="+whichOpponent );
 
       //display event based on last turn's input
       if(partyTurn){
@@ -322,7 +310,8 @@ public class Game{
         //Process user input for the last Adventurer:
         if(input.startsWith("attack ") || input.startsWith("a ")){
           /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-
+          drawText((party.get(whichPlayer)).attack(enemies, whichOpponent), 20, 2);
+          
           /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
         }
         else if(input.startsWith("special ") || input.startsWith("sp ")){

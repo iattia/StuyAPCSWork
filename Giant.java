@@ -32,7 +32,7 @@ public class Giant extends Adventurer{
     Adventurer other = others.get(index);
     other.applyDamage(50);
     this.applyDamage(20);
-    return getName() + " punched " + other.getName() + " and gave them a concussion " + other.getName() + " lost 50 HP. " + getName() + " lost 20 HP.";
+    return getName() + " punched " + other.getName() + " and gave them a concussion. " + other.getName() + " lost 50 HP. " + getName() + " lost 20 HP.";
   }
 
   public String support(ArrayList<Adventurer> others, int index){
