@@ -21,7 +21,9 @@ public class Game{
       System.out.print(" ");
       Text.go(1, i);
       System.out.print(" ");
-      Text.go(9, i);
+      Text.go(10, i);
+      System.out.print(" ");
+      Text.go(19, i);
       System.out.print(" ");
     }
     for (int i = 2; i  <= 30; i++){
@@ -210,15 +212,10 @@ public class Game{
   //Place the cursor at the place where the user will by typing their input at the end of this method.
   public static void drawScreen(ArrayList<Adventurer> enemies, ArrayList<Adventurer> party){
 
-    for (int row = 2; row < 30; row++){
-      Text.go(row, 2);
-      System.out.print(" ".repeat(77));
-    }
-
     //draw player party
-    Text.go(10, 3);
+    Text.go(12, 3);
     System.out.print(Text.colorize("YOUR PARTY", Text.GREEN, Text.BOLD));
-    drawParty(party, 11);
+    drawParty(party, 13);
 
     //draw enemy party
     Text.go(3, 3);
