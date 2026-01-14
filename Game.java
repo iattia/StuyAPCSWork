@@ -59,7 +59,6 @@ public class Game{
   */
   public static void TextBox(int row, int col, int width, int height, String text){
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-    Text.clear();
     Text.go(row, col);
     while (true){
       if (height == 0){
@@ -77,11 +76,11 @@ public class Game{
         text = "";
       }
       if (height > 0){
-        System.out.print(" ".repeat(width+1));
         row++;
         Text.go(row, col);
+        System.out.print(" ".repeat(width + 1));
         height--;
-      } else{
+      } else{ 
         return;
       }
     }
@@ -310,7 +309,8 @@ public class Game{
         //Process user input for the last Adventurer:
         if(input.startsWith("attack ") || input.startsWith("a ")){
           /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-          drawText((party.get(whichPlayer)).attack(enemies, whichOpponent), 20, 2);
+          TextBox(20, 2, 77, 2, (party.get(whichPlayer)).attack(enemies, whichOpponent));
+          Text.go(29,2);
           
           /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
         }
