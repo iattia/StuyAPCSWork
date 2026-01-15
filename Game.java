@@ -71,7 +71,7 @@ public class Game{
         row++;
         Text.go(row,col);
         continue;
-      } else{
+      } else if(! (text.equals(""))){
         System.out.print(text+" ".repeat(width-text.length()+1));
         height--;
         text = "";
@@ -94,18 +94,14 @@ public class Game{
     //return a random adventurer (choose between all available subclasses)
     //feel free to overload this method to allow specific names/stats.
     public static Adventurer createRandomAdventurer(){
-      int choice = (int) (Math.random() * 3);
+      int choice = (int) (Math.random() * 2);
       String[] names = {"Bob", "Charlie", "Eve", "Diana", "Alice"};
       String name = names[(int) (Math.random() * names.length)];
 
       if (choice == 0){
-        return new CodeWarrior(name);
-      } else if (choice == 1){
         return new Giant(name);
-      } else if (choice == 2){
+      } else{
         return new Witch(name);
-      } else {
-        return new CodeWarrior(name);
       }
     }
 
@@ -149,7 +145,7 @@ public class Game{
       String bottomRight = "┘";
       String horizontal = "─";
       String vertical = "│";
-
+   
       Text.go(row, col);
       System.out.print(Text.colorize(topLeft + horizontal.repeat(width - 2) + topRight, borderColor));
 
@@ -205,7 +201,7 @@ public class Game{
   }
 
 
-
+  
 
 
   //Display the party and enemies
@@ -257,15 +253,14 @@ public class Game{
     //start with 1 boss and modify the code to allow 2-3 adventurers later.
     ArrayList<Adventurer>enemies = new ArrayList<Adventurer>();
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-    int numEnemies = (int) (Math.random() * 2 + 1);
-    if (numEnemies == 1){
+    int numEnemies = (int) (Math.random() * 2+ 1);
+    if (numEnemies == 0){
       enemies.add(new Witch("Boss"));
     }
-    else if (numEnemies == 2){
-      for (int i = 0; i < 2; i++){
+    else{
+      for (int i = 0; i < 3; i++){
         enemies.add(createRandomAdventurer());
       }
-      enemies.add(new CodeWarrior());
     }
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
 
@@ -273,7 +268,7 @@ public class Game{
     //Make an ArrayList of Adventurers and add 2-4 Adventurers to it.
     ArrayList<Adventurer> party = new ArrayList<>();
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-    for (int i = 0; i < 2; i++){
+    for (int i = 0; i < 3; i++){
       party.add(createRandomAdventurer());
     }
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
@@ -290,13 +285,16 @@ public class Game{
     drawScreen(enemies,party);//initial state.
 
     //Main loop
-
+    int deadOpp = 0;
+    int deadPar = 0;
+    ArrayList<Adventurer> deadList = new ArrayList<>();
     //display this prompt at the start of the game.
-    String preprompt = "Enter command for "+ (party.get(whichPlayer)).getName() + ": attack/special/quit";
-         Text.go(28, 2);
+    String preprompt = "Enter command for "+ (party.get(whichPlayer)).getName() + ": attack/special/support/quit";
+    
+    Text.go(28, 2);
     System.out.print(preprompt);
 
-    while(! (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit"))){
+    while(! (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit") || (deadOpp == enemies.size() || deadPar == party.size()))){
       //Read user input
       input = userInput(in);
       int enemyInd = 100;
@@ -313,47 +311,71 @@ public class Game{
         //Process user input for the last Adventurer:
         if(input.startsWith("attack ") || input.startsWith("a ")){
           /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-          TextBox(20, 2, 77, 2, (party.get(whichPlayer)).attack(enemies, enemyInd));
+          if (enemies.get(enemyInd).getHP() == 0){
+            TextBox(20, 2, 77, 3, "Please choose another target enemy to attack.");
+            continue;
+          }
+          TextBox(20, 2, 77, 3, (party.get(whichPlayer)).attack(enemies, enemyInd));
           /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
         }
         else if(input.startsWith("special ") || input.startsWith("sp ")){
           /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-          TextBox(20, 2, 77, 2, (party.get(whichPlayer)).specialAttack(enemies, enemyInd));
+          if (enemies.get(enemyInd).getHP() == 0){
+            TextBox(20, 2, 77, 3, "Please choose another target enemy to attack.");
+            continue;
+          }
+          TextBox(20, 2, 77, 3, (party.get(whichPlayer)).specialAttack(enemies, enemyInd));
           /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
         }
         else if(input.startsWith("su ") || input.startsWith("support ")){
           //"support 0" or "su 0" or "su 2" etc.
           //assume the value that follows su  is an integer.
           /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-          TextBox(20, 2, 77, 2, (party.get(whichPlayer)).support(party, enemyInd));
+          if (party.get(enemyInd).getHP() == party.get(enemyInd).getmaxHP() || party.get(enemyInd).getSpecial() == party.get(enemyInd).getSpecialMax()){
+            TextBox(20, 2, 77, 3, party.get(enemyInd).getName() + " has full HP or special. Choose another action/character.");
+          }
+          TextBox(20, 2, 77, 3, (party.get(whichPlayer)).support(party, enemyInd));
           /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
         }
-
+        else{
+          //not a good input
+          continue;
+        }
+        TextBox(24, 2, 77, 1, " ");
+        for (int i = 0; i < party.size(); i++){
+          if ((party.get(i)).getHP() <= 0 && !deadList.contains(party.get(i))){
+            (party.get(i)).setHP(0);
+            TextBox(24, 2, 77, 1, Text.colorize(party.get(i).getName() + " has died.", Text.RED));
+            deadPar++;
+            deadList.add(party.get(i));
+          }
+        }
+        for (int i = 0; i < enemies.size(); i++){
+          if ((enemies.get(i)).getHP() <= 0 && !deadList.contains(enemies.get(i))){
+            (enemies.get(i)).setHP(0);
+            TextBox(24, 2, 77, 1, Text.colorize(enemies.get(i).getName() + " has died.", Text.RED));
+            deadOpp++;
+            deadList.add(enemies.get(i));
+          }
+        } 
+        drawScreen(enemies,party);
         //You should decide when you want to re-ask for user input
         //If no errors:
         whichPlayer++;
 
-        Text.go(28, 2);
-        String erase = "";
-        for (int i = 2; i < 80; i++){
-          erase += " ";
-        }
-        drawText(erase, 28, 2);
-        Text.go(28, 2);
         if(whichPlayer < party.size()){
           //This is a player turn.
           //Decide where to draw the following prompt:
           
-          String prompt = "Enter command for "+party.get(whichPlayer).getName()+": attack/special/quit";
+          String prompt = "Enter command for "+party.get(whichPlayer).getName()+": attack/special/support/quit";
 
-        
-          System.out.print(prompt);
+          TextBox(28, 2, 77, 1, prompt);
           continue;
-        }else{
+        }else{  
           //This is after the player's turn, and allows the user to see the enemy turn
           //Decide where to draw the following prompt:
           String prompt = "press enter to see monster's turn";
-          System.out.print(prompt);
+          TextBox(28, 2, 77, 1, prompt);
           partyTurn = false;
           whichOpponent = 0;
         }
@@ -367,40 +389,60 @@ public class Game{
         /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
         int randAttack = (int) (Math.random() * 3);
         int randPlayer = (int) (Math.random() * party.size());
+        if (party.get(randPlayer).getHP() == 0){
+          continue;
+        }
         int randOpp = (int) (Math.random() * enemies.size());
+        if (enemies.get(randOpp).getHP() == 0 || enemies.get(randOpp).getHP() == enemies.get(randOpp).getmaxHP()){
+          continue;
+        }
         if (randAttack == 0){
-          TextBox(20, 2, 77, 2, (enemies.get(whichOpponent)).attack(party, randPlayer));
+          TextBox(20, 2, 77, 3, (enemies.get(whichOpponent)).attack(party, randPlayer));
         }
         else if (randAttack == 1){
-          TextBox(20, 2, 77, 2, (enemies.get(whichOpponent)).specialAttack(party, randPlayer));
+          TextBox(20, 2, 77, 3, (enemies.get(whichOpponent)).specialAttack(party, randPlayer));
         }
         else{
-          TextBox(20, 2, 77, 2, (enemies.get(whichOpponent)).support(enemies, randOpp));
+          TextBox(20, 2, 77, 3, (enemies.get(whichOpponent)).support(enemies, randOpp));
         }
         /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
 
-
+        for (int i = 0; i < party.size(); i++){
+          if ((party.get(i)).getHP() <= 0){
+            (party.get(i)).setHP(0);
+            TextBox(24, 2, 77, 1, Text.colorize(party.get(i).getName() + " has died.", Text.RED));
+          }
+        }
+        for (int i = 0; i < enemies.size(); i++){
+          if ((enemies.get(i)).getHP() <= 0){
+            (enemies.get(i)).setHP(0);
+            TextBox(24, 2, 77, 1, Text.colorize(enemies.get(i).getName() + " has died.", Text.RED));
+          }
+        }
         //Decide where to draw the following prompt:
         String prompt = "press enter to see next turn";
+
+        TextBox(28, 2, 77, 1, prompt);
 
         whichOpponent++;
 
       }//end of one enemy.
 
       //modify this if statement.
-      if(!partyTurn && whichOpponent >= enemies.size()){
+      if(!partyTurn && whichOpponent >= enemies.size() - deadOpp){
         //THIS BLOCK IS TO END THE ENEMY TURN
         //It only triggers after the last enemy goes.
         whichPlayer = 0;
         turn++;
         partyTurn=true;
         //display this prompt before player's turn
-        String prompt = "Enter command for "+party.get(whichPlayer)+": attack/special/quit";
+        String prompt = "Enter command for "+party.get(whichPlayer)+": attack/special/support/quit";
+        TextBox(28, 2, 77, 1, prompt);
       }
 
       //display the updated screen after input has been processed.
       drawScreen(enemies,party);
-
+    
 
     }//end of main game loop
 
