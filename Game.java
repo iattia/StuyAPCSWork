@@ -73,6 +73,7 @@ public class Game{
         continue;
       } else{
         System.out.print(text+" ".repeat(width-text.length()+1));
+        height--;
         text = "";
       }
       if (height > 0){
@@ -231,8 +232,8 @@ public class Game{
       //show cursor
 
       String input = in.nextLine();
-      for (int i = 1; i < 80; i++){
-        drawText(" ", 29, 2);
+      for (int i = 2; i < 80; i++){
+        drawText(" ", 29, i);
       }
 
       return input;
@@ -291,39 +292,40 @@ public class Game{
     //Main loop
 
     //display this prompt at the start of the game.
-    String preprompt = "Enter command for "+(party.get(whichPlayer)).getName() + ": attack/special/quit";
-
+    String preprompt = "Enter command for "+ (party.get(whichPlayer)).getName() + ": attack/special/quit";
+         Text.go(28, 2);
+    System.out.print(preprompt);
 
     while(! (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit"))){
       //Read user input
-      Text.go(28, 2);
-      System.out.println(preprompt);
       input = userInput(in);
-
+      int enemyInd = 100;
+      for (int i = 0; i < input.length(); i++){
+        if (input.charAt(i) == ' '){
+          enemyInd = Integer.parseInt(input.substring(i + 1, i + 2));
+        }
+      }
       //example debug statment
       //TextBox(24,2,1,78,"input: "+input+" partyTurn:"+partyTurn+ " whichPlayer="+whichPlayer+ " whichOpp="+whichOpponent );
 
       //display event based on last turn's input
       if(partyTurn){
-
         //Process user input for the last Adventurer:
         if(input.startsWith("attack ") || input.startsWith("a ")){
           /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-          TextBox(20, 2, 77, 2, (party.get(whichPlayer)).attack(enemies, whichOpponent));
-          Text.go(29,2);
-          
+          TextBox(20, 2, 77, 2, (party.get(whichPlayer)).attack(enemies, enemyInd));
           /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
         }
         else if(input.startsWith("special ") || input.startsWith("sp ")){
           /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-          //YOUR CODE HERE
+          TextBox(20, 2, 77, 2, (party.get(whichPlayer)).specialAttack(enemies, enemyInd));
           /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
         }
         else if(input.startsWith("su ") || input.startsWith("support ")){
           //"support 0" or "su 0" or "su 2" etc.
           //assume the value that follows su  is an integer.
           /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-          //YOUR CODE HERE
+          TextBox(20, 2, 77, 2, (party.get(whichPlayer)).support(party, enemyInd));
           /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
         }
 
@@ -331,18 +333,27 @@ public class Game{
         //If no errors:
         whichPlayer++;
 
-
+        Text.go(28, 2);
+        String erase = "";
+        for (int i = 2; i < 80; i++){
+          erase += " ";
+        }
+        drawText(erase, 28, 2);
+        Text.go(28, 2);
         if(whichPlayer < party.size()){
           //This is a player turn.
           //Decide where to draw the following prompt:
-          String prompt = "Enter command for "+party.get(whichPlayer)+": attack/special/quit";
+          
+          String prompt = "Enter command for "+party.get(whichPlayer).getName()+": attack/special/quit";
 
-
+        
+          System.out.print(prompt);
+          continue;
         }else{
           //This is after the player's turn, and allows the user to see the enemy turn
           //Decide where to draw the following prompt:
           String prompt = "press enter to see monster's turn";
-
+          System.out.print(prompt);
           partyTurn = false;
           whichOpponent = 0;
         }
@@ -351,10 +362,21 @@ public class Game{
         //not the party turn!
 
 
-        //enemy attacks a randomly chosen person with a randomly chosen attack.z`
+        //enemy attacks a randomly chosen person with a randomly chosen attack.
         //Enemy action choices go here!
         /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-        //YOUR CODE HERE
+        int randAttack = (int) (Math.random() * 3);
+        int randPlayer = (int) (Math.random() * party.size());
+        int randOpp = (int) (Math.random() * enemies.size());
+        if (randAttack == 0){
+          TextBox(20, 2, 77, 2, (enemies.get(whichOpponent)).attack(party, randPlayer));
+        }
+        else if (randAttack == 1){
+          TextBox(20, 2, 77, 2, (enemies.get(whichOpponent)).specialAttack(party, randPlayer));
+        }
+        else{
+          TextBox(20, 2, 77, 2, (enemies.get(whichOpponent)).support(enemies, randOpp));
+        }
         /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
 
 
