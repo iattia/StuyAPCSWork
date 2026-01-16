@@ -4,6 +4,7 @@ public abstract class Adventurer{
   private int HP,maxHP;
   private boolean hasEvolved = false;
   private boolean hasShield = false;
+  private int radiationTurns = 0;
 
   //Abstract methods are meant to be implemented in child classes.
   /*
@@ -84,7 +85,14 @@ public abstract class Adventurer{
   public boolean getShield(){
     return this.hasShield;
   }
+  
+  public void setRadiationTurns(int turns){
+    this.radiationTurns = turns;
+  }
 
+  public int getRadiationTurns(){
+    return this.radiationTurns;
+  }
   //You did it wrong if this happens.
   public Adventurer(){
     this("Lester-the-noArg-constructor-string");

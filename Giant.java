@@ -2,7 +2,6 @@ import java.util.*;
 
 public class Giant extends Adventurer{
   private int Cows, maxCows = 10;
-  private String name;
 
   public Giant(String name){
     super(name);
@@ -30,9 +29,9 @@ public class Giant extends Adventurer{
   //attack & support
   public String attack(ArrayList<Adventurer> others, int index){
     Adventurer other = others.get(index);
-    other.applyDamage(50);
-    this.applyDamage(20);
-    return getName() + " punched " + other.getName() + " and gave them a concussion. " + other.getName() + " lost 50 HP. " + getName() + " lost 20 HP.";
+    other.applyDamage(8);
+    this.applyDamage(12);
+    return getName() + " punched " + other.getName() + " and gave them a concussion. " + other.getName() + " lost 8 HP. " + getName() + " lost 12 HP.";
   }
 
   public String support(ArrayList<Adventurer> others, int index){
@@ -71,12 +70,12 @@ public class Giant extends Adventurer{
       return attack(others, index);
     }
     setSpecial(getSpecial() - 5);
-    other.applyDamage(70);
+    other.applyDamage(15);
     for (int i=0;i<others.size();i++){
       if (i != index){
         others.get(i).applyDamage(10);
       }
     }
-    return getName() + " ate 5 cows and threw a tantrum on top of " + other.getName() + " and their all(ies). Their all(ies) lost 10 HP. " + other.getName() + " lost 70 HP. " + getName() + " lost 5 cows.";
+    return getName() + " ate 5 cows and threw a tantrum on top of " + other.getName() + " and their all(ies). Their all(ies) lost 10 HP. " + other.getName() + " lost 15 HP. " + getName() + " lost 5 cows.";
   }
 }

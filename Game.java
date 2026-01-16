@@ -1,8 +1,5 @@
 import java.util.*;
 public class Game{
-  private static final int WIDTH = 80;
-  private static final int HEIGHT = 30;
-  private static final int BORDER_COLOR = Text.BLACK;
   private static final int BORDER_BACKGROUND = Text.WHITE + Text.BACKGROUND;
 
   public static void main(String[] args) {
@@ -182,9 +179,15 @@ public class Game{
 
   //Use this to create a colorized number string based on the % compared to the max value.
   public static String colorByPercent(int hp, int maxHP){
-    String output = String.format("%2s", hp+"")+"/"+String.format("%2s", maxHP+"");
+    String hpStr = String.valueOf(hp);
+    hpStr = " ".repeat(Math.max(0, 2 - hpStr.length())) + hpStr;
+
+    String maxStr = String.valueOf(maxHP);
+    maxStr = " ".repeat(Math.max(0, 2 - maxStr.length())) + maxStr;
+
+    String output = hpStr + "/" + maxStr;
     double percent = (double) hp / maxHP;
-    int color = 0;
+    int color;
     if (percent < 0.25){
       color = Text.RED;
     }
@@ -194,11 +197,12 @@ public class Game{
     else{
       color = Text.WHITE;
     }
+    // Return the colorized string directly
+    return Text.colorize(output, color);
     //COLORIZE THE OUTPUT IF HIGH/LOW:
     // under 25% : red
     // under 75% : yellow
     // otherwise : white
-    return Text.colorize(output, color);
   }
 
 
@@ -254,9 +258,10 @@ public class Game{
     //start with 1 boss and modify the code to allow 2-3 adventurers later.
     ArrayList<Adventurer>enemies = new ArrayList<Adventurer>();
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-    int numEnemies = (int) (Math.random() * 3 + 1);
-    if (numEnemies == 1){
-      enemies.add(new Witch("Boss"));
+    int numEnemies = (int)(Math.random() * 4);
+    int numTeam = (int)(Math.random()*3)+2;
+    if (numEnemies == 0){
+      enemies.add(new JohnPork("John Pork"));
     }
     else{
       for (int i = 0; i < numEnemies; i++){
@@ -269,7 +274,7 @@ public class Game{
     //Make an ArrayList of Adventurers and add 2-4 Adventurers to it.
     ArrayList<Adventurer> party = new ArrayList<>();
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-    for (int i = 0; i < 3; i++){
+    for (int i = 0; i < numTeam; i++){
       party.add(createRandomAdventurer());
     }
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
@@ -277,7 +282,6 @@ public class Game{
     boolean partyTurn = true;
     int whichPlayer = 0;
     int whichOpponent = 0;
-    int turn = 0;
     String input = "";//blank to get into the main loop.
     Scanner in = new Scanner(System.in);
     //Draw the window border
@@ -290,7 +294,7 @@ public class Game{
     int deadPar = 0;
     ArrayList<Adventurer> deadList = new ArrayList<>();
     //display this prompt at the start of the game.
-    String preprompt = "Enter command for "+ (party.get(whichPlayer)).getName() + ": attack/special/support/quit";
+    String preprompt = "Enter command for "+ (party.get(whichPlayer)).getName() + ": attack/special/support/evolve/quit";
     
     Text.go(28, 2);
     System.out.print(preprompt);
@@ -313,7 +317,9 @@ public class Game{
         if (enemyInd == 100){
           continue;
         }
-        if (enemyInd >= enemies.size());
+        if (enemyInd >= enemies.size()){
+          continue;
+        };
     }
     else if (input.startsWith("su ")){
       if (enemyInd >= party.size()){
@@ -353,6 +359,9 @@ public class Game{
           }
           TextBox(20, 2, 77, 3, (party.get(whichPlayer)).support(party, enemyInd));
           /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
+        } else if(input.startsWith("evolve") || input.startsWith("e")){
+          String result = (party.get(whichPlayer)).evolve(party);
+          TextBox(20, 2, 77, 3, result);
         }
         else{
           //not a good input
@@ -381,7 +390,9 @@ public class Game{
         //You should decide when you want to re-ask for user input
         //If no errors:
         whichPlayer++;
-
+        while(whichPlayer < party.size() && party.get(whichPlayer).getHP() <= 0){
+          whichPlayer++;
+        }
         if(whichPlayer < party.size()){
           //This is a player turn.
           //Decide where to draw the following prompt:
@@ -408,20 +419,41 @@ public class Game{
         //done with one party member
       }else{
         //not the party turn!
-
+        while(whichOpponent < enemies.size() && enemies.get(whichOpponent).getHP() <= 0){
+          whichOpponent++;
+        }
+        if(whichOpponent >= enemies.size()){
+          whichPlayer = 0;
+          while(whichPlayer < party.size() && party.get(whichPlayer).getHP() <= 0){
+            whichPlayer++;
+          }
+          partyTurn = true;
+          if(whichPlayer < party.size()){
+            String prompt = "Enter command for "+party.get(whichPlayer).getName()+": attack/special/support/evolve/quit";
+            TextBox(28, 2, 77, 1, prompt);
+          }
+          drawScreen(enemies, party);
+          continue;
+        }
 
         //enemy attacks a randomly chosen person with a randomly chosen attack.
         //Enemy action choices go here!
         /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
         int randAttack = (int) (Math.random() * 3);
-        int randPlayer = (int) (Math.random() * party.size());
-        if (party.get(randPlayer).getHP() <= 0){
+        ArrayList<Integer> alivePlayers = new ArrayList<>();
+        for(int i = 0; i < party.size(); i++){
+          if(party.get(i).getHP() > 0) alivePlayers.add(i);
+        }
+        if(alivePlayers.isEmpty()){
+          whichOpponent++;
           continue;
         }
-        int randOpp = (int) (Math.random() * enemies.size());
-        if (enemies.get(randOpp).getHP() == 0 || enemies.get(randOpp).getHP() == enemies.get(randOpp).getmaxHP()){
-          continue;
+        int randPlayer = alivePlayers.get((int)(Math.random() * alivePlayers.size()));
+        ArrayList<Integer> aliveEnemies = new ArrayList<>();
+        for(int i = 0; i < enemies.size(); i++){
+          if(enemies.get(i).getHP() > 0) aliveEnemies.add(i);
         }
+        int randOpp = aliveEnemies.get((int)(Math.random() * aliveEnemies.size()));
         if (randAttack == 0){
           TextBox(20, 2, 77, 3, (enemies.get(whichOpponent)).attack(party, randPlayer));
         }
@@ -470,7 +502,9 @@ public class Game{
         //THIS BLOCK IS TO END THE ENEMY TURN
         //It only triggers after the last enemy goes.
         whichPlayer = 0;
-        turn++;
+        while(whichPlayer < party.size() && party.get(whichPlayer).getHP() <= 0){
+          whichPlayer++;
+        }
         partyTurn=true;
         //display this prompt before player's turn
         while (deadList.contains(party.get(whichPlayer))){
@@ -486,6 +520,7 @@ public class Game{
     
 
     }//end of main game loop
+    displayEndScreen(deadOpp == enemies.size(), party, enemies);
 
     String msg = "";
     if (deadOpp == enemies.size() && deadPar == party.size()){
@@ -502,5 +537,68 @@ public class Game{
     //After quit reset things:
     quit();
   }
-  
+
+  public static void displayEndScreen(boolean playerWon, ArrayList<Adventurer> party, ArrayList<Adventurer> enemies){
+    Text.clear();
+    drawBackground();
+    
+    if(playerWon){
+      Text.go(10, 25);
+      System.out.print(Text.colorize("╔════════════════════════════════╗", Text.GREEN, Text.BOLD));
+      Text.go(11, 25);
+      System.out.print(Text.colorize("║", Text.GREEN, Text.BOLD));
+      System.out.print(Text.colorize("          VICTORY!              ", Text.GREEN + Text.BRIGHT, Text.BOLD));
+      System.out.print(Text.colorize("║", Text.GREEN, Text.BOLD));
+      Text.go(12, 25);
+      System.out.print(Text.colorize("║                                ║", Text.GREEN, Text.BOLD));
+      Text.go(13, 25);
+      System.out.print(Text.colorize("║", Text.GREEN, Text.BOLD));
+      System.out.print("  You have defeated all enemies! ");
+      System.out.print(Text.colorize("║", Text.GREEN, Text.BOLD));
+      Text.go(14, 25);
+      System.out.print(Text.colorize("║                                ║", Text.GREEN, Text.BOLD));
+      Text.go(15, 25);
+      System.out.print(Text.colorize("╚════════════════════════════════╝", Text.GREEN, Text.BOLD));
+      
+      Text.go(17, 25);
+      System.out.print(Text.colorize("Survivors:", Text.CYAN, Text.BOLD));
+      int row = 18;
+      for(Adventurer a : party){
+        if(a.getHP() > 0){
+          Text.go(row++, 27);
+          System.out.print(Text.colorize("★ " + a.getName() + " (HP: " + a.getHP() + "/" + a.getmaxHP() + ")", Text.WHITE));
+        }
+      }
+    } else {
+      Text.go(10, 25);
+      System.out.print(Text.colorize("╔════════════════════════════════╗", Text.RED, Text.BOLD));
+      Text.go(11, 25);
+      System.out.print(Text.colorize("║", Text.RED, Text.BOLD));
+      System.out.print(Text.colorize("          GAME OVER             ", Text.RED + Text.BRIGHT, Text.BOLD));
+      System.out.print(Text.colorize("║", Text.RED, Text.BOLD));
+      Text.go(12, 25);
+      System.out.print(Text.colorize("║                                ║", Text.RED, Text.BOLD));
+      Text.go(13, 25);
+      System.out.print(Text.colorize("║", Text.RED, Text.BOLD));
+      System.out.print("  Your party has been defeated  ");
+      System.out.print(Text.colorize("║", Text.RED, Text.BOLD));
+      Text.go(14, 25);
+      System.out.print(Text.colorize("║                                ║", Text.RED, Text.BOLD));
+      Text.go(15, 25);
+      System.out.print(Text.colorize("╚════════════════════════════════╝", Text.RED, Text.BOLD));
+      
+      Text.go(17, 25);
+      System.out.print(Text.colorize("Remaining Enemies:", Text.YELLOW, Text.BOLD));
+      int row = 18;
+      for(Adventurer a : enemies){
+        if(a.getHP() > 0){
+          Text.go(row++, 27);
+          System.out.print(Text.colorize("☠ " + a.getName() + " (HP: " + a.getHP() + "/" + a.getmaxHP() + ")", Text.WHITE));
+        }
+      }
+    }
+    
+    Text.go(23, 25);
+    System.out.print(Text.colorize("Press enter to exit.", Text.CYAN));
+  }
 }
