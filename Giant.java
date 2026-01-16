@@ -29,8 +29,8 @@ public class Giant extends Adventurer{
   //attack & support
   public String attack(ArrayList<Adventurer> others, int index){
     Adventurer other = others.get(index);
-    other.applyDamage(50);
-    this.applyDamage(20);
+    other.applyDamage(8);
+    this.applyDamage(12);
     return getName() + " punched " + other.getName() + " and gave them a concussion. " + other.getName() + " lost 50 HP. " + getName() + " lost 20 HP.";
   }
 
@@ -70,7 +70,7 @@ public class Giant extends Adventurer{
       return attack(others, index);
     }
     setSpecial(getSpecial() - 5);
-    other.applyDamage(70);
+    other.applyDamage(15);
     for (int i=0;i<others.size();i++){
       if (i != index){
         others.get(i).applyDamage(10);
