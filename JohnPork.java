@@ -76,6 +76,7 @@ public class JohnPork extends Adventurer{
       int damage = (int)(other.getmaxHP() * 0.1);
       other.applyDamage(damage);
       result += other.getName() + " takes " + damage + " radiation damage (10% of max HP). ";
+      other.setRadiationTurns(2);
     }
     result += "All enemies will lose 10% HP per turn for 2 turns.";
     return result;
