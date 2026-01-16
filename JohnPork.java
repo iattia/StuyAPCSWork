@@ -11,7 +11,7 @@ public class JohnPork extends Adventurer{
     this.waves = 50;
   }
 
-  public Witch(String name, int hp, int waves){
+  public JohnPork(String name, int hp, int waves){
     super(name, hp);
     super.setmaxHP(hp);
     this.waves = waves;
