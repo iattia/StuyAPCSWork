@@ -2,7 +2,6 @@ import java.util.*;
 
 public class Giant extends Adventurer{
   private int Cows, maxCows = 10;
-  private String name;
 
   public Giant(String name){
     super(name);
