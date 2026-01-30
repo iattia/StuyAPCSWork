@@ -24,22 +24,31 @@ public class USACO{
       stomp(grid, R_s, C_s, D_s);
     }
     System.out.println(Arrays.deepToString(grid));
+    for (int r=0; r<R;r++){
+      for (int c=0;c<C;c++){
+        if (E-grid[r][c]>0){
+          totalVolume += E-grid[r][c];
+        }
+      }
+    }
+    totalVolume = totalVolume *72*72;
+    System.out.println(totalVolume);
   }
 
   public static void stomp(int[][]grid, int rows, int cols, int depth){
     int currentMax = 0;
-    for (int i = 0; i<rows;i++){
-      for (int j = 0;j<cols;j++){
-        if (grid[i][j]>currentMax){
-          currentMax = grid[i][j];
+    for (int i = 0; i<3;i++){
+      for (int j = 0;j<3;j++){
+        if (grid[rows+i][cols+j]>currentMax){
+          currentMax = grid[rows+i][cols+j];
         }
       }
     }
     int newElev = currentMax-depth;
-    for (int i = 0; i<rows;i++){
-      for (int j = 0;j<cols;j++){
-        if (grid[i][j]>newElev){
-          grid[i][j] = newElev;
+    for (int i = 0; i<3;i++){
+      for (int j = 0;j<3;j++){
+        if (grid[rows+i][cols+j]>newElev){
+          grid[rows+i][cols+j] = newElev;
         }
       }
     }
