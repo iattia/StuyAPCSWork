@@ -1,17 +1,22 @@
-import java.io.File;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class USACO{
-  public static void getBronzeData(String filename){
-    File bronzeFile = new File(filename);
-    try{
-      Scanner bronzeScan = new Scanner(bronzeFile);
-    }catch (FileNotFound e){
-      e.printStackTrace();
+  public static void main(String[] args) throws FileNotFoundException{
+    File file = new File("makelake.0.in");
+    Scanner scanner = new Scanner(file);
+    int R = scanner.nextInt();
+    int C = scanner.nextInt();
+    int E = scanner.nextInt();
+    int N = scanner.nextInt();
+    int[][] grid = new int[R][C];
+    for (int r=0; r<R;r++){
+      for (int c=0;c<C;c++){
+        grid[r][c] = scanner.nextInt();
+      }
     }
-    while (bronzeScan.hasNextInt()){
-      System.out.println(bronzeScan.nextInt());
-    }
+    scanner.close();
+    System.out.println(Arrays.deepToString(grid));
 
   }
   //public int[][] getData(String filename)
