@@ -51,7 +51,27 @@ public class USACO{
     return totalVolume;
   }
 
-  public static long silver(String filename){
-    return 0;
-  }
+  public static long silver(String filename) {
+    try {
+        Scanner sc = new Scanner(new File(filename));
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        int T = sc.nextInt();
+        sc.nextLine();
+        char[][] grid = new char[N][M];
+        for (int i = 0; i < N; i++) {
+            String line = sc.nextLine();
+            for (int j = 0; j < M; j++) {
+                grid[i][j] = line.charAt(j);
+            }
+        }
+        int R1 = sc.nextInt() - 1;
+        int C1 = sc.nextInt() - 1;
+        int R2 = sc.nextInt() - 1;
+        int C2 = sc.nextInt() - 1;
+        sc.close();
+      } catch (FileNotFoundException e) {
+        e.printStackTrace();
+      }
+    }
 }
