@@ -53,25 +53,50 @@ public class USACO{
 
   public static long silver(String filename) {
     try {
-        Scanner sc = new Scanner(new File(filename));
-        int N = sc.nextInt();
-        int M = sc.nextInt();
-        int T = sc.nextInt();
-        sc.nextLine();
-        char[][] grid = new char[N][M];
-        for (int i = 0; i < N; i++) {
-            String line = sc.nextLine();
-            for (int j = 0; j < M; j++) {
-                grid[i][j] = line.charAt(j);
-            }
+      Scanner sc = new Scanner(new File(filename));
+      int N = sc.nextInt();
+      int M = sc.nextInt();
+      int T = sc.nextInt();
+      sc.nextLine();
+      char[][] grid = new char[N][M];
+      for (int i = 0; i < N; i++) {
+        String line = sc.nextLine();
+        for (int j = 0; j < M; j++) {
+          grid[i][j] = line.charAt(j);
         }
-        int R1 = sc.nextInt() - 1;
-        int C1 = sc.nextInt() - 1;
-        int R2 = sc.nextInt() - 1;
-        int C2 = sc.nextInt() - 1;
-        sc.close();
-      } catch (FileNotFoundException e) {
-        e.printStackTrace();
       }
+      int R1 = sc.nextInt() - 1;
+      int C1 = sc.nextInt() - 1;
+      int R2 = sc.nextInt() - 1;
+      int C2 = sc.nextInt() - 1;
+      sc.close();
+      long[][][] dp = new long[T + 1][N][M];
+      dp[0][R1][C1] = 1;
+      int[] dr = {-1, 1, 0, 0};
+      int[] dc = {0, 0, -1, 1};
+      for (int t = 0; t < T; t++) {
+        for (int r = 0; r < N; r++) {
+          for (int c = 0; c < M; c++) {
+            if (dp[t][r][c] == 0){
+              continue;
+            }
+            if (grid[r][c] == '*'){
+              continue;
+            }
+            for (int d = 0; d < 4; d++) {
+              int nr = r + dr[d];
+              int nc = c + dc[d];
+              if (nr >= 0 && nr < N && nc >= 0 && nc < M && grid[nr][nc] == '.') {
+                dp[t + 1][nr][nc] += dp[t][r][c];
+              }
+            }
+          }
+        }
+      }
+      return dp[T][R2][C2];
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+      return 0;
     }
+  }
 }
