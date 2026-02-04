@@ -29,4 +29,11 @@ public class Backtracking {
     }
     return false;
   }
+
+  public static boolean splitHelper(int index, int[] nums, int diff){
+    if(index == nums.length){
+      return diff == 0;
+    }
+    return splitHelper(index + 1, nums, diff + nums[index])|| splitHelper(index + 1, nums, diff - nums[index]);
+  }
 }
