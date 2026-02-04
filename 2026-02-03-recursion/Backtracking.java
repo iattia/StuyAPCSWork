@@ -21,13 +21,7 @@ public class Backtracking {
     if (start == nums.length) {
       return target == 0;
     }
-    if (groupSum(start + 1, nums, target - nums[start])) {
-      return true;
-    }
-    if (groupSum(start + 1, nums, target)) {
-      return true;
-    }
-    return false;
+    return groupSum(start + 1, nums, target - nums[start]) || groupSum(start + 1, nums, target);
   }
 
   public static boolean splitArray(int[] nums){
@@ -38,5 +32,12 @@ public class Backtracking {
       return diff == 0;
     }
     return splitHelper(index + 1, nums, diff + nums[index])|| splitHelper(index + 1, nums, diff - nums[index]);
+  }
+
+  public static boolean groupSum6(int start, int[] nums, int target) {
+    if (start == nums.length){
+      return target == 0;
+    }
+
   }
 }
