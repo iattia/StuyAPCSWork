@@ -30,6 +30,9 @@ public class Backtracking {
     return false;
   }
 
+  public static boolean splitArray(int[] nums){
+    return splitHelper(0,nums,0);
+  }
   public static boolean splitHelper(int index, int[] nums, int diff){
     if(index == nums.length){
       return diff == 0;
