@@ -1,1 +1,5 @@
+# Compiled files
+*.class
 
+# macOS system files
+.DS_Store
