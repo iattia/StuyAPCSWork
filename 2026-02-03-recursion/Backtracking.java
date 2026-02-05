@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Backtracking {
   public static void main(String[] args){
 
@@ -45,7 +47,7 @@ public class Backtracking {
   }
 
   public static boolean groupNoAdj(int start, int[] nums, int target) {
-    if (start >= nums.length) {
+    if (start == nums.length) {
       return target == 0;
     }
     if (groupNoAdj(start + 2, nums, target - nums[start])) {
@@ -85,7 +87,7 @@ public class Backtracking {
   }
 
   public static boolean groupSum5(int start, int[] nums, int target) {
-    if (start >= nums.length) {
+    if (start == nums.length) {
       return target == 0;
     }
     if (nums[start] % 5 == 0) {
@@ -98,7 +100,7 @@ public class Backtracking {
   }
 
   public static boolean groupSumClump(int start, int[] nums, int target) {
-    if (start >= nums.length) {
+    if (start == nums.length) {
       return target == 0;
     }
     int i = start;
@@ -111,5 +113,17 @@ public class Backtracking {
       return true;
     }
     return groupSumClump(i, nums, target);
+  }
+
+  public static void printSubsets(int[] nums){
+    printSubsetsHelper(0, "", nums);
+  }
+  public static void printSubsetsHelper(int index, String current, int[] nums){
+    if (index == nums.length){
+      System.out.println(Arrays.toString(current.split(" ")));
+      return;
+    }
+    printSubsetsHelper(index + 1, current + nums[index] + " ", nums);
+    printSubsetsHelper(index + 1, current, nums);
   }
 }
