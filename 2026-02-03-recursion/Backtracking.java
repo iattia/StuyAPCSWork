@@ -53,4 +53,14 @@ public class Backtracking {
     }
     return groupNoAdj(start + 1, nums, target);
   }
+
+  private static boolean splitOdd10Helper(int index, int[] nums, int sum10, int sumOdd) {
+    if (index == nums.length) {
+      return (sum10 % 10 == 0) && (sumOdd % 2 == 1);
+    }
+    if (splitOdd10Helper(index + 1, nums, sum10 + nums[index], sumOdd)) {
+      return true;
+    }
+    return splitOdd10Helper(index + 1, nums, sum10, sumOdd + nums[index]);
+  }
 }
