@@ -36,20 +36,13 @@ public class Backtracking {
     return splitHelper(index + 1, nums, diff + nums[index])|| splitHelper(index + 1, nums, diff - nums[index]);
   }
 
-  public static boolean groupSum6(int[] nums, int target) {
-    groupSum6Helper(0, nums, target - 6);
-  }
-  public static boolean groupSum6Helper(int start, int[] nums, int target){
-    int index6 = Arrays.indexOf(nums, 6);
-    if (index6 < 0){
-      return false;
+  public static boolean groupSum6(int start, int[] nums, int target) {
+    if (start >= nums.length) {
+      return target == 0;
     }
-    nums.remove(index6);
+    if (nums[start] == 6) {
+      return groupSum6(start + 1, nums, target - 6);
+    }
     return groupSum6(start + 1, nums, target - nums[start]) || groupSum6(start + 1, nums, target);
-  }
-
-  public static void main(String[] args){
-    int[] nums1 = new int[]{1,2,3,4};
-    return groupSum6();
   }
 }
