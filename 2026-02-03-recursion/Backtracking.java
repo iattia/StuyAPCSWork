@@ -53,7 +53,10 @@ public class Backtracking {
     }
     return groupNoAdj(start + 1, nums, target);
   }
-
+  
+  public static boolean splitOdd10(int[] nums) {
+    return splitOdd10Helper(0, nums, 0, 0);
+  }
   private static boolean splitOdd10Helper(int index, int[] nums, int sum10, int sumOdd) {
     if (index == nums.length) {
       return (sum10 % 10 == 0) && (sumOdd % 2 == 1);
