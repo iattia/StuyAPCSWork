@@ -67,6 +67,9 @@ public class Backtracking {
     return splitOdd10Helper(index + 1, nums, sum10, sumOdd + nums[index]);
   }
 
+  public static boolean split53(int[] nums) {
+    return split53Helper(0, nums, 0, 0);
+  }
   public static boolean split53Helper(int index, int[] nums, int sum1, int sum2) {
     if (index == nums.length) {
       return sum1 == sum2;
@@ -79,4 +82,5 @@ public class Backtracking {
       return split53Helper(index + 1, nums, sum1, sum2 + current);
     }
     return split53Helper(index + 1, nums, sum1 + current, sum2) || split53Helper(index + 1, nums, sum1, sum2 + current);
+  }
 }
