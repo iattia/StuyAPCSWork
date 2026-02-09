@@ -10,6 +10,7 @@ public class QueenBoard{
     //this will default the program NOT to animate.
     animated = false;
     delay = 0;
+    board = new int[size][size];
   }
 
   /**
@@ -25,59 +26,60 @@ public class QueenBoard{
   * "_ _ Q _\nQ _ _ _\n_ _ _ Q\n_ Q _ _"
   */
   public String toString(){
-    String board = "";
+    String boardString = "";
     for (int r = 0; r < board.length; r++){
       for (int c = 0; c < board[r].length; c++){
         if (board[r][c] == -1){
-          board += "Q";
+          boardString += "Q";
           if (c < board[r].length - 1){
-            board += " ";
+            boardString += " ";
           } else{
-            board += "\n";
+            boardString += "\n";
           }
         } else{
-          board += "_"
+          boardString += "_";
           if (c < board[r].length - 1){
-            board += " ";
+            boardString += " ";
           } else{
-            board += "\n";
+            boardString += "\n";
           }
         }
       }
     }
-    return board;
+    return boardString;
   }
 
-  public String debugToString(int[][] board){
-    String board = "";
+  public String debugToString(){
+    String boardString = "";
     int current;
     for (int r = 0; r < board.length; r++){
       for (int c = 0; c < board[r].length; c++){
-        current = board[r][c]
+        current = board[r][c];
         if (current == -1){
-          board += "Q";
+          boardString += "Q";
           if (c < board[r].length - 1){
-            board += " ";
+            boardString += " ";
           } else{
-            board += "\n";
+            boardString += "\n";
           }
-        } else if (board > 0){
-          board += current;
+        } else if (current > 0){
+          boardString += current;
           if (c < board[r].length - 1){
-            board += " ";
+            boardString += " ";
           } else{
-            board += "\n";
+            boardString += "\n";
           }
         } else{
-          board += "_"
+          boardString += "_";
           if (c < board[r].length - 1){
-            board += " ";
+            boardString += " ";
           } else{
-            board += "\n";
+            boardString += "\n";
           }
         }
       }
     }
+    return boardString;
   }
 
   /**
@@ -161,8 +163,4 @@ public class QueenBoard{
   public void setDelay(int newValue){
    delay = newValue;
   }
-
-
-
-
 }
