@@ -89,7 +89,7 @@ public class QueenBoard{
   * in which case the queen is added and all it's threatened positions are incremented.
   * Only the squares in rows that are higher index than r should be marked as threatened.
   */
-  private boolean addQueen(int r, int c, int[][] board){
+  private boolean addQueen(int r, int c){
     if (board[r][c] != 0){
       return false;
     }
@@ -162,5 +162,13 @@ public class QueenBoard{
   //DO NOT CHANGE THIS METHOD
   public void setDelay(int newValue){
    delay = newValue;
+  }
+
+  public static void main(String[] args){
+    QueenBoard a = new QueenBoard(4);
+    System.out.println(a.debugToString());
+    a.addQueen(0,0);
+    System.out.println(a.debugToString());
+    System.out.println(a.toString());
   }
 }
