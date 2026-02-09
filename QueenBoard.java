@@ -3,15 +3,15 @@ public class QueenBoard{
   private boolean animated;
   private int delay;
 
-  
+
   /*Initialize board with a size by size 2D array. All values should be 0*/
   public QueenBoard(int size){
-    //do not change animated/delay here. ONLY change it using mutators, 
+    //do not change animated/delay here. ONLY change it using mutators,
     //this will default the program NOT to animate.
     animated = false;
     delay = 0;
   }
-  
+
   /**
   *@return The output string formatted as follows:
   *All numbers that represent queens are replaced with 'Q'
@@ -35,8 +35,12 @@ public class QueenBoard{
   * in which case the queen is added and all it's threatened positions are incremented.
   * Only the squares in rows that are higher index than r should be marked as threatened.
   */
-  private boolean addQueen(int r, int c){
-    return false;
+  private static boolean addQueen(int r, int c, int[][] board){
+    if (board[r][c] != 0){
+      return false;
+    }
+    modifyBoard(r, c, board, true);
+    return true;
   }
 
   /**Remove the queen that was added to r,c
@@ -45,19 +49,41 @@ public class QueenBoard{
   *threatened positions are decremented
   */
   private void removeQueen(int r, int c){
-
+    modifyBoard(r, c, board, false);
   }
 
+  // removeQueen and addQueen helper
+  private static void modifyBoard(int r, int c, int[][] board, boolean isAdding){
+    int modifier;
+    if (isAdding){
+      modifier = 1;
+      board[r][c] = -1;
+    } else{
+      modifier = -1;
+      board[r][c] = 0;
+    }
+    for (int i = 1; i < board.length; i++){
+      if (r + i < board.length){
+        board[r + i][c] += modifier;
+        if (c - i >= 0){
+          board[r + i][c - i] += modifier;
+        }
+        if (c + i < board.length){
+          board[r + i][c + i] += modifier;
+        }
+      }
+    }
+  }
 
   /*reset all values of the board to 0. */
   private void clear(){
-   
+
   }
-  
+
   /**Find the first solution configuration possible for this size board. Start by placing
   *  the 1st queen in the top left corner, and each new queen in the next ROW. When backtracking
   *  move the previous queen to the next valid space. This means everyone will generate the same
-  *  first solution. 
+  *  first solution.
   *@precondition: the board is filled with 0's (you don't try to solve an already solved board.)
   *@postcondition: the board remains in a solved state.
   *@return false when the board is not solveable and leaves the board filled with zeros;
@@ -83,8 +109,8 @@ public class QueenBoard{
   public void setDelay(int newValue){
    delay = newValue;
   }
-  
-  
+
+
 
 
 }
