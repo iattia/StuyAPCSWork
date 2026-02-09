@@ -1,10 +1,14 @@
 public class Queens{
   private static boolean addQueen(int r, int c, int[][] board){
-    
+    if (board[r][c] != 0){
+      return false;
+    }
+    modifyBoard(r, c, board, true);
+    return true;
   }
 
   private static void removeQueen(int r, int c, int[][] board){
-
+    modifyBoard(r, c, board, false);
   }
 
   private static void modifyBoard(int r, int c, int[][] board, boolean isAdding){
