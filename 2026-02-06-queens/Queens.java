@@ -44,4 +44,30 @@ public class Queens{
       }
     }
   }
+  public static void main(String[] args) {
+    int[][] board = new int[4][4];
+
+    System.out.println("Add Queen at (0,0)");
+    boolean test1 = addQueen(0, 0, board);
+    System.out.println("Added (0,0): " + test1);
+    printBoard(board);
+
+    System.out.println("Add Queen at (1,2)");
+    boolean test2 = addQueen(1, 2, board);
+    System.out.println("Added (1,2): " + test2);
+    printBoard(board);
+
+    System.out.println("Attempt to add to threatened square (3,0)");
+    boolean test3 = addQueen(3, 0, board);
+    System.out.println("Added (3,0): " + test3); 
+    printBoard(board);
+
+    System.out.println("Remove Queen at (1,2)");
+    removeQueen(1, 2, board);
+    printBoard(board);
+
+    System.out.println("Remove Queen at (0,0)");
+    removeQueen(0, 0, board);
+    printBoard(board);
+  }
 }
