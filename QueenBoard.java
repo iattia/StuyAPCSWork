@@ -25,7 +25,49 @@ public class QueenBoard{
   * "_ _ Q _\nQ _ _ _\n_ _ _ Q\n_ Q _ _"
   */
   public String toString(){
-    return "";
+    String board = "";
+    for (int r = 0; r < board.length; r++){
+      for (int c = 0; c < board[r].length; c++){
+        if (board[r][c] == -1){
+          board += "Q";
+          if (c < board[r].length - 1){
+            board += " ";
+          }
+        } else{
+          board += "_"
+          if (c < board[r].length - 1){
+            board += " ";
+          }
+        }
+      }
+    }
+    return board;
+  }
+
+  public String debugToString(int[][] board){
+    String board = "";
+    int current;
+    for (int r = 0; r < board.length; r++){
+      for (int c = 0; c < board[r].length; c++){
+        current = board[r][c]
+        if (current == -1){
+          board += "Q";
+          if (c < board[r].length - 1){
+            board += " ";
+          }
+        } else if (board > 0){
+          board += current;
+          if (c < board[r].length - 1){
+            board += " ";
+          }
+        } else{
+          board += "_"
+          if (c < board[r].length - 1){
+            board += " ";
+          }
+        }
+      }
+    }
   }
 
   /**
@@ -35,7 +77,7 @@ public class QueenBoard{
   * in which case the queen is added and all it's threatened positions are incremented.
   * Only the squares in rows that are higher index than r should be marked as threatened.
   */
-  private static boolean addQueen(int r, int c, int[][] board){
+  private boolean addQueen(int r, int c, int[][] board){
     if (board[r][c] != 0){
       return false;
     }
