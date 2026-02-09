@@ -31,4 +31,16 @@ public class Queens{
       }
     }
   }
+
+  public static void printBoard(int[][] board){
+    for (int r = 0; r < board.length; r++){
+      System.out.print("[");
+      for (int c = 0; c < board[r].length; c++){
+        System.out.print(board[r][c] + " ");
+        if (c == board[r].length - 1){
+          System.out.println("]");
+        }
+      }
+    }
+  }
 }
