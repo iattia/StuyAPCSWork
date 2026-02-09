@@ -22,6 +22,7 @@ public class Queens{
     }
     for (int i = 1; i < board.length; i++){
       if (r + i < board.length){
+        board[r + i][c] += modifier;
         if (c - i >= 0){
           board[r + i][c - i] += modifier;
         }
