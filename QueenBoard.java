@@ -32,11 +32,15 @@ public class QueenBoard{
           board += "Q";
           if (c < board[r].length - 1){
             board += " ";
+          } else{
+            board += "\n";
           }
         } else{
           board += "_"
           if (c < board[r].length - 1){
             board += " ";
+          } else{
+            board += "\n";
           }
         }
       }
@@ -54,16 +58,22 @@ public class QueenBoard{
           board += "Q";
           if (c < board[r].length - 1){
             board += " ";
+          } else{
+            board += "\n";
           }
         } else if (board > 0){
           board += current;
           if (c < board[r].length - 1){
             board += " ";
+          } else{
+            board += "\n";
           }
         } else{
           board += "_"
           if (c < board[r].length - 1){
             board += " ";
+          } else{
+            board += "\n";
           }
         }
       }
