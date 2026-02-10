@@ -131,7 +131,7 @@ public class QueenBoard{
 
   /*reset all values of the board to 0. */
   private void clear(){
-
+    board = board[size][size];
   }
 
   /**Find the first solution configuration possible for this size board. Start by placing
@@ -201,7 +201,7 @@ public class QueenBoard{
     System.out.println(a.toString());
     a.removeQueen(0,0);
     System.out.println(a.solve());
-    a = new QueenBoard(4);
+    a = new QueenBoard(10);
     System.out.println(a.countSolutions());
   }
 }
