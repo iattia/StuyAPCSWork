@@ -144,9 +144,23 @@ public class QueenBoard{
   *        returns true when the board is solveable, and leaves the board in a solved state
   */
   public boolean solve(){
-    return false;
+    return solve(0);
   }
 
+  private boolean solve(int row){
+    if (row == board.length){
+      return true;
+    }
+    for (int col = 0; col < board[row].length; col++){
+      if (addQueen(row, col)){
+        if (solve(row + 1)){
+          return true;
+        }
+        removeQueen(row, col);
+      }
+    }
+    return false;
+  }
 
   /**Find all possible solutions to this size board. You must clear the board before attempting to solve.
   *@return the number of solutions found, and leaves the board filled with only 0's
@@ -170,5 +184,7 @@ public class QueenBoard{
     a.addQueen(0,0);
     System.out.println(a.debugToString());
     System.out.println(a.toString());
+    a.removeQueen(0,0);
+    System.out.println(a.solve());
   }
 }
