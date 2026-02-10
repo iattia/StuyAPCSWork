@@ -165,8 +165,23 @@ public class QueenBoard{
   /**Find all possible solutions to this size board. You must clear the board before attempting to solve.
   *@return the number of solutions found, and leaves the board filled with only 0's
   */
+
   public int countSolutions(){
-    return -1;
+    return countSolutions(0);
+  }
+
+  private int countSolutions(int row){
+    if (row == board.length){
+      return 1;
+    }
+    int count = 0;
+    for (int col = 0; col < board[row].length; col++){
+      if (addQueen(row, col)){
+        count+= countSolutions(row + 1);
+        removeQueen(row, col);
+      }
+    }
+    return count;
   }
 
   //DO NOT CHANGE THIS METHOD
@@ -186,5 +201,7 @@ public class QueenBoard{
     System.out.println(a.toString());
     a.removeQueen(0,0);
     System.out.println(a.solve());
+    a = new QueenBoard(4);
+    System.out.println(a.countSolutions());
   }
 }
