@@ -11,7 +11,12 @@ public class Driver{
         b.setAnimate(true);
         b.setDelay(Integer.parseInt(args[1]));
       }
+      System.out.println(Text.CLEAR_SCREEN);
+      System.out.println(Text.HIDE_CURSOR);
+      Text.go(1, 1);
       b.solve();
+      System.out.println(Text.RESET);
+      Text.go(1,1);
       System.out.println(b);
     }catch(Exception e){
 	    System.out.println("Fail solve size "+size+" board, exception"+e);
