@@ -191,16 +191,4 @@ public class QueenBoard {
   public void setDelay(int newValue) {
     delay = newValue;
   }
-
-  public static void main(String[] args) {
-    QueenBoard a = new QueenBoard(4);
-    System.out.println(a.debugToString());
-    a.addQueen(0, 0);
-    System.out.println(a.debugToString());
-    System.out.println(a.toString());
-    a.removeQueen(0, 0);
-    System.out.println(a.solve());
-    a = new QueenBoard(10);
-    System.out.println(a.countSolutions());
-  }
 }
