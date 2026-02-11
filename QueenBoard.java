@@ -130,6 +130,7 @@ public class QueenBoard {
   *        returns true when the board is solveable, and leaves the board in a solved state
   */
   public boolean solve() {
+    clear();
     return solve(0);
   }
 
@@ -153,6 +154,7 @@ public class QueenBoard {
   */
 
   public int countSolutions() {
+    clear();
     return countSolutions(0);
   }
 
