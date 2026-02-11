@@ -140,10 +140,20 @@ public class QueenBoard {
     }
     for (int col = 0; col < board[row].length; col++) {
       if (addQueen(row, col)) {
+        if (animated) {
+          Text.go(1, 1);
+          System.out.println(this);
+          Text.wait(delay);
+        }
         if (solve(row + 1)) {
           return true;
         }
         removeQueen(row, col);
+        if (animated) {
+          Text.go(1, 1);
+          System.out.println(this);
+          Text.wait(delay);
+        }
       }
     }
     return false;
