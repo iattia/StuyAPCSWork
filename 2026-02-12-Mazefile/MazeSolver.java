@@ -1,5 +1,5 @@
-import java.io.*
-import java.util.*
+import java.io.*;
+import java.util.*;
 
 public class MazeSolver{
   public static char[][] maze(String filename) throws FileNotFoundException{
@@ -7,7 +7,7 @@ public class MazeSolver{
     Scanner sc = new Scanner(new File(filename));
     while (sc.hasNextLine()){
       String currentLine = sc.nextLine();
-      if (!currentLine.isEmpty){
+      if (!currentLine.isEmpty()){
         mazeString += currentLine;
       }
     }
@@ -21,5 +21,15 @@ public class MazeSolver{
       }
     }
     return mazeChar;
+  }
+  public static void main(String[] args){
+    try{
+      char[][] arr = maze("Maze1.txt");
+      for (int i = 0; i < arr.length; i++){
+        System.out.println(Arrays.toString(arr[i]));
+      }
+    } catch (FileNotFoundException e){
+      System.out.println("File not found");
+    }
   }
 }
