@@ -79,6 +79,18 @@ public class Maze{
 
   */
   private int solve(int row, int col){
+    if (maze[row][col] == 'e'){
+      return 1;
+    }
+    int pathLength = 0;
+    if (maze[row][col] == ' '){
+      maze[row][col] = '@';
+      pathLength++;
+    }
+    solve(row + 1, col);
+    solve(row - 1, col);
+    solve(row, col + 1);
+    solve(row, col - 1);
     return 0;
   }
 
