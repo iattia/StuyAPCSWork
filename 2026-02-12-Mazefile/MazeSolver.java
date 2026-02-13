@@ -8,7 +8,7 @@ public class MazeSolver{
     while (sc.hasNextLine()){
       String currentLine = sc.nextLine();
       if (!currentLine.isEmpty()){
-        mazeString += currentLine;
+        mazeString += currentLine + "\n";
       }
     }
     String[] arrString = mazeString.split("\n");
