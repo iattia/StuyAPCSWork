@@ -22,12 +22,32 @@ public class MazeSolver{
     }
     return mazeChar;
   }
-  public static void main(String[] args){
+  public static String toString(char[][] mazeChar){
+    String result = "";
+    for (int r = 0; r < mazeChar.length; r++){
+      for (int c = 0; c < mazeChar[r].length; c++){
+        result += mazeChar[r][c];
+      }
+      result += "\n";
+    }
+    return result;
+  }
+
+  public static void splitByLine(String filename){
     try{
-      char[][] arr = maze("Maze1.txt");
+      char[][] arr = maze(filename);
       for (int i = 0; i < arr.length; i++){
         System.out.println(Arrays.toString(arr[i]));
       }
+    } catch (FileNotFoundException e){
+      System.out.println("File not found");
+    }
+  }
+  public static void main(String[] args){
+    splitByLine("Maze1.txt");
+    try{
+      char[][] arr = maze("Maze1.txt");
+      System.out.println(toString(arr));
     } catch (FileNotFoundException e){
       System.out.println("File not found");
     }
