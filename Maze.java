@@ -6,7 +6,7 @@ public class Maze{
   private int startRow,startCol;
 
 
-  
+
   /**Constructor
 
   1. load maze text file,
@@ -25,7 +25,23 @@ public class Maze{
 
   */
   public Maze(String filename) throws FileNotFoundException{
-  
+    String mazeString = "";
+    Scanner sc = new Scanner(new File(filename));
+    while (sc.hasNextLine()){
+      String currentLine = sc.nextLine();
+      if (!currentLine.isEmpty()){
+        mazeString += currentLine + "\n";
+      }
+    }
+    String[] arrString = mazeString.split("\n");
+    int rows = arrString.length;
+    int cols = arrString[0].length();
+    maze = new char[rows][cols];
+    for (int r = 0; r < rows; r++){
+      for (int c = 0; c < cols; c++){
+        maze[r][c] = arrString[r].charAt(c);
+      }
+    }
   }
 
   /**toString
@@ -33,7 +49,14 @@ public class Maze{
   *It should look like the text file with some characters potentially replaced.
   */
   public String toString(){
-    return "";
+    String result = "";
+    for (int r = 0; r < maze.length; r++){
+      for (int c = 0; c < maze[r].length; c++){
+        result += maze[r][c];
+      }
+      result += "\n";
+    }
+    return result;
   }
 
 
@@ -63,14 +86,14 @@ public class Maze{
    *Do Not Modify below this comment until discussion in class about the new methods
    */
   public Maze(int rows, int cols){
-   
+
   }
   public boolean canCarve(int row, int col) {
     return false;
   }
   public void placeSE() {
   }
-  
+
   public void carveMaze(int row, int col) {
   }
 
