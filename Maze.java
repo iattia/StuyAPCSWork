@@ -40,6 +40,10 @@ public class Maze{
     for (int r = 0; r < rows; r++){
       for (int c = 0; c < cols; c++){
         maze[r][c] = arrString[r].charAt(c);
+        if (maze[r][c] == 'S'){
+          startRow = r;
+          startCol = c;
+        }
       }
     }
   }
@@ -64,7 +68,7 @@ public class Maze{
    *@return the result of the recursive solve.
    */
   public int solve(){
-    return 0;
+    return solve(startRow, startCol);
   }
 
   /**Solve
@@ -79,19 +83,31 @@ public class Maze{
 
   */
   private int solve(int row, int col){
-    if (maze[row][col] == 'e'){
-      return 1;
+    if (maze[row][col] == 'E'){
+      return 0;
     }
-    int pathLength = 0;
-    if (maze[row][col] == ' '){
-      maze[row][col] = '@';
-      pathLength++;
+    if (maze[row][col] == '#' || maze[row][col] == '@' || maze[row][col] == '.'){
+      return -1;
     }
-    solve(row + 1, col);
-    solve(row - 1, col);
-    solve(row, col + 1);
-    solve(row, col - 1);
-    return 0;
+    maze[row][col] = '@';
+    int pathLength = solve(row + 1, col);
+    if (pathLength > -1){
+      return pathLength + 1;
+    }
+    pathLength = solve(row - 1, col);
+    if (pathLength > -1){
+      return pathLength + 1;
+    }
+    pathLength = solve(row, col + 1);
+    if (pathLength > -1){
+      return pathLength + 1;
+    }
+    pathLength = solve(row, col - 1);
+    if (pathLength > -1){
+      return pathLength + 1;
+    }
+    maze[row][col] = '.';
+    return -1;
   }
 
   /*
