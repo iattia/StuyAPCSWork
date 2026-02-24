@@ -114,15 +114,31 @@ public class Maze{
    *Do Not Modify below this comment until discussion in class about the new methods
    */
   public Maze(int rows, int cols){
-
+    maze = new char[rows][cols];
+    for(char[]row:maze){
+      for(int i = 0; i < row.length;i++){
+        row[i]='#';
+      }
+    }
+    carveMaze(1,1);
+    placeSE();
   }
   public boolean canCarve(int row, int col) {
-    return false;
+    return maze[row][col] == '#' && row != 0 && col != 0;
   }
   public void placeSE() {
   }
 
   public void carveMaze(int row, int col) {
+    ArrayList<String> directions = new ArrayList<>(4);
+    directions.add("up");
+    directions.add("down");
+    directions.add("left");
+    directions.add("right");
+    String direction = directions.get((int) Math.random(4));
+    while (row > 0 && col > 0){
+
+    }
   }
 
 
