@@ -124,7 +124,26 @@ public class Maze{
     placeSE();
   }
   public boolean canCarve(int row, int col) {
-    return maze[row][col] == '#' && row != 0 && col != 0;
+    if (row <= 0 || row >= maze.length - 1 || col <= 0 || col >= maze[0].length - 1){
+      return false;
+    }
+    if (maze[row][col] != '#'){
+      return false;
+    }
+    int adjacentCount = 0;
+    if (maze[row + 1][col] == ' '){
+      adjacentCount++;
+    }
+    if (maze[row - 1][col] == ' '){
+      adjacentCount++;
+    }
+    if (maze[row][col + 1] == ' '){
+      adjacentCount++;
+    }
+    if (maze[row][col - 1] == ' '){
+      adjacentCount++;
+    }
+    return adjacentCount < 2;
   }
   public void placeSE() {
   }
