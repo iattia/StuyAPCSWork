@@ -130,14 +130,19 @@ public class Maze{
   }
 
   public void carveMaze(int row, int col) {
-    ArrayList<String> directions = new ArrayList<>(4);
-    directions.add("up");
-    directions.add("down");
-    directions.add("left");
-    directions.add("right");
-    String direction = directions.get((int) Math.random(4));
-    while (row > 0 && col > 0){
-
+    if (!canCarve(row, col)){
+      return;
+    }
+    maze[row][col] = ' ';
+    int[][] directions = {{1,0},{-1,0},{0,1},{0,-1}};
+    for (int i = directions.length - 1; i > 0; i--){
+      int rand = (int)(Math.random() * (i + 1));
+      int[] swap = directions[i];
+      directions[i] = directions[rand];
+      directions[rand] = swap;
+    }
+    for (int i = 0; i < directions.length; i++){
+      carveMaze(row + directions[i][0], col+directions[i][1]);
     }
   }
 
