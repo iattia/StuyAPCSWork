@@ -68,6 +68,7 @@ public class Maze{
    *@return the result of the recursive solve.
    */
   public int solve(){
+    clearTerminal();
     return solve(startRow, startCol);
   }
 
@@ -90,6 +91,11 @@ public class Maze{
       return -1;
     }
     maze[row][col] = '@';
+    if (animate){
+      gotoTop();
+      System.out.println(this);
+      wait(100);
+    }
     int pathLength = solve(row + 1, col);
     if (pathLength > -1){
       return pathLength + 1;
@@ -107,6 +113,11 @@ public class Maze{
       return pathLength + 1;
     }
     maze[row][col] = '.';
+    if (animate){
+      gotoTop();
+      System.out.println(this);
+      wait(100);
+    }
     return -1;
   }
 
@@ -146,6 +157,23 @@ public class Maze{
     return adjacentCount < 2;
   }
   public void placeSE() {
+    while (true){
+      int row = (int)(Math.random() * maze.length);
+      int col = (int)(Math.random() * maze[0].length);
+      if (maze[row][col] == ' '){
+        maze[row][col] = 'S';
+        startRow = row;
+        startCol = col;
+        while (true){
+          row = (int)(Math.random() * maze.length);
+          col = (int)(Math.random() * maze[0].length);
+          if (maze[row][col] == ' '){
+            maze[row][col] = 'E';
+            return;
+          }
+        }
+      }
+    }
   }
 
   public void carveMaze(int row, int col) {
