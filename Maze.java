@@ -159,14 +159,14 @@ public class Maze{
   public void placeSE() {
     while (true){
       int row = (int)(Math.random() * maze.length);
-      int col = (int)(Math.random() * maze[0].length);
+      int col = 1;
       if (maze[row][col] == ' '){
         maze[row][col] = 'S';
         startRow = row;
         startCol = col;
         while (true){
           row = (int)(Math.random() * maze.length);
-          col = (int)(Math.random() * maze[0].length);
+          col = maze[0].length - 2;
           if (maze[row][col] == ' '){
             maze[row][col] = 'E';
             return;
