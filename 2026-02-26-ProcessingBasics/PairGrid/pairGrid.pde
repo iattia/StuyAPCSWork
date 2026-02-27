@@ -11,8 +11,7 @@ static final int SQUARE_SIZE = 100;
                        {1, 0, 1, 0, 0, 0 },
                        {1, 1, 1, 1, 1, 0 },
                        {0, 0, 0, 1, 1, 0 },
-                       {1, 1, 0, 0, 0, 0 } };
-    grid(grid);
+                       {1, 1, 0, 0, 0, 0 } };    
     //ALTERNATE INITIALIZATION:
     //After you test the above array:
     //change this in the constant above: SQUARE_SIZE=20;
@@ -29,13 +28,12 @@ static final int SQUARE_SIZE = 100;
   void grid() {
     stroke(255);
     fill(0);
-    for (int i = 0; i < colors.length; i++){
-      for (int j = 0; j < colors[i].length; j++){
-        square(j * SQUARE_SIZE + 15, i * SQUARE_SIZE + 15, SQUARE_SIZE);
+    for (int i = 15; i < height; i+=SQUARE_SIZE){
+      for (int j = 15; j < width; j+=SQUARE_SIZE){
+        square(j, i, SQUARE_SIZE);
       }
-    }   
-  }
-
+    }
+   }   
   /**2. Fill the screen with Squares with a white border
    *When the corresponding value of colors is 0, fill with color(100)
    *When the corresponding value of colors is not 0, fill with color(200)
@@ -60,8 +58,7 @@ static final int SQUARE_SIZE = 100;
   //The method only stops when you exit the program.
   void draw() {
     //test your two grid methods here!
-    grid();
-    //grid(grid);//switch over to this after part 1 works.
+    grid(grid);//switch over to this after part 1 works.
   }
 
   /**3. when you click on a square, change the corresponding value in the grid[][] array.
@@ -71,5 +68,8 @@ static final int SQUARE_SIZE = 100;
   *You must switch to the  grid(int[][]) method in your draw() before testing this method.
   */
   void mouseClicked() {
-
+    int x = (mouseX-15)/100;
+    int y = (mouseY-15)/100;
+    if (grid[y][x]==0) grid[y][x]=1;
+    else grid[y][x]=0;
   }
