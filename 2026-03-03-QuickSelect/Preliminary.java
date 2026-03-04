@@ -39,5 +39,8 @@ public static int partition( int [] data, int lo, int hi){
       i++;
     }
   }
+  temp = data[lo];
+  data[lo] = data[j];
+  data[j] = temp;
   return j;
 }
