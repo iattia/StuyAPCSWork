@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Quick{
 
 /**This method partitions a subset of an array between two indices (between lo and hi inclusive)
@@ -56,15 +58,23 @@ public class Quick{
       int v = partition(data, lo, hi);
       while (v != k){
         if (v < k) {
-          hi = v;
-        } else if (v > k) {
           lo = v;
+        } else if (v > k) {
+          hi = v;
         }
-        partition(data, lo, hi);
+        v = partition(data, lo, hi);
       }
       return data[v];
     }
 
+    public static void main(String[] args){
+      int [] data = new int[] {994,995,996,4,3,2,1,0,997,998,999};
+      System.out.println("Original: "+Arrays.toString(data));
+      int pivot = partition( data , 3, 7);
+      System.out.println("Pivot value: "+data[pivot]+ ", Pivot index: "+pivot);
+      System.out.println("Modified: "+Arrays.toString(data));
+      System.out.println();
+    }
   /*more methods to be added later*/
 
 }
