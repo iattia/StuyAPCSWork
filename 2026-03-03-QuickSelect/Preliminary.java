@@ -22,12 +22,22 @@ public static int partition( int [] data, int lo, int hi){
   int temp = data[lo];
   data[lo] = data[vIndex];
   data[vIndex] = temp;
+  boolean endRight = true;
   while (i <= j){
-    if (data[i] > v){
+    if (data[i] > v || (data[i] == v && endRight)){
       temp = data[i];
       data[i] = data[j];
       data[j] = temp;
+      if (data[j] == v){
+        endRight = !endRight;
+      }
       j--;
+    } else {
+      if (data[i] == v){
+        endRight = !endRight;
+      }
+      i++;
     }
   }
+  return j;
 }
