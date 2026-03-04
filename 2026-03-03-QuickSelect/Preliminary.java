@@ -15,19 +15,19 @@
 * the values at indices > hi are not changed
 */
 public static int partition( int [] data, int lo, int hi){
-  int vIndex = (int) (Math.random()*data.length());
+  int vIndex = lo + (int) (Math.random()*(hi - lo + 1));
   int v = data[vIndex];
   int j = hi;
-  temp = data[lo];
-  data[low] = data[vIndex];
+  int i = lo + 1;
+  int temp = data[lo];
+  data[lo] = data[vIndex];
   data[vIndex] = temp;
-  for (int i = lo + 1; i < j; i++){
+  while (i <= j){
     if (data[i] > v){
-      temp = data[i]
+      temp = data[i];
       data[i] = data[j];
-      data[j] = data[i];
+      data[j] = temp;
       j--;
-      i--;
     }
   }
 }
