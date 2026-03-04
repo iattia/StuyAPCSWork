@@ -51,7 +51,18 @@ public class Quick{
     *@return the value of the kth smallest integer.
     */
     public static int quickselect(int []data, int k){
-      return -1;
+      int lo = 0;
+      int hi = data.length - 1;
+      int v = partition(data, lo, hi);
+      while (v != k){
+        if (v < k) {
+          hi = v;
+        } else if (v > k) {
+          lo = v;
+        }
+        partition(data, lo, hi);
+      }
+      return data[v];
     }
 
   /*more methods to be added later*/
