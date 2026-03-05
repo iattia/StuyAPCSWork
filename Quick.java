@@ -66,15 +66,37 @@ public class Quick{
       }
       return data[v];
     }
-
-    public static void main(String[] args){
-      int [] data = new int[] {994,995,996,4,3,2,1,0,997,998,999};
-      System.out.println("Original: "+Arrays.toString(data));
-      int pivot = partition( data , 3, 7);
-      System.out.println("Pivot value: "+data[pivot]+ ", Pivot index: "+pivot);
-      System.out.println("Modified: "+Arrays.toString(data));
-      System.out.println();
-    }
   /*more methods to be added later*/
+    /**Quicksort wrapper method, starts the recursion from 0 to len-1 inclusive.
+   */
+  public static void quicksort(int[]data){
+    quicksort(data,0,data.length-1);
+  }
 
+  /**Quicksort
+   *@param lo is the lower index inclusive
+   *@param hi is the upper index inclusive
+   *@param data is the array to be sorted
+   *@postcondition The array between lo and hi should be sorted.
+   */
+  public static void quicksort(int[]data,int lo,int hi){
+    if (lo >= hi){
+      return;
+    }
+    int vIndex = partition(data, lo, hi);
+    quicksort(data, lo, vIndex - 1);
+    quicksort(data, vIndex + 1, hi);
+  }
+
+  public static void main(String[] args){
+    int [] data = new int[] {994,995,996,4,3,2,1,0,997,998,999};
+    System.out.println("Original: "+Arrays.toString(data));
+    int pivot = partition( data , 3, 7);
+    System.out.println("Pivot value: "+data[pivot]+ ", Pivot index: "+pivot);
+    System.out.println("Modified: "+Arrays.toString(data));
+    System.out.println();
+    data = new int[] {994,995,996,4,3,2,1,0,997,998,999};
+    Arrays.sort(data);
+    System.out.println(quickselect(data, 9));
+  }
 }
