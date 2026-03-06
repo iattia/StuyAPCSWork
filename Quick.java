@@ -87,17 +87,4 @@ public class Quick{
     quicksort(data, lo, vIndex - 1);
     quicksort(data, vIndex + 1, hi);
   }
-
-  public static int[] genArray(int min, int max, int length){
-    int[] randArray = new int[length];
-    for (int i=0;i<length;i++){
-      randArray[i] = (int) (Math.random()*(max-min+1))+min;
-    }
-    return randArray;
-  }
-  public static void main(String[] args){
-    int[] arr1 = genArray(-5000,5000,1000000);
-    quicksort(arr1);
-    System.out.println(Arrays.toString(arr1));
-  }
 }
