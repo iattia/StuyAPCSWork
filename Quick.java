@@ -58,9 +58,9 @@ public class Quick{
       int v = partition(data, lo, hi);
       while (v != k){
         if (v < k) {
-          lo = v;
+          lo = v + 1;
         } else if (v > k) {
-          hi = v;
+          hi = v - 1;
         }
         v = partition(data, lo, hi);
       }
