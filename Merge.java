@@ -41,6 +41,18 @@ public class Merge{
   *@return a new array that is the sorted version of data.
   */
   public static int[] mergesortH(int [] data){
+    if (data.length > 1){
+      int midLength = data.length/2;
+      int[] left = new int[midLength];
+      int[] right = new int[data.length - midLength];
+      for (int i = 0; i < midLength; i++){
+        left[i] = data[i];
+        right[i] = data[i + midLength];
+      }
+      return merge(mergesortH(left), mergesortH(right));
+    } else{
+      return data;
+    }
     //********************
     //COMPLETE THIS METHOD
     //********************
@@ -54,7 +66,6 @@ public class Merge{
       return the size 1 array.
     }
     */
-    return new int[1]; //so this compiles
   }
 
 
