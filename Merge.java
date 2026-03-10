@@ -1,6 +1,6 @@
 
 public class Merge{
-  
+
   /*merge takes two sorted arrays and returns a new array that combines all
   *elements of both arrays in asorted order.
   *@left a sorted array (this is a precondition)
@@ -8,10 +8,32 @@ public class Merge{
   *@return a sorted array that contains all elements of left and right
   */
   public static int [] merge(int [] left, int[] right){
-    //********************
-    //COMPLETE THIS METHOD
-    //********************
-    return new int[1];//so this compiles.
+    int[] sorted = new int[left.length + right.length];
+    int l = 0;
+    int r = 0;
+    int i = 0;
+    while (l < left.length && r < right.length) {
+      if (left[l] <= right[r]) {
+        sorted[i] = left[l];
+        i++;
+        l++;
+      } else {
+        sorted[i] = right[r];
+        i++;
+        r++;
+      }
+    }
+    while (l < left.length) {
+      sorted[i] = left[l];
+      i++;
+      l++;
+    }
+    while (r < right.length) {
+      sorted[i] = right[r];
+      i++;
+      r++;
+    }
+    return sorted;
   }
 
   /*mergesortH is the actual mergesort method.
@@ -39,10 +61,10 @@ public class Merge{
   /* OPTIONAL */
   //Change this only if you want to do the fast version.
   public static void mergesortFast(int [] data){
-    //You will need to create a second merge function and 
+    //You will need to create a second merge function and
     //a second recursive function to go with this method.
 
-    //Delete this exception ONLY when you are done with the other sort and want to work on this method. 
+    //Delete this exception ONLY when you are done with the other sort and want to work on this method.
     throw new UnsupportedOperationException("Method not implemented");
   }
 
