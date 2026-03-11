@@ -76,11 +76,26 @@ public class Merge{
   public static void mergesortFast(int [] data){
     //You will need to create a second merge function and
     //a second recursive function to go with this method.
-
+    int[] temp = dataCopy(data);
+    mergesortFastH(data, temp, 0, data.length - 1);
     //Delete this exception ONLY when you are done with the other sort and want to work on this method.
     throw new UnsupportedOperationException("Method not implemented");
   }
 
+  public static void mergesortFastH(int[] data, int[] temp, int lo, int hi){
+
+  }
+
+  public static void mergeFast(int[] data, int[] temp, int lo, int hi){
+    
+  }
+  public static int[] dataCopy(int[] data){
+    int[] temp = new int[data.length]
+    for (int i = 0; i < data.length; i++){
+      temp[i] = data[i];
+    }
+    return temp;
+  }
 
   /* DO NOT MODIFY THE WRAPPER METHOD*/
 
