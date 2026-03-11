@@ -45,8 +45,10 @@ public class Merge{
       int midLength = data.length/2;
       int[] left = new int[midLength];
       int[] right = new int[data.length - midLength];
-      for (int i = 0; i < midLength; i++){
+      for (int i = 0; i < left.length; i++){
         left[i] = data[i];
+      }
+      for (int i = 0; i < right.length; i++){
         right[i] = data[i + midLength];
       }
       return merge(mergesortH(left), mergesortH(right));
