@@ -85,12 +85,11 @@ public class Merge{
   public static void mergesortFastH(int[] data, int[] temp, int lo, int hi){
 
   }
-
   public static void mergeFast(int[] data, int[] temp, int lo, int hi){
-    
+
   }
   public static int[] dataCopy(int[] data){
-    int[] temp = new int[data.length]
+    int[] temp = new int[data.length];
     for (int i = 0; i < data.length; i++){
       temp[i] = data[i];
     }
