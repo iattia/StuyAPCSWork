@@ -81,7 +81,12 @@ public class Merge{
   }
 
   public static void mergesortFastH(int[] data, int[] temp, int lo, int hi){
-
+    if (lo < hi){
+      int mid = (lo + hi) / 2;
+      mergesortFastH(data, temp, lo, mid);
+      mergesortFastH(data, temp, mid + 1, hi);
+      mergeFast(data, temp, lo, hi);
+    }
   }
   public static void mergeFast(int[] data, int[] temp, int lo, int hi){
     int mid = (lo + hi) / 2;
