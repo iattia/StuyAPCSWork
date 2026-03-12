@@ -78,15 +78,33 @@ public class Merge{
     //a second recursive function to go with this method.
     int[] temp = dataCopy(data);
     mergesortFastH(data, temp, 0, data.length - 1);
-    //Delete this exception ONLY when you are done with the other sort and want to work on this method.
-    throw new UnsupportedOperationException("Method not implemented");
   }
 
   public static void mergesortFastH(int[] data, int[] temp, int lo, int hi){
 
   }
   public static void mergeFast(int[] data, int[] temp, int lo, int hi){
-
+    int mid = (lo + hi) / 2;
+    for (int i = lo; i <= hi; i++){
+      temp[i] = data[i];
+    }
+    int l = lo;
+    int r = mid + 1;
+    for (int i = lo; i <= hi; i++){
+      if (l > mid){
+        data[i] = temp[r];
+        r++;
+      } else if (r > hi){
+        data[i] = temp[l];
+        l++;
+      } else if (temp[l] <= temp[r]){
+        data[i] = temp[l];
+        l++;
+      } else{
+        data[i] = temp[r];
+        r++;
+      }
+    }
   }
   public static int[] dataCopy(int[] data){
     int[] temp = new int[data.length];
