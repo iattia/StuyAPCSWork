@@ -8,12 +8,15 @@ public class MyDeque<E>{
         E[] d = (E[])new Object[10];
         data = d;
         size = 0;
+        start = 0;
+        end = 0;
       }
 
       public MyDeque(int initialCapacity){
         @SuppressWarnings("unchecked")
         E[] d = (E[])new Object[initialCapacity];
         data = d;
+        size = 0;
       }
 
       /**return the current number of values in the deque*/
@@ -39,12 +42,19 @@ public class MyDeque<E>{
 
       /**Add an element to the first position of the deque, resize if needed.*/
       public void addFirst(E element){
-
+        if (data.length == size){
+          this.resize();
+        }
       }
 
       /**Add an element to the last position of the deque, resize if needed.*/
       public void addLast(E element){
-
+        if (data.length == size){
+          this.resize();
+        }
+        data[end] = element;
+        end++;
+        size++;
       }
 
       /**Remove and then return the first element*/
@@ -59,11 +69,11 @@ public class MyDeque<E>{
 
       /**Return but do not remove the first element*/
       public E getFirst(){
-        return null;
+        return data[start];
       }
 
       /**Return but do not remove the last element*/
       public E getLast(){
-        return null;
+        return data[end];
       }
     }
