@@ -40,6 +40,14 @@ public class MyDeque<E>{
 
       /**Double the capacity of the deque, copying the old values over in the correct order.*/
       private void resize(){
+        @SuppressWarnings("unchecked")
+        E[] newData = (E[]) new Object[data.length * 2];
+        for (int i = 0; i < size; i++){
+          newData[i] = data[(start + i) % data.length];
+        }
+        data = newData;
+        start = 0;
+        end = size;
       }
 
       /**Add an element to the first position of the deque, resize if needed.*/
