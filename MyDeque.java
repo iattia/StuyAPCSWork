@@ -17,6 +17,8 @@ public class MyDeque<E>{
         E[] d = (E[])new Object[initialCapacity];
         data = d;
         size = 0;
+        start = 0;
+        end = 0;;
       }
 
       /**return the current number of values in the deque*/
@@ -28,8 +30,8 @@ public class MyDeque<E>{
       public String toString(){
         String result = "[";
         for (int i = 0; i < this.size(); i++){
-          result += data[i];
-          if (i != this.size()){
+          result += data[(start + i) % data.length];
+          if (i != this.size() - 1){
             result += ", ";
           }
         }
@@ -45,6 +47,9 @@ public class MyDeque<E>{
         if (data.length == size){
           this.resize();
         }
+        start = (start - 1 + data.length) % data.length;
+        data[start] = element;
+        size++;
       }
 
       /**Add an element to the last position of the deque, resize if needed.*/
@@ -53,7 +58,7 @@ public class MyDeque<E>{
           this.resize();
         }
         data[end] = element;
-        end++;
+        end = (end + 1) % data.length;
         size++;
       }
 
@@ -74,6 +79,6 @@ public class MyDeque<E>{
 
       /**Return but do not remove the last element*/
       public E getLast(){
-        return data[end];
+        return data[(end - 1 + data.length) % data.length];
       }
     }
