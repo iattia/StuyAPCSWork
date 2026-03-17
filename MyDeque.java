@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class MyDeque<E>{
       private E[] data;
       private int size;
@@ -52,6 +54,9 @@ public class MyDeque<E>{
 
       /**Add an element to the first position of the deque, resize if needed.*/
       public void addFirst(E element){
+        if (element == null){
+          throw new NullPointerException("Element is null");
+        }
         if (data.length == size){
           this.resize();
         }
@@ -62,6 +67,9 @@ public class MyDeque<E>{
 
       /**Add an element to the last position of the deque, resize if needed.*/
       public void addLast(E element){
+        if (element == null){
+          throw new NullPointerException("Element is null");
+        }
         if (data.length == size){
           this.resize();
         }
@@ -72,6 +80,9 @@ public class MyDeque<E>{
 
       /**Remove and then return the first element*/
       public E removeFirst(){
+        if (size == 0){
+          throw new NoSuchElementException("No element to remove");
+        }
         E removed = data[start];
         data[start] = null;
         start = (start + 1 + data.length) % data.length;
@@ -81,6 +92,9 @@ public class MyDeque<E>{
 
       /**Remove and then return the last element*/
       public E removeLast(){
+        if (size == 0){
+          throw new NoSuchElementException("No element to remove");
+        }
         E removed = data[end];
         data[end] = null;
         end = (end - 1 + data.length) % data.length;
@@ -90,11 +104,17 @@ public class MyDeque<E>{
 
       /**Return but do not remove the first element*/
       public E getFirst(){
+        if (size == 0){
+          throw new NoSuchElementException("No element to get");
+        }
         return data[start];
       }
 
       /**Return but do not remove the last element*/
       public E getLast(){
+        if (size == 0){
+          throw new NoSuchElementException("No element to get");
+        }
         return data[(end - 1 + data.length) % data.length];
       }
     }
