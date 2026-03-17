@@ -18,7 +18,7 @@ public class MyDeque<E>{
         data = d;
         size = 0;
         start = 0;
-        end = 0;;
+        end = 0;
       }
 
       /**return the current number of values in the deque*/
@@ -72,7 +72,11 @@ public class MyDeque<E>{
 
       /**Remove and then return the first element*/
       public E removeFirst(){
-        return null;
+        E removed = data[start];
+        data[start] = null;
+        start = (start + 1 + data.length) % data.length;
+        size--;
+        return removed;
       }
 
       /**Remove and then return the last element*/
