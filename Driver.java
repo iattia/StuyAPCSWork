@@ -11,5 +11,9 @@ public class Driver{
     }
     System.out.println(a);
     System.out.println("new size: " + a.size());
+    a.removeFirst();
+    System.out.println(a);
+    a.removeLast();
+    System.out.println(a);
   }
 }
