@@ -6,5 +6,10 @@ public class Driver{
     System.out.println(a);
     a.addLast("10");
     System.out.println(a);
+    for (int i = 0; i < 10; i++){
+      a.addFirst("5");
+    }
+    System.out.println(a);
+    System.out.println("new size: " + a.size());
   }
 }
