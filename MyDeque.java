@@ -81,7 +81,11 @@ public class MyDeque<E>{
 
       /**Remove and then return the last element*/
       public E removeLast(){
-        return null;
+        E removed = data[end];
+        data[end] = null;
+        end = (end - 1 + data.length) % data.length;
+        size--;
+        return removed;
       }
 
       /**Return but do not remove the first element*/
