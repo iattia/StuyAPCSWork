@@ -95,9 +95,9 @@ public class MyDeque<E>{
         if (size == 0){
           throw new NoSuchElementException("No element to remove");
         }
+        end = (end - 1 + data.length) % data.length;
         E removed = data[end];
         data[end] = null;
-        end = (end - 1 + data.length) % data.length;
         size--;
         return removed;
       }
