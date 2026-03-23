@@ -16,7 +16,24 @@ public class Calculator{
       *        "too few operands for operation _" (replace _ with +,- etc.) when you try to evaluate an operator but there are not enough operands
       */
       public static double eval(String expression){
-        return 0.0;
+        String[] splitString = expression.split(" ");
+        ArrayDeque<Double> operands = new ArrayDeque<>();
+        for (String str : splitString){
+          if (isOperator(str)){
+            if (operands.size() < 2){
+              throw new IllegalArgumentException("too few operands for operation " + str);
+            }
+            double x = operands.pop();
+            double y = operands.pop();
+            operands.push(operate(x, y, str));
+          } else{
+            operands.push(Double.parseDouble(str));
+          }
+        }
+        if (operands.size() != 1){
+          throw new IllegalArgumentException("too many operands");
+        }
+        return operands.pop();
       }
 
       public static boolean isOperator(String str){
@@ -43,5 +60,6 @@ public class Calculator{
             return x - (y % x);
           }
         }
+        throw new IllegalArgumentException("invalid operator");
       }
 }
