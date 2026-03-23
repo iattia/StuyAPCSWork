@@ -43,23 +43,15 @@ public class Calculator{
       public static double operate(double x, double y, String operator){
         if (operator.equals("+")){
           return y + x;
-        }
-        if (operator.equals("-")){
+        } else if (operator.equals("-")){
           return y - x;
-        }
-        if (operator.equals("/")){
-          return y / x;
-        }
-        if (operator.equals("*")){
+        } else if (operator.equals("*")){
           return y * x;
+        } else if (operator.equals("/")){
+          return y / x;
+        } else if (operator.equals("%")){
+          return y % x;
         }
-        if (operator.equals("%")){
-          if ((y > 0 && x > 0) || (y < 0 && x < 0)){
-            return y % x;
-          } else{
-            return x - (y % x);
-          }
-        }
-        throw new IllegalArgumentException("invalid operator");
+        throw new IllegalArgumentException("Invalid operator: " + operator);
       }
 }
