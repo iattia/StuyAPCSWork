@@ -16,6 +16,9 @@ public class Calculator{
       *        "too few operands for operation _" (replace _ with +,- etc.) when you try to evaluate an operator but there are not enough operands
       */
       public static double eval(String expression){
+        if (expression == null || expression.trim().equals("")){
+          throw new IllegalArgumentException("too few operands");
+        }
         String[] splitString = expression.split(" ");
         ArrayDeque<Double> operands = new ArrayDeque<>();
         for (String str : splitString){
@@ -49,9 +52,8 @@ public class Calculator{
           return y * x;
         } else if (operator.equals("/")){
           return y / x;
-        } else if (operator.equals("%")){
+        } else{
           return y % x;
         }
-        throw new IllegalArgumentException("Invalid operator: " + operator);
       }
 }
