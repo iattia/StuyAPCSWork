@@ -42,7 +42,7 @@ public class Calculator{
       public static boolean isOperator(String str){
         return str.equals("+") || str.equals("-") || str.equals("/") || str.equals("*") || str.equals("%");
       }
-      
+
       public static double operate(double x, double y, String operator){
         if (operator.equals("+")){
           return y + x;
