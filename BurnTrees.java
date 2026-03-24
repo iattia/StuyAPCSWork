@@ -41,6 +41,8 @@ public class BurnTrees{
       for(int c=0; c<map[r].length; c++ ){
         if(Math.random() < density){
            map[r][c]=TREE;
+         }else{
+           map[r][c]=SPACE;
          }
        }
      }
