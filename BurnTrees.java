@@ -27,6 +27,34 @@ public class BurnTrees{
     ticks++;//leave this here.
     //YOU MUST IMPLEMENT THE REST OF THIS METHOD
     //(BEFORE WRITING ANY CODE READ ALL OF THE CODE AND SEE HOW IT FITS TOGETHER)
+    for(int r=0; r<map.length; r++ ){
+      for(int c=0; c<map[r].length; c++ ){
+        if(map[r][c] == FIRE){
+          map[r][c] == OLD_FIRE;
+        }
+      }
+    }
+    for(int r=0; r<map.length; r++ ){
+      for(int c=0; c<map[r].length; c++ ){
+        if(map[r][c] == OLD_FIRE{
+          if (r + 1 < map.length && map[r + 1][c] == TREE){
+            map[r + 1][c] = FIRE;
+          }
+          if (r - 1 > -1 && map[r - 1][c] == TREE){
+            map[r - 1][c] = FIRE;
+          }
+          if (c + 1 < map[r].length && map[r][c + 1] == TREE){
+            map[r][c + 1] = FIRE;
+          }
+          if (c - 1 > -1 && map[r][c - 1] == TREE){
+            map[r][c - 1] = FIRE;
+          }
+          map[r][c] = ASH;
+         } else if (map[r][c] == ASH){
+           map[r][c] = SPACE;
+         }
+       }
+     }
   }
 
   /***********************YOU MIGHT UPDATE THIS**************************/
