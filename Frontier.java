@@ -4,10 +4,10 @@ public class Frontier{
   private ArrayDeque<int[]> frontier;
   public Frontier(){}
   public int size(){
-    return frontier.getSize();
+    return frontier.size();
   }
   public void add(int[]location){
-    frontier.addLast(location)
+    frontier.addLast(location);
   }
   public int[] remove(){
     return frontier.poll();
