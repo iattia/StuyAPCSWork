@@ -2,7 +2,9 @@ import java.util.ArrayDeque;
 
 public class Frontier{
   private ArrayDeque<int[]> frontier;
-  public Frontier(){}
+  public Frontier(){
+    frontier = new ArrayDeque<>();
+  }
   public int size(){
     return frontier.size();
   }
