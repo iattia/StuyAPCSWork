@@ -7,6 +7,7 @@ public class BurnTrees{
   private static final int OLD_FIRE = 9;
   private static final int ASH = 0;
   private static final int SPACE = -1;
+  private int fireCount;
 
 
   /*Determine if the simulation is still burning
@@ -16,7 +17,7 @@ public class BurnTrees{
     //YOU MUST IMPLEMENT THIS METHOD
     //(BEFORE WRITING ANY CODE READ ALL OF THE CODE AND SEE HOW IT FITS TOGETHER)
     //HINT: do not check the board for fire which is an n^2 operation
-    return false;//placeholder for compilation purposes
+    return fireCount == 0;//placeholder for compilation purposes
   }
 
   /*This is the core of the simulation. All of the logic for advancing to the next round goes here.
@@ -27,29 +28,36 @@ public class BurnTrees{
     ticks++;//leave this here.
     //YOU MUST IMPLEMENT THE REST OF THIS METHOD
     //(BEFORE WRITING ANY CODE READ ALL OF THE CODE AND SEE HOW IT FITS TOGETHER)
+    fireCount = 0;
     for(int r=0; r<map.length; r++ ){
       for(int c=0; c<map[r].length; c++ ){
         if(map[r][c] == FIRE){
-          map[r][c] == OLD_FIRE;
+          map[r][c] = OLD_FIRE;
+          fireCount++;
         }
       }
     }
     for(int r=0; r<map.length; r++ ){
       for(int c=0; c<map[r].length; c++ ){
-        if(map[r][c] == OLD_FIRE{
+        if(map[r][c] == OLD_FIRE){
           if (r + 1 < map.length && map[r + 1][c] == TREE){
             map[r + 1][c] = FIRE;
+            fireCount++;
           }
           if (r - 1 > -1 && map[r - 1][c] == TREE){
             map[r - 1][c] = FIRE;
+            fireCount++;
           }
           if (c + 1 < map[r].length && map[r][c + 1] == TREE){
             map[r][c + 1] = FIRE;
+            fireCount++;
           }
           if (c - 1 > -1 && map[r][c - 1] == TREE){
             map[r][c - 1] = FIRE;
+            fireCount++;
           }
           map[r][c] = ASH;
+          fireCount--;
          } else if (map[r][c] == ASH){
            map[r][c] = SPACE;
          }
@@ -87,6 +95,7 @@ public class BurnTrees{
     for(int i = 0; i < map.length; i++){
       if(map[i][0]==TREE){
         map[i][0]=FIRE;
+        fireCount++;
       }
     }
   }
