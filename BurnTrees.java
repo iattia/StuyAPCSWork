@@ -8,6 +8,7 @@ public class BurnTrees{
   private static final int ASH = 0;
   private static final int SPACE = -1;
   private int fireCount;
+  private static Frontier frontier = new Frontier();
 
 
   /*Determine if the simulation is still burning
@@ -24,7 +25,7 @@ public class BurnTrees{
    *All existing fires spread new fires, and turn to ash
    *new fires should remain fire, and not spread.
    */
-  public void tick(){
+  public void tickOld(){
     ticks++;//leave this here.
     //YOU MUST IMPLEMENT THE REST OF THIS METHOD
     //(BEFORE WRITING ANY CODE READ ALL OF THE CODE AND SEE HOW IT FITS TOGETHER)
@@ -65,6 +66,32 @@ public class BurnTrees{
      }
   }
 
+  public void tick(){
+    ticks++;
+    int cycles = frontier.size();
+    for (int i = 0; i < cycles; i++){
+      int[] current = frontier.remove();
+      int r = current[0];
+      int c = current[1];
+      if (r + 1 < map.length && map[r + 1][c] == TREE){
+        map[r + 1][c] = FIRE;
+        frontier.add(new int[]{r + 1, c});
+      }
+      if (r - 1 > -1 && map[r - 1][c] == TREE){
+        map[r - 1][c] = FIRE;
+        frontier.add(new int[]{r - 1, c});
+      }
+      if (c + 1 < map[r].length && map[r][c + 1] == TREE){
+        map[r][c + 1] = FIRE;
+        frontier.add(new int[]{r, c + 1});
+      }
+      if (c - 1 > -1 && map[r][c - 1] == TREE){
+        map[r][c - 1] = FIRE;
+        frontier.add(new int[]{r, c - 1});
+      }
+    }
+  }
+
   /***********************YOU MIGHT UPDATE THIS**************************/
 
   /*Initialize the simulation.
@@ -96,6 +123,7 @@ public class BurnTrees{
       if(map[i][0]==TREE){
         map[i][0]=FIRE;
         fireCount++;
+        frontier.add(new int[]{i,0});
       }
     }
   }
