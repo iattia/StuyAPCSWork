@@ -60,8 +60,6 @@ public class BurnTrees{
           }
           map[r][c] = ASH;
           fireCount--;
-         } else if (map[r][c] == ASH){
-           map[r][c] = SPACE;
          }
        }
      }
@@ -92,9 +90,6 @@ public class BurnTrees{
           frontier.add(new int[]{r, c - 1});
         }
         map[r][c] = ASH;
-        frontier.add(current);
-      } else if (map[r][c] == ASH) {
-        map[r][c] = SPACE;
       }
     }
   }
@@ -140,9 +135,15 @@ public class BurnTrees{
  *reached the right side of the map.
  */
   public boolean crossedEntireForest(){
+    for (int r = 0; r < map.length; r++){
+      if (map[r][map.length - 1] == ASH){
+        return true;
+      }
+    }
     return false;
   }
 
+/*
   public static void main(String[]args){
     int WIDTH = 20;
     int HEIGHT = 20;
@@ -166,7 +167,36 @@ public class BurnTrees{
     //System.out.println(ans);//print the final answer
   }
 
+*/
 
+  public static void main(String[] args){
+    int WIDTH = 100;
+    int HEIGHT = 100;
+    int REPETITIONS = 100;
+    double DENSITY = 1.0;
+    double crossedForest = 0.0;
+    double runTime = 0.0;
+
+    if (args.length > 1){
+      WIDTH = Integer.parseInt(args[0]);
+      HEIGHT = Integer.parseInt(args[1]);
+      DENSITY = Double.parseDouble(args[2]);
+    }
+
+    double crossedForestTotal = 0.0;
+    double runTimeTotal = 0.0;
+    for (int i = 0; i < REPETITIONS; i++){
+      BurnTrees b = new BurnTrees(WIDTH, HEIGHT, DENSITY);
+      runTimeTotal += b.run();
+      if (b.crossedEntireForest()){
+        crossedForestTotal++;
+      }
+    }
+    crossedForest = crossedForestTotal/WIDTH;
+    runTime = runTimeTotal/WIDTH;
+
+    System.out.println(DENSITY + ", " + String.format("%.2f", runTime/WIDTH) + ", " + String.format("%.2f", crossedForest));
+  }
 
 
   /***********************DO NOT UPDATE THINGS BELOW HERE**************************/
