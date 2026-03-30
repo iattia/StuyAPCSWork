@@ -136,7 +136,7 @@ public class BurnTrees{
  */
   public boolean crossedEntireForest(){
     for (int r = 0; r < map.length; r++){
-      if (map[r][map.length - 1] == ASH){
+      if (map[r][map[r].length - 1] == ASH){
         return true;
       }
     }
@@ -173,29 +173,28 @@ public class BurnTrees{
     int WIDTH = 100;
     int HEIGHT = 100;
     int REPETITIONS = 100;
-    double DENSITY = 1.0;
-    double crossedForest = 0.0;
-    double runTime = 0.0;
 
-    if (args.length > 1){
-      WIDTH = Integer.parseInt(args[0]);
-      HEIGHT = Integer.parseInt(args[1]);
-      DENSITY = Double.parseDouble(args[2]);
-    }
+    System.out.println("| Density | Average Burn Time (normalized) | Crossed Forest Probability |");
+    System.out.println("| :--- | :---: | ---: |");
 
-    double crossedForestTotal = 0.0;
-    double runTimeTotal = 0.0;
-    for (int i = 0; i < REPETITIONS; i++){
-      BurnTrees b = new BurnTrees(WIDTH, HEIGHT, DENSITY);
-      runTimeTotal += b.run();
-      if (b.crossedEntireForest()){
-        crossedForestTotal++;
+    for (int d = 0; d <= 20; d++){
+      double density = d * 0.05;
+      double crossedForestTotal = 0.0;
+      double runTimeTotal = 0.0;
+
+      for (int i = 0; i < REPETITIONS; i++){
+        BurnTrees b = new BurnTrees(WIDTH, HEIGHT, density);
+        runTimeTotal += b.run();
+        if (b.crossedEntireForest()){
+          crossedForestTotal++;
+        }
       }
-    }
-    crossedForest = crossedForestTotal/WIDTH;
-    runTime = runTimeTotal/WIDTH;
 
-    System.out.println(DENSITY + ", " + String.format("%.2f", runTime/WIDTH) + ", " + String.format("%.2f", crossedForest));
+      double normalizedRunTime = (runTimeTotal / REPETITIONS) / WIDTH;
+      double crossedProbability = crossedForestTotal / REPETITIONS;
+
+      System.out.println(String.format("| %.2f | %.3f | %.2f |", density, normalizedRunTime, crossedProbability));
+    }
   }
 
 
