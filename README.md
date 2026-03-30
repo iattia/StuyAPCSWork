@@ -4,6 +4,37 @@
 
 # BurnTrees Lab
 
+## Explanations
+
+### How I chose the zoomed-in range
+
+The coarse table (densities 0.00–1.00 in steps of 0.05) showed normalized burn time rising sharply between 0.50 and 0.60, then dropping steadily from 0.60 onward. That made 0.55–0.65 the obvious window to look at. Running that range at 0.01 increments on the 1000×1000 board confirms a local maximum at density 0.60 (normalized burn time 2.470). The values on both sides are lower, so the peak is clearly on that density.
+
+### Larger board vs smaller board
+
+The 1000×1000 board produces smoother, more consistent results. With more cells per run, each repetition samples more of the forest, so averages stabilize across the 100 repetitions. The 100×100 board has noticeably higher variance. Its peak normalized burn time (2.589 at density 0.60) actually exceeds the 1000×1000 peak (2.470), which is a side effect of the smaller board rather than a real difference. On the smaller board, a single lucky or unlucky run has more influence on the average. This is visible in the graphs: the 1000×1000 curve is more symmetric around the peak, while the 100×100 curve is slightly wider.
+
+### Effects of density on burn time
+
+Below roughly 0.55, trees are too sparse to form a connected path across the forest. Fire burns a small local cluster and stops early, keeping both normalized burn time and crossing probability near zero. Around 0.60, the forest hits a threshold with just enough connectivity that fire can cross, but it must navigate a winding path through the grid, which maximizes travel time. Above 0.65, the forest is dense enough that fire spreads nearly uniformly in all directions and reaches the right side quickly, so normalized burn time drops back toward 1.0 and levels off.
+
+### Real-world implications
+
+This maps directly onto how forest managers think about fire risk. You do not need to remove all trees to prevent a large fire. You just need to reduce effective tree connectivity below a certain threshold. Firebreaks and controlled burns work by cutting out spots through the forest so that even if fire starts, it cannot find a continuous path to spread far. The data shows that even a modest density reduction from 0.65 to 0.55 drops the crossing probability from 100% to near zero, which is a significant safety margin for a relatively small intervention.
+
+
+## Graphs
+
+### 100×100 and 1000×1000 boards (combined)
+
+![100x100 Data Analysis](100x100_Data_Analysis.png)
+
+![1000x1000 Data Analysis](1000x1000_Data_Analysis.png)
+
+### Zoomed in — 1000×1000 board, densities 0.55–0.65
+
+![Zoomed Data Analysis](Zoomed_Data_Analysis.png)
+
 ## Data Tables
 
 ### Table 1a — 1000×1000 board, 100 repetitions
@@ -73,34 +104,3 @@
 | 0.63 | 1.639 | 1.00 |
 | 0.64 | 1.550 | 1.00 |
 | 0.65 | 1.491 | 1.00 |
-
-## Explanations
-
-### How I chose the zoomed-in range
-
-The coarse table (densities 0.00–1.00 in steps of 0.05) showed normalized burn time rising sharply between 0.50 and 0.60, then dropping steadily from 0.60 onward. That made 0.55–0.65 the obvious window to look at. Running that range at 0.01 increments on the 1000×1000 board confirms a local maximum at density 0.60 (normalized burn time 2.470). The values on both sides are lower, so the peak is clearly on that density.
-
-### Larger board vs smaller board
-
-The 1000×1000 board produces smoother, more consistent results. With more cells per run, each repetition samples more of the forest, so averages stabilize across the 100 repetitions. The 100×100 board has noticeably higher variance. Its peak normalized burn time (2.589 at density 0.60) actually exceeds the 1000×1000 peak (2.470), which is a side effect of the smaller board rather than a real difference. On the smaller board, a single lucky or unlucky run has more influence on the average. This is visible in the graphs: the 1000×1000 curve is more symmetric around the peak, while the 100×100 curve is slightly wider.
-
-### Effects of density on burn time
-
-Below roughly 0.55, trees are too sparse to form a connected path across the forest. Fire burns a small local cluster and stops early, keeping both normalized burn time and crossing probability near zero. Around 0.60, the forest hits a threshold with just enough connectivity that fire can cross, but it must navigate a winding path through the grid, which maximizes travel time. Above 0.65, the forest is dense enough that fire spreads nearly uniformly in all directions and reaches the right side quickly, so normalized burn time drops back toward 1.0 and levels off.
-
-### Real-world implications
-
-This maps directly onto how forest managers think about fire risk. You do not need to remove all trees to prevent a large fire. You just need to reduce effective tree connectivity below a certain threshold. Firebreaks and controlled burns work by cutting out spots through the forest so that even if fire starts, it cannot find a continuous path to spread far. The data shows that even a modest density reduction from 0.65 to 0.55 drops the crossing probability from 100% to near zero, which is a significant safety margin for a relatively small intervention.
-
-
-## Graphs
-
-### 100×100 and 1000×1000 boards (combined)
-
-![100x100 Data Analysis](100x100_Data_Analysis.png)
-
-![1000x1000 Data Analysis](1000x1000_Data_Analysis.png)
-
-### Zoomed in — 1000×1000 board, densities 0.55–0.65
-
-![Zoomed Data Analysis](Zoomed_Data_Analysis.png)
