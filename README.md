@@ -27,7 +27,7 @@ This maps directly onto how forest managers think about fire risk. You do not ne
 
 ### 100×100 and 1000×1000 boards (combined)
 
-![100x100 & 1000x1000 Data Analysis](chart_1000x1000_100x100.pdf)
+![100x100 & 1000x1000 Data Analysis](chart_1000x1000_100x100.png)
 
 ### Zoomed in — 1000×1000 board, densities 0.55–0.65
 
