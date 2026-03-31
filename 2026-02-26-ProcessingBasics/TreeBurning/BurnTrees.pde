@@ -21,49 +21,6 @@ class BurnTrees{
     return frontier.size() == 0;
   }
 
-  /*This is the core of the simulation. All of the logic for advancing to the next round goes here.
-   *All existing fires spread new fires, and turn to ash
-   *new fires should remain fire, and not spread.
-   */
-  public void tickOld(){
-    ticks++;//leave this here.
-    //YOU MUST IMPLEMENT THE REST OF THIS METHOD
-    //(BEFORE WRITING ANY CODE READ ALL OF THE CODE AND SEE HOW IT FITS TOGETHER)
-    fireCount = 0;
-    for(int r=0; r<map.length; r++ ){
-      for(int c=0; c<map[r].length; c++ ){
-        if(map[r][c] == FIRE){
-          map[r][c] = OLD_FIRE;
-          fireCount++;
-        }
-      }
-    }
-    for(int r=0; r<map.length; r++ ){
-      for(int c=0; c<map[r].length; c++ ){
-        if(map[r][c] == OLD_FIRE){
-          if (r + 1 < map.length && map[r + 1][c] == TREE){
-            map[r + 1][c] = FIRE;
-            fireCount++;
-          }
-          if (r - 1 > -1 && map[r - 1][c] == TREE){
-            map[r - 1][c] = FIRE;
-            fireCount++;
-          }
-          if (c + 1 < map[r].length && map[r][c + 1] == TREE){
-            map[r][c + 1] = FIRE;
-            fireCount++;
-          }
-          if (c - 1 > -1 && map[r][c - 1] == TREE){
-            map[r][c - 1] = FIRE;
-            fireCount++;
-          }
-          map[r][c] = ASH;
-          fireCount--;
-         }
-       }
-     }
-  }
-
   public void tick(){
     ticks++;
     int cycles = frontier.size();
