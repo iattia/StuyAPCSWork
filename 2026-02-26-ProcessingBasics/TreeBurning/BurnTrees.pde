@@ -1,5 +1,5 @@
 import java.util.*;
-public class BurnTrees{
+class BurnTrees{
   private int[][]map;
   private int ticks;
   private static final int TREE = -2;
@@ -7,8 +7,7 @@ public class BurnTrees{
   private static final int OLD_FIRE = 9;
   private static final int ASH = 0;
   private static final int SPACE = -1;
-  private int fireCount;
-  private static Frontier frontier = new Frontier();
+  private Frontier frontier = new Frontier();
 
 
   /*Determine if the simulation is still burning
