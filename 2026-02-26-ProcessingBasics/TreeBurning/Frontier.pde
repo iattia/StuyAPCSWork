@@ -1,6 +1,6 @@
 import java.util.ArrayDeque;
 
-public class Frontier{
+class Frontier{
   private ArrayDeque<int[]> frontier;
   public Frontier(){
     frontier = new ArrayDeque<>();
