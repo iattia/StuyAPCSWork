@@ -99,21 +99,19 @@ void drawSquares(BurnTrees treeSim) {
    *   Colors: Fire = RED, Tree = GREEN, SPACE = BLACK, ASH = GREY
    *3. You can use the array directly (treeSim.map) because it is in the same java file (sketch).
    */
-   void drawSquares(BurnTrees treeSim) {
-    for (int r = 0; r < ROWS; r++){
-      for (int c = 0; c < COLS; c++){
-        int state = treeSim.map[r][c];
-        if (state == 10){
-          fill(255, 0, 0); 
-        } else if (state == -2){
-          fill(0, 255, 0); 
-        } else if (state == 0){
-          fill(128, 128, 128); 
-        } else{
-          fill(0, 0, 0); 
-        }
-        rect(c * SQUARESIZE, r * SQUARESIZE, SQUARESIZE, SQUARESIZE);
+  for (int r = 0; r < ROWS; r++){
+    for (int c = 0; c < COLS; c++){
+      int state = treeSim.map[r][c];
+      if (state == 10){
+        fill(255, 0, 0); 
+      } else if (state == -2){
+        fill(0, 255, 0); 
+      } else if (state == 0){
+        fill(128, 128, 128); 
+      } else{
+        fill(0, 0, 0); 
       }
+      rect(c * SQUARESIZE, r * SQUARESIZE, SQUARESIZE, SQUARESIZE);
     }
-}
+  }
 }
