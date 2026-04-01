@@ -80,7 +80,6 @@ class BurnTrees{
     for(int i = 0; i < map.length; i++){
       if(map[i][0]==TREE){
         map[i][0]=FIRE;
-        fireCount++;
         frontier.add(new int[]{i,0});
       }
     }
