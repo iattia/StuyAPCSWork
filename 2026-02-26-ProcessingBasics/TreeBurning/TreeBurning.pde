@@ -1,7 +1,7 @@
-/*1.
-*2.
-*3.
-*4.
+/*1. the ratio of width to COLS = height to ROWS
+*2. SQUARESIZE = width / COLS
+*3. Since draw tries to run 60 times a second, adding a restriction on tick will slow down the simulaiton visual and actually make it possible for someone to watch the fire spread.
+*4. treeSim 
 */
 
 /**IMPORTANT:
@@ -35,7 +35,7 @@ void setup() {
    *ANSWER : replace squareSize = 8; with the correct square size.
    * DO NOT just write a number, it must work when you change the size() command or the ROWS and COLS
    */
-  SQUARESIZE = 8;//COPY YOUR CHANGED LINE TO THE TOP IN ANSWER SLOT 2.
+  SQUARESIZE = width / COLS ;//COPY YOUR CHANGED LINE TO THE TOP IN ANSWER SLOT 2.
 
 
 }
@@ -83,7 +83,7 @@ void mouseClicked() {
    *Please use the same values that it was initialized with in the setup.
    * ANSWER: UPDATE THE NEXT LINE THEN COPY IT TO THE TOP IN ANSWER SLOT 4.
    */
-  treeSim = null;
+  treeSim = new BurnTrees(COLS, ROWS, DENSITY);
 }
 
 
@@ -99,4 +99,21 @@ void drawSquares(BurnTrees treeSim) {
    *   Colors: Fire = RED, Tree = GREEN, SPACE = BLACK, ASH = GREY
    *3. You can use the array directly (treeSim.map) because it is in the same java file (sketch).
    */
+   void drawSquares(BurnTrees treeSim) {
+    for (int r = 0; r < ROWS; r++){
+      for (int c = 0; c < COLS; c++){
+        int state = treeSim.map[r][c];
+        if (state == 10){
+          fill(255, 0, 0); 
+        } else if (state == -2){
+          fill(0, 255, 0); 
+        } else if (state == 0){
+          fill(128, 128, 128); 
+        } else{
+          fill(0, 0, 0); 
+        }
+        rect(c * SQUARESIZE, r * SQUARESIZE, SQUARESIZE, SQUARESIZE);
+      }
+    }
+}
 }
