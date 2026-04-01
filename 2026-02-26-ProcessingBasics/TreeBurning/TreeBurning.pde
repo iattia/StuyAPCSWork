@@ -15,9 +15,9 @@ double DENSITY;
 int SQUARESIZE;
 
 void setup() {
-  size(800, 800);
-  ROWS = 200;
-  COLS = 200;
+  size(600, 500);
+  ROWS = 50;
+  COLS = 60;
   /**question 1 *********************************
    *At this point you have initialized width, height,ROWS,COLS. You can change these values
    *to alter the screen size, but you cannot just change one value!
