@@ -6,8 +6,8 @@ class BurnTrees{
   private static final int FIRE = 10;
   private static final int ASH = 0;
   private static final int SPACE = -1;
-  private Frontier frontier = new Frontier();
-
+  private boolean isStack;
+  private Frontier frontier;
 
   /*Determine if the simulation is still burning
    *@return false if any fires are still burning, true otherwise
@@ -53,12 +53,14 @@ class BurnTrees{
    *otherwise it is complete
    */
   public BurnTrees(int width,int height, boolean isStack){
+    this.isStack = isStack;
+    frontier = new Frontier(this.isStack);
     map = new int[height][width];
     for (int i = 0; i < map.length; i++){
       Arrays.fill(map[i], SPACE);
     }
-    carveMaze(1, 0);
-    map[0][0] = TREE;
+    carveMaze(1, 1);
+    map[1][0] = TREE;
     start();//set the left column on fire.
   }
 
