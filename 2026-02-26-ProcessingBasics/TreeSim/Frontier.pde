@@ -1,9 +1,9 @@
 import java.util.ArrayDeque;
 
 class Frontier{
-  boolean isStack = true;
+  private boolean isStack = Math.random() > 0.5;
   private ArrayDeque<int[]> frontier;
-  public Frontier(){
+  public Frontier(boolean isStack){
     frontier = new ArrayDeque<>();
   }
   public int size(){
