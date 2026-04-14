@@ -6,6 +6,8 @@ class BurnTrees{
   private static final int FIRE = 10;
   private static final int ASH = 0;
   private static final int SPACE = -1;
+  private static final int START = 7;
+  private static final int END = 7;
   private boolean isStack;
   private Frontier frontier;
 
@@ -60,6 +62,7 @@ class BurnTrees{
       Arrays.fill(map[i], SPACE);
     }
     carveMaze(1, 1);
+    placeSE();
     map[1][0] = TREE;
     start();//set the left column on fire.
   }
@@ -102,6 +105,27 @@ class BurnTrees{
       adjacentCount++;
     }
     return adjacentCount < 2;
+  }
+
+
+  public void placeSE() {
+    while (true){
+      int row = (int)(Math.random() * map.length);
+      int col = 1;
+      if (map[row][col] == TREE){
+        map[row][col] = START;
+        int startRow = row;
+        int startCol = col;
+        while (true){
+          row = (int)(Math.random() * map.length);
+          col = map[0].length - 2;
+          if (map[row][col] == TREE){
+            map[row][col] = END;
+            return;
+          }
+        }
+      }
+    }
   }
 
   /*
