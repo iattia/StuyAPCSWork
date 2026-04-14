@@ -1,6 +1,7 @@
 import java.util.ArrayDeque;
 
 class Frontier{
+  boolean isStack = true;
   private ArrayDeque<int[]> frontier;
   public Frontier(){
     frontier = new ArrayDeque<>();
@@ -12,6 +13,9 @@ class Frontier{
     frontier.addLast(location);
   }
   public int[] remove(){
-    return frontier.pollLast();
+    if (isStack){
+      return frontier.pollLast();
+    }
+    return frontier.poll();
   }
 }
