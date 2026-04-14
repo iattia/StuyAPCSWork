@@ -1,7 +1,7 @@
 /*1. the ratio of width to COLS = height to ROWS
 *2. SQUARESIZE = width / COLS
 *3. Since draw tries to run 60 times a second, adding a restriction on tick will slow down the simulaiton visual and actually make it possible for someone to watch the fire spread.
-*4. treeSim 
+*4. treeSim = new BurnTrees(COLS, ROWS, DENSITY); 
 */
 
 /**IMPORTANT:
@@ -11,8 +11,8 @@
 BurnTrees treeSim;
 int ROWS;
 int COLS;
-double DENSITY;
 int SQUARESIZE;
+boolean isStack;
 
 void setup() {
   size(600, 500);
@@ -25,9 +25,9 @@ void setup() {
    *ANSWER ON THE TOP IN ANSWER SLOT 1.
    */
 
-  DENSITY = .61;
   //width is cols, or x.
-  treeSim = new BurnTrees(COLS, ROWS, DENSITY);
+  isStack = Math.random() < 0.5;
+  treeSim = new BurnTrees(COLS, ROWS, isStack);
 
   /**question 2 *********************************
    *Given that you can change the size() and the number of ROWS and COLS,
@@ -84,7 +84,8 @@ void mouseClicked() {
    *Please use the same values that it was initialized with in the setup.
    * ANSWER: UPDATE THE NEXT LINE THEN COPY IT TO THE TOP IN ANSWER SLOT 4.
    */
-  treeSim = new BurnTrees(COLS, ROWS, DENSITY);
+  isStack = Math.random() < 0.5;
+  treeSim = new BurnTrees(COLS, ROWS, isStack);
 }
 
 
