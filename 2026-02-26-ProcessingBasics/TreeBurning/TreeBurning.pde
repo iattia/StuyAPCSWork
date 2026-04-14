@@ -1,7 +1,7 @@
 /*1. the ratio of width to COLS = height to ROWS
 *2. SQUARESIZE = width / COLS
 *3. Since draw tries to run 60 times a second, adding a restriction on tick will slow down the simulaiton visual and actually make it possible for someone to watch the fire spread.
-*4. treeSim 
+*4. treeSim = new BurnTrees(COLS, ROWS, DENSITY); 
 */
 
 /**IMPORTANT:
