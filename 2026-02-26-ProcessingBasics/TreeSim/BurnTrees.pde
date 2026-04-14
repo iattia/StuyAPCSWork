@@ -52,20 +52,55 @@ class BurnTrees{
    *If you add more instance variables you can add more here,
    *otherwise it is complete
    */
-  public BurnTrees(int width,int height, double density){
+  public BurnTrees(int width,int height, boolean isStack){
     map = new int[height][width];
-    for(int r=0; r<map.length; r++ ){
-      for(int c=0; c<map[r].length; c++ ){
-        if(Math.random() < density){
-           map[r][c]=TREE;
-         }else{
-           map[r][c]=SPACE;
-         }
-       }
-     }
-     start();//set the left column on fire.
+    for (int i = 0; i < map.length; i++){
+      Arrays.fill(map[i], SPACE);
+    }
+    carveMaze(1, 0);
+    map[0][0] = TREE;
+    start();//set the left column on fire.
   }
 
+  public void carveMaze(int row, int col) {
+    if (!canCarve(row, col)){
+      return;
+    }
+    map[row][col] = TREE;
+    int[][] directions = {{1,0},{-1,0},{0,1},{0,-1}};
+    for (int i = directions.length - 1; i > 0; i--){
+      int rand = (int)(Math.random() * (i + 1));
+      int[] swap = directions[i];
+      directions[i] = directions[rand];
+      directions[rand] = swap;
+    }
+    for (int i = 0; i < directions.length; i++){
+      carveMaze(row + directions[i][0], col+directions[i][1]);
+    }
+  }
+
+  public boolean canCarve(int row, int col) {
+    if (row <= 0 || row >= map.length - 1 || col <= 0 || col >= map[0].length - 1){
+      return false;
+    }
+    if (map[row][col] != SPACE){
+      return false;
+    }
+    int adjacentCount = 0;
+    if (map[row + 1][col] == TREE){
+      adjacentCount++;
+    }
+    if (map[row - 1][col] == TREE){
+      adjacentCount++;
+    }
+    if (map[row][col + 1] == TREE){
+      adjacentCount++;
+    }
+    if (map[row][col - 1] == TREE){
+      adjacentCount++;
+    }
+    return adjacentCount < 2;
+  }
 
   /*
    *Sets the trees in the left column of the forest on fire
