@@ -12,6 +12,6 @@ class Frontier{
     frontier.addLast(location);
   }
   public int[] remove(){
-    return frontier.poll();
+    return frontier.pollLast();
   }
 }
