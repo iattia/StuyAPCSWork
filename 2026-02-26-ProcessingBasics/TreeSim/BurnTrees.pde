@@ -22,30 +22,27 @@ class BurnTrees{
 
   public void tick(){
     ticks++;
-    int cycles = frontier.size();
-    for (int i = 0; i < cycles; i++){
-      int[] current = frontier.remove();
-      int r = current[0];
-      int c = current[1];
-      if (map[r][c] == FIRE) {
-        if (r + 1 < map.length && map[r + 1][c] == TREE){
-          map[r + 1][c] = FIRE;
-          frontier.add(new int[]{r + 1, c});
-        }
-        if (r - 1 > -1 && map[r - 1][c] == TREE){
-          map[r - 1][c] = FIRE;
-          frontier.add(new int[]{r - 1, c});
-        }
-        if (c + 1 < map[r].length && map[r][c + 1] == TREE){
-          map[r][c + 1] = FIRE;
-          frontier.add(new int[]{r, c + 1});
-        }
-        if (c - 1 > -1 && map[r][c - 1] == TREE){
-          map[r][c - 1] = FIRE;
-          frontier.add(new int[]{r, c - 1});
-        }
-        map[r][c] = ASH;
+    int[] current = frontier.remove();
+    int r = current[0];
+    int c = current[1];
+    if (map[r][c] == FIRE) {
+      if (r + 1 < map.length && map[r + 1][c] == TREE){
+        map[r + 1][c] = FIRE;
+        frontier.add(new int[]{r + 1, c});
       }
+      if (r - 1 > -1 && map[r - 1][c] == TREE){
+        map[r - 1][c] = FIRE;
+        frontier.add(new int[]{r - 1, c});
+      }
+      if (c + 1 < map[r].length && map[r][c + 1] == TREE){
+        map[r][c + 1] = FIRE;
+        frontier.add(new int[]{r, c + 1});
+      }
+      if (c - 1 > -1 && map[r][c - 1] == TREE){
+        map[r][c - 1] = FIRE;
+        frontier.add(new int[]{r, c - 1});
+      }
+      map[r][c] = ASH;
     }
   }
 
