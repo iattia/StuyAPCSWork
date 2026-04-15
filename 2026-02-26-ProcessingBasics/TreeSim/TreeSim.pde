@@ -110,7 +110,9 @@ void drawSquares(BurnTrees treeSim) {
         fill(0, 255, 0); 
       } else if (state == 0){
         fill(128, 128, 128); 
-      } else{
+      } else if (state == 5){
+        fill(255,255,0);
+      }else{
         fill(0, 0, 0); 
       }
       rect(c * SQUARESIZE, r * SQUARESIZE, SQUARESIZE, SQUARESIZE);
