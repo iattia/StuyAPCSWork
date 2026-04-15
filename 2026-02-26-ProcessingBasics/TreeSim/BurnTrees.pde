@@ -6,8 +6,10 @@ class BurnTrees{
   private static final int FIRE = 10;
   private static final int ASH = 0;
   private static final int SPACE = -1;
-  private static final int START = 7;
-  private static final int END = 7;
+  private static final int END = 5;
+  private static final int START = 5;
+  private boolean done = false;
+  private int startRow, startCol;
   private boolean isStack;
   private Frontier frontier;
 
@@ -19,7 +21,7 @@ class BurnTrees{
     //(BEFORE WRITING ANY CODE READ ALL OF THE CODE AND SEE HOW IT FITS TOGETHER)
     //HINT: do not check the board for fire which is an n^2 operation
     //return fireCount == 0;//placeholder for compilation purposes
-    return frontier.size() == 0;
+    return frontier.size() == 0 || done;
   }
 
   public void tick(){
@@ -28,21 +30,41 @@ class BurnTrees{
     int r = current[0];
     int c = current[1];
     if (map[r][c] == FIRE) {
-      if (r + 1 < map.length && map[r + 1][c] == TREE){
-        map[r + 1][c] = FIRE;
-        frontier.add(new int[]{r + 1, c});
+      if (r + 1 < map.length){
+        if (map[r + 1][c] == TREE){
+          map[r + 1][c] = FIRE;
+          frontier.add(new int[]{r + 1, c});
+        }
+        else if (map[r + 1][c] == END){
+          done = true;
+        }
       }
-      if (r - 1 > -1 && map[r - 1][c] == TREE){
-        map[r - 1][c] = FIRE;
-        frontier.add(new int[]{r - 1, c});
+      if (r - 1 > -1){
+        if (map[r - 1][c] == TREE){
+          map[r - 1][c] = FIRE;
+          frontier.add(new int[]{r - 1, c});
+        }
+        else if (map[r - 1][c] == END){
+          done = true;
+        }
       }
-      if (c + 1 < map[r].length && map[r][c + 1] == TREE){
-        map[r][c + 1] = FIRE;
-        frontier.add(new int[]{r, c + 1});
+      if (c + 1 < map[r].length){
+        if (map[r][c + 1] == TREE){
+          map[r][c + 1] = FIRE;
+          frontier.add(new int[]{r, c + 1});
+        }
+        else if (map[r][c + 1] == END){
+          done = true;
+        }
       }
-      if (c - 1 > -1 && map[r][c - 1] == TREE){
-        map[r][c - 1] = FIRE;
-        frontier.add(new int[]{r, c - 1});
+      if (c - 1 > -1){
+        if (map[r][c - 1] == TREE){
+          map[r][c - 1] = FIRE;
+          frontier.add(new int[]{r, c - 1});
+        }
+        else if (map[r][c - 1] == END){
+          done = true;
+        }
       }
       map[r][c] = ASH;
     }
@@ -63,7 +85,6 @@ class BurnTrees{
     }
     carveMaze(1, 1);
     placeSE();
-    map[1][0] = TREE;
     start();//set the left column on fire.
   }
 
@@ -114,8 +135,8 @@ class BurnTrees{
       int col = 1;
       if (map[row][col] == TREE){
         map[row][col] = START;
-        int startRow = row;
-        int startCol = col;
+        startRow = row;
+        startCol = col;
         while (true){
           row = (int)(Math.random() * map.length);
           col = map[0].length - 2;
@@ -134,12 +155,8 @@ class BurnTrees{
   public void start(){
     //If you add more instance variables you can add more here,
     //otherwise it is complete.
-    for(int i = 0; i < map.length; i++){
-      if(map[i][0]==TREE){
-        map[i][0]=FIRE;
-        frontier.add(new int[]{i,0});
-      }
-    }
+    map[startRow][startCol] = FIRE;
+    frontier.add(new int[]{startRow, startCol});
   }
 
 /*
