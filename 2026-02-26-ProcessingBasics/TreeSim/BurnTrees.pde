@@ -8,10 +8,14 @@ class BurnTrees{
   private static final int SPACE = -1;
   private static final int END = 5;
   private static final int START = 5;
+  public static final int PATH = 7;
   private boolean done = false;
   private int startRow, startCol;
   private boolean isStack;
   private Frontier frontier;
+  private int[][][] cameFrom;
+  private int endRow;
+  private int endCol;
 
   /*Determine if the simulation is still burning
    *@return false if any fires are still burning, true otherwise
@@ -34,36 +38,48 @@ class BurnTrees{
         if (map[r + 1][c] == TREE){
           map[r + 1][c] = FIRE;
           frontier.add(new int[]{r + 1, c});
+          cameFrom[r + 1][c] = new int[]{r, c};
         }
         else if (map[r + 1][c] == END){
+          cameFrom[r + 1][c] = new int[]{r, c};
           done = true;
+          retracePath(r + 1, c);
         }
       }
       if (r - 1 > -1){
         if (map[r - 1][c] == TREE){
           map[r - 1][c] = FIRE;
           frontier.add(new int[]{r - 1, c});
+          cameFrom[r - 1][c] = new int[]{r, c};
         }
         else if (map[r - 1][c] == END){
+          cameFrom[r - 1][c] = new int[]{r, c};
           done = true;
+          retracePath(r - 1, c);
         }
       }
       if (c + 1 < map[r].length){
         if (map[r][c + 1] == TREE){
           map[r][c + 1] = FIRE;
           frontier.add(new int[]{r, c + 1});
+          cameFrom[r][c + 1] = new int[]{r, c};
         }
         else if (map[r][c + 1] == END){
+          cameFrom[r][c + 1] = new int[]{r, c};
           done = true;
+          retracePath(r, c + 1);
         }
       }
       if (c - 1 > -1){
         if (map[r][c - 1] == TREE){
           map[r][c - 1] = FIRE;
           frontier.add(new int[]{r, c - 1});
+          cameFrom[r][c - 1] = new int[]{r, c};
         }
         else if (map[r][c - 1] == END){
+          cameFrom[r][c - 1] = new int[]{r, c};
           done = true;
+          retracePath(r, c - 1);
         }
       }
       map[r][c] = ASH;
@@ -80,6 +96,7 @@ class BurnTrees{
     this.isStack = isStack;
     frontier = new Frontier(this.isStack);
     map = new int[height][width];
+    cameFrom = new int[height][width][2];
     for (int i = 0; i < map.length; i++){
       Arrays.fill(map[i], SPACE);
     }
@@ -145,6 +162,17 @@ class BurnTrees{
             return;
           }
         }
+      }
+    }
+  }
+
+  public void retracePath(int endRow, int endCol) {
+    while (endRow != startRow || endCol != startCol) {
+      int[] root = cameFrom[endRow][endCol];
+      endRow = root[0];
+      endCol = root[1];
+      if (endRow != startRow || endCol != startCol) {
+        map[endRow][endCol] = PATH;
       }
     }
   }
