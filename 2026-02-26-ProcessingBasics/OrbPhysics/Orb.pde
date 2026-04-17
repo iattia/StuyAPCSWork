@@ -37,11 +37,17 @@ public class Orb{
       //If you are touching any of the sides of the screen:
       //Change the direction of movement by negataing one of the velocity directions.
       //check x and y separately in case you hit a corner and hit both simultaneously, do not connect with an else!
-      if (x - radius < 0 || x + radius > width){
-        dx *= -1;
+      if (x - radius < 0){
+        dx = abs(dx);
       }
-      if (y - radius < 0 || y + radius > height) {
-        dy *= -1;
+      if (x + radius > width){
+        dx = -abs(dx);
+      }
+      if (y - radius < 0){
+        dy = abs(dy);
+      }
+      if (y + radius > height) {
+        dy = -abs(dy);
       }
     }
   }
