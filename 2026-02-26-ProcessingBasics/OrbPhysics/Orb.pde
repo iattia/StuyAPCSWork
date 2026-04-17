@@ -14,7 +14,9 @@ public class Orb{
       c = color(random(255),random(255),random(255));
     }
 
-
+    public Orb(float x_, float y_, float angle_, float radius_){
+      this(x_, y_, 5 * cos(radians(angle_)), 5 * sin(radians(angle_)), radius_);
+    }
     void display(){
       //Part 1:
       //draw a circle at the x,y position, with the correct radius.
