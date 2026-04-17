@@ -21,17 +21,25 @@ public class Orb{
       //make sure it is the correct color
       //make sure you read the parameters of ellipse/circle, so that you have the correct size.
       //radius is NOT one of the parameters by default.
+      fill(c);
+      circle(x, y, radius * 2);
     }
 
     void move(){
       //PART 2 VELOCITY
       //change the x based on the xVelocity
       //change the y based on the yVelocity
-
+      x += dx;
+      y += dy;
       //PART 3 BOUNCE
       //If you are touching any of the sides of the screen:
       //Change the direction of movement by negataing one of the velocity directions.
       //check x and y separately in case you hit a corner and hit both simultaneously, do not connect with an else!
-
+      if (x - radius < 0 || x + radius > width){
+        dx *= -1;
+      }
+      if (y - radius < 0 || y + radius > height) {
+        dy *= -1;
+      }
     }
   }
