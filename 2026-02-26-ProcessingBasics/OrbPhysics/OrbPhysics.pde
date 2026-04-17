@@ -8,6 +8,10 @@
         //The x and y positions are the same as the mouse
         //the radius should be a random value in the range [40.0,80.0)
         //the xVelocity and yVelocity should be random values in the range [-3.0,3.0)
+        float radius = random(40.0, 80.0);
+        float xVelocity = random(-3.0, 3.0);
+        float yVelocity = random(-3.0, 3.0);
+        orbList.add(new Orb(mouseX, mouseY, xVel, yVel, radius));
       }
       void draw() {
         background(255);
