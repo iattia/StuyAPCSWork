@@ -17,7 +17,7 @@ void move() {
   //1. apply acceleration to velocity
   //2. apply velocity to position
   //3. reset acceleration to 0 so that forces do not accumulate
-
+  acceleration.add(velocity);
 
   //DO NOT EDIT:
   //bounce on earth mode
