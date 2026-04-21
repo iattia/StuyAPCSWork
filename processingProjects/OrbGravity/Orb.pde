@@ -17,7 +17,9 @@ void move() {
   //1. apply acceleration to velocity
   //2. apply velocity to position
   //3. reset acceleration to 0 so that forces do not accumulate
-  acceleration.add(velocity);
+  velocity.add(acceleration);
+  position.add(velocity);
+  acceleration.set(0, 0);
 
   //DO NOT EDIT:
   //bounce on earth mode
@@ -38,7 +40,7 @@ PVector attractTo(Orb other) {
 
   //CHANGE THIS
   //calculate the distance from this orb to other orb
-  float distance = 1.0;
+  float distance = position.dist(other.position);
 
   //DO NOT CHANGE THIS:
   //this code prevents small distances creating problems (overlapping orbs with 0 dist)
@@ -56,6 +58,7 @@ PVector attractTo(Orb other) {
 
   //CHANGE THIS
   //normalize the force
+  force.normalize();
 
   //CHANGE THIS
   //now you have a unit vector, and a magnitude.
@@ -70,9 +73,10 @@ PVector attractTo(Orb other) {
 void applyForce(PVector f) {
   //knowing that f = ma, you can rearrange the formula to see how you want to manipulate acceleration:
   //a = f / m
-
+  PVector a = PVector.div(f, mass);
   //CHANGE THIS
   //add  force/mass to the acceleration to apply the force.
+  acceleration.add(a);
 }
 
 //DO NOT CHANGE THINGS BELOW THIS POINT
