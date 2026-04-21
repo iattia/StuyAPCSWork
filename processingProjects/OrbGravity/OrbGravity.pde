@@ -18,7 +18,7 @@ center = new Orb(600.0,450.0, 0.0, 0.0, 10.0, 100.0);
 
 //CHANGE THIS
 //make earth (mass of 500million) place it very far off the bottom of the screen
-earth = new Orb(1.0,99999999.0,0.0,0.0,10000.0,500000000.0);
+earth = new Orb(1.0,150000.0,0.0,0.0,10000.0,500000000.0);
 
 
 //DO NOT CHANGE THIS:
