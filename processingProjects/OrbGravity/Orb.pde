@@ -109,6 +109,7 @@ public void bounce() {
   if (position.y < radius)
     velocity.y = abs(velocity.y);
   if (position.y > height-radius)
+    position.y = height - radius;
     velocity.y= -1 * abs(velocity.y);
 }
 }
