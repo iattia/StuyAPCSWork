@@ -48,13 +48,13 @@ PVector attractTo(Orb other) {
 
   //CHANGE THIS
   //calculate the magnitude of the force g using the formula g = G*M1*M2/dist^2
-  double mag = 1.0;
+  double mag = (OrbGravity.G * this.mass * other.mass)/(Math.pow(distance, 2));
 
   //CHANGE THIS
   //calculate the direction of the force
   //hint: (concept) https://mathsathome.com/vector-between-2-points/
   //hint2: use the built in functions of pvectors.
-  PVector force = null;
+  PVector force = PVector.sub(other.position, this.position);
 
   //CHANGE THIS
   //normalize the force
@@ -63,7 +63,7 @@ PVector attractTo(Orb other) {
   //CHANGE THIS
   //now you have a unit vector, and a magnitude.
   //Make your force vector have the correct magnitude before returning it.
-
+  force.mult((float) mag);
 
   //DO NOT CHANGE THIS
   return force;
