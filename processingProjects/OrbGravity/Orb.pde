@@ -102,14 +102,18 @@ void display() {
 
 public void bounce() {
   //This can introduce/remove energy from the system because of small "teleportations".
-  if (position.x < radius)
+  if (position.x < radius){
     velocity.x = abs(velocity.x);
-  if (position.x > width-radius)
+  }
+  if (position.x > width-radius){
     velocity.x= -1 * abs(velocity.x);
-  if (position.y < radius)
+  }
+  if (position.y < radius){
     velocity.y = abs(velocity.y);
-  if (position.y > height-radius)
+  }
+  if (position.y > height-radius){
     position.y = height - radius;
     velocity.y= -1 * abs(velocity.y);
+  }
 }
 }
