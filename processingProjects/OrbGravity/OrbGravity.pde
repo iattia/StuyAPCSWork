@@ -1,14 +1,13 @@
 ArrayList<Orb>orbList;
 Orb earth, center;
 static double G = 20;
-static int ORBIT = 0;
-static int EARTH = 1;
+static double SPRING_CONSTANT, SPRING_LENGTH;
+static int ORBIT = 1;
+static int EARTH = 0;
 static int OFF = 2;
 static int MODE = EARTH;
 
 static int SPACE = 32;
-static int B = 66;
-static int C = 67;
 
 static boolean BOUNCE = true;
 static boolean CLEAR_BACKGROUND = true;
@@ -45,15 +44,20 @@ void keyPressed() {
     MODE++;
     MODE%=3;
   }
-  if (key == B){
+  if (key == 'b' || key == 'B'){
     BOUNCE = !BOUNCE;
   }
-  if (key == C){
+  if (key == 'c' || key == 'C'){
     CLEAR_BACKGROUND = !CLEAR_BACKGROUND;
+  }
+  if (key == 's' || key == 'S'){
+    SPRING = !SPRING;
   }
 }
 void draw() {
+if (CLEAR_BACKGROUND){
 background(255);
+}
 for (Orb o : orbList) {
   o.move();
   o.display();
@@ -69,6 +73,25 @@ if (MODE==ORBIT)
   text("Orbit Mode", 20, 20);
 if (MODE==EARTH)
   text("Earth Mode", 20, 20);
+if (MODE==OFF){
+  text("Gravity Off", 20, 20);
+}
+if (BOUNCE){
+  text("Bounce On", 20, 60);
+} else{
+  text("Bounce Off", 20, 60);
+}
+if (CLEAR_BACKGROUND){
+  text("Clear Background On", 20, 80);
+} else {
+  text("Clear Background Off", 20, 80);
+}
+if (SPRING){
+  text("Spring On", 20, 100);
+} else{
+  text("Spring Off", 20, 100);
+}
+
 
 text(orbList.size(), 20, 40);
 }
