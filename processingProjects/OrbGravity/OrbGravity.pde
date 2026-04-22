@@ -3,7 +3,16 @@ Orb earth, center;
 static double G = 20;
 static int ORBIT = 0;
 static int EARTH = 1;
+static int OFF = 2;
 static int MODE = EARTH;
+
+static int SPACE = 32;
+static int B = 66;
+static int C = 67;
+
+static boolean BOUNCE = true;
+static boolean CLEAR_BACKGROUND = true;
+static boolean SPRING = false;
 
 /**
 *IN THIS TAB: MODIFY YOUR SETUP BEFORE YOU EDIT ORB
@@ -32,8 +41,16 @@ orbList.add(new Orb(mouseX, mouseY, 5, 0, 20, 10));
 
 //When you press a key you change modes
 void keyPressed() {
-MODE++;
-MODE%=2;
+  if (key == SPACE){
+    MODE++;
+    MODE%=3;
+  }
+  if (key == B){
+    BOUNCE = !BOUNCE;
+  }
+  if (key == C){
+    CLEAR_BACKGROUND = !CLEAR_BACKGROUND;
+  }
 }
 void draw() {
 background(255);
