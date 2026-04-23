@@ -66,9 +66,16 @@ for (Orb o : orbList) {
     o.applyForce(o.attractTo(center));
   if (SPRING){
     center.springAttract(o);
+    stroke(0);
+    strokeWeight(1);
+    line(center.position.x, center.position.y, o.position.x, o.position.y);
   }
 }
-if (MODE==ORBIT)
+noStroke();
+fill(255);
+rect(0, 0, 150, 100);
+fill(0);
+if (MODE==ORBIT || SPRING)
   center.display();
 fill(0);
 if (MODE==ORBIT)
