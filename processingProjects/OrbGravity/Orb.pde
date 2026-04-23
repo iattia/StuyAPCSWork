@@ -69,6 +69,28 @@ PVector attractTo(Orb other) {
   return force;
 }
 
+//This method will be used to make the current Orb apply a spring force to the other Orb.
+void springAttract(Orb other) {
+  //1. check the distance between the orbs.
+  float dist = this.position.dist(other.position);
+
+  //2. calculate the magnitude of the force using f = SPRING_CONSTANT*displacement
+  //displacement: the difference between the distance beetween the orbs, and the SPRING_LENGTH.
+  //Note: The force will change direction depending if the distance is smaller/larger than the SPRING_LENGTH.
+  
+  float displacement = dist - (float)OrbGravity.SPRING_LENGTH;
+  float mag = (float)(OrbGravity.SPRING_CONSTANT * displacement);
+
+  //3. Now calculate the direction of the force,
+  PVector direction = PVector.sub(this.position, other.position);
+
+  //4. Scale the direction vector to the mag, so it can be used as a force
+  direction.normalize();
+  direction.mult(mag);
+  //5. apply that force to other (use the appropriate method)
+  other.applyForce(direction);
+}
+
 /*Apply a force to the current orb by changing the acceleration.*/
 void applyForce(PVector f) {
   //knowing that f = ma, you can rearrange the formula to see how you want to manipulate acceleration:

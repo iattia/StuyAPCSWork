@@ -1,13 +1,12 @@
 ArrayList<Orb>orbList;
 Orb earth, center;
 static double G = 20;
-static double SPRING_CONSTANT, SPRING_LENGTH;
+static double SPRING_CONSTANT = 1.0;
+static double SPRING_LENGTH = 150.0;
 static int ORBIT = 1;
 static int EARTH = 0;
 static int OFF = 2;
 static int MODE = EARTH;
-
-static int SPACE = 32;
 
 static boolean BOUNCE = true;
 static boolean CLEAR_BACKGROUND = true;
@@ -26,7 +25,7 @@ center = new Orb(600.0,450.0, 0.0, 0.0, 10.0, 100.0);
 
 //CHANGE THIS
 //make earth (mass of 500million) place it very far off the bottom of the screen
-earth = new Orb(1.0,150000.0,0.0,0.0,10000.0,500000000.0);
+earth = new Orb(1.0,200000.0,0.0,0.0,10000.0,500000000.0);
 
 
 //DO NOT CHANGE THIS:
@@ -40,7 +39,7 @@ orbList.add(new Orb(mouseX, mouseY, 5, 0, 20, 10));
 
 //When you press a key you change modes
 void keyPressed() {
-  if (key == SPACE){
+  if (key == ' '){
     MODE++;
     MODE%=3;
   }
@@ -65,6 +64,9 @@ for (Orb o : orbList) {
     o.applyForce(o.attractTo(earth));
   if (MODE==ORBIT)
     o.applyForce(o.attractTo(center));
+  if (SPRING){
+    center.springAttract(o);
+  }
 }
 if (MODE==ORBIT)
   center.display();
