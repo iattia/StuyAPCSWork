@@ -1,11 +1,12 @@
 ArrayList<Orb>orbList;
-Orb earth, center;
+Orb earth, center, grav1, grav2;
 static double G = 20;
 static double SPRING_CONSTANT = 0.01;
 static double SPRING_LENGTH = 150.0;
 static int ORBIT = 1;
 static int EARTH = 0;
 static int OFF = 2;
+static int DUALORBIT = 3;
 static int MODE = EARTH;
 
 static boolean BOUNCE = true;
@@ -23,6 +24,8 @@ size(1200, 900);
 //note: Orb Constructor parameters: x,y,xSpeed,ySpeed,radius,mass
 center = new Orb(600.0,450.0, 0.0, 0.0, 10.0, 100.0);
 
+grav1 = new Orb(600.0,300.0, 0.0, 0.0, 10.0, 100.0);
+grav2 = new Orb(600.0,600.0, 0.0, 0.0, 10.0, 100.0);
 //CHANGE THIS
 //make earth (mass of 500million) place it very far off the bottom of the screen
 earth = new Orb(1.0,200000.0,0.0,0.0,10000.0,500000000.0);
@@ -41,7 +44,7 @@ orbList.add(new Orb(mouseX, mouseY, 5, 0, 20, 10));
 void keyPressed() {
   if (key == ' '){
     MODE++;
-    MODE%=3;
+    MODE%=4;
   }
   if (key == 'b' || key == 'B'){
     BOUNCE = !BOUNCE;
@@ -68,6 +71,10 @@ for (Orb o : orbList) {
     o.applyForce(o.attractTo(earth));
   if (MODE==ORBIT)
     o.applyForce(o.attractTo(center));
+  if (MODE == DUALORBIT){
+    o.applyForce(o.attractTo(grav1));
+    o.applyForce(o.attractTo(grav2));
+  }
   if (SPRING){
     center.springAttract(o);
     stroke(0);
@@ -77,10 +84,14 @@ for (Orb o : orbList) {
 }
 noStroke();
 fill(255);
-rect(0, 0, 150, 110);
+rect(0, 0, 150, 150);
 fill(0);
 if (MODE==ORBIT || SPRING)
   center.display();
+if (MODE == DUALORBIT){
+  grav1.display();
+  grav2.display();
+}
 fill(0);
 if (MODE==ORBIT)
   text("Orbit Mode", 20, 20);
@@ -88,6 +99,11 @@ if (MODE==EARTH)
   text("Earth Mode", 20, 20);
 if (MODE==OFF){
   text("Gravity Off", 20, 20);
+}
+if (MODE == DUALORBIT){
+  text("Dual Orbit Mode On", 20, 120);
+} else{
+  text("Dual Orbit Mode Off", 20, 120);
 }
 if (BOUNCE){
   text("Bounce On", 20, 60);
@@ -104,6 +120,7 @@ if (SPRING){
 } else{
   text("Spring Off", 20, 100);
 }
+text("R to clear screen", 20, 140);
 
 
 text(orbList.size(), 20, 40);
