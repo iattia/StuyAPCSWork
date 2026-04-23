@@ -23,7 +23,7 @@ void move() {
 
   //DO NOT EDIT:
   //bounce on earth mode
-  if (MODE == EARTH)
+  if (OrbGravity.BOUNCE)
     bounce();
 }
 
