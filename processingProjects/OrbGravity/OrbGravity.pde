@@ -73,7 +73,7 @@ for (Orb o : orbList) {
 }
 noStroke();
 fill(255);
-rect(0, 0, 150, 100);
+rect(0, 0, 150, 110);
 fill(0);
 if (MODE==ORBIT || SPRING)
   center.display();
