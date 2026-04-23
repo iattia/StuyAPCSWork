@@ -52,6 +52,10 @@ void keyPressed() {
   if (key == 's' || key == 'S'){
     SPRING = !SPRING;
   }
+  if (key == 'r' || key == 'R'){
+    orbList = new ArrayList<Orb>();
+    background(255);
+  }
 }
 void draw() {
 if (CLEAR_BACKGROUND){
