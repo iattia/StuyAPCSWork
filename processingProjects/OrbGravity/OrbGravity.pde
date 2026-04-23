@@ -1,7 +1,7 @@
 ArrayList<Orb>orbList;
 Orb earth, center;
 static double G = 20;
-static double SPRING_CONSTANT = 1.0;
+static double SPRING_CONSTANT = 0.01;
 static double SPRING_LENGTH = 150.0;
 static int ORBIT = 1;
 static int EARTH = 0;
