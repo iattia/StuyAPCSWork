@@ -18,6 +18,10 @@ public class Heap{
   *This should run in linear time.
   */
   private static void heapify(int[]data){
+    int start = data.length / 2 - 1;
+    for (int i = start; i >= 0; i--){
+      pushDown(data, data.length, i);
+    }
   }
 
   /**
@@ -48,5 +52,4 @@ public class Heap{
   */
   private static void remove(int[]data,int size){
   }
-
 }
