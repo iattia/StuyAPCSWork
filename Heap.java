@@ -25,16 +25,22 @@ public class Heap{
   *@param: index the location to push dowh
   */
   private static void pushDown(int[]data,int size,int index){
-    int leftI index * 2 + 1;
+    int leftI = index * 2 + 1;
     int rightI = index * 2 + 2;
-    int temp = data[index];
-    if (rightI >= size && data[rightI] > data[leftI]){
-      data[index] = data[rightI];
-      data[rightI] = temp;
-      pushDown(data, size, rightI);
-    } else if (leftI >= size){
-      pushDown(data, size, leftI);
+    int largestI = index;
+    if (leftI < size && data[leftI] > data[largestI]){
+      largestI = leftI;
     }
+    if (rightI < size && data[rightI] > data[largestI]){
+      largestI = rightI;
+    }
+    if (largestI != index){
+      int temp = data[index];
+      data[index] = data[largestI];
+      data[largestI] = temp;
+      pushDown(data, size, largestI);
+    }
+
   }
 
   /**
