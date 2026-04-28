@@ -46,7 +46,7 @@ public class Heap{
       int temp = data[index];
       data[index] = data[largestI];
       data[largestI] = temp;
-      pushDown(data, size, largestI);
+      pushDown(data, size - 1, largestI);
     }
 
   }
