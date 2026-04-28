@@ -12,6 +12,10 @@ public class Heap{
   *This should run in nlogn time.
   */
   public static void heapsort(int[]data){
+    heapify(data);
+    for (int i = data.length - 1; i > 0; i--){
+      remove(data, i + 1);
+    }
   }
 
   /**Convert the entire array to a valid heap
@@ -51,5 +55,9 @@ public class Heap{
   *@param: size the number of elements in the heap
   */
   private static void remove(int[]data,int size){
+    int temp = data[0];
+    data[0] = data[size - 1];
+    data[size - 1] = temp;
+    pushDown(data, size - 1, 0);
   }
 }
