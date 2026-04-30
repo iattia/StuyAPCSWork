@@ -13,6 +13,8 @@ private Kernel k2 = new Kernel( new float[][] {
   } );
 void setup(){
   size(1450,500);
+  //Epilepsy mode:
+  //frameRate(200);
 }
 
 void mouseClicked() {
