@@ -14,6 +14,10 @@ String[]names;
     currentKernel %= kernels.length;
     kernels[currentKernel].apply(car, destination);
     image(destination, car.width, 0);
+    fill(0);
+    rect(width/2 + 15 , 10, 100, 30);
+    fill(255);
+    text(names[currentKernel], width / 2 + 30, 30);
   }
 
   void setup(){
@@ -73,4 +77,8 @@ String[]names;
     kernels[currentKernel].apply(car, destination);
     image(car, 0, 0);
     image(destination, car.width, 0);
+    fill(0);
+    rect(width/2 + 15 , 10, 100, 30);
+    fill(255);
+    text(names[currentKernel], width / 2 + 30, 30);
   }
