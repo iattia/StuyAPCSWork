@@ -1,42 +1,76 @@
-private static int MODE = 0;
-private static Kernel[] kernels;
-private Kernel k = new Kernel( new float[][] {
-    {-1, -1, -1},
-    {-1, 8, -1},
-    {-1, -1, -1}
-  } );
+String[]names;
+  Kernel[]kernels;
+  int currentKernel;
+  PImage car,destination;
+  //you can have other instance variables here
 
-private Kernel k2 = new Kernel( new float[][] {
-    {.11, .11, .11},
-    {.11, .11, .11},
-    {.11, .11, .11}
-  } );
-void setup(){
-  size(1450,500);
-  //Epilepsy mode:
-  //frameRate(200);
-}
+  void draw(){
+    //Required to have the sketch allow for keyPressed()
+    //You don't need code here.
+  }
 
-void mouseClicked() {
-  MODE++;
-  MODE %= kernels.length;
-}
+  void keyPressed(){
+    currentKernel++;
+    currentKernel %= kernels.length;
+    kernels[currentKernel].apply(car, destination);
+    image(destination, car.width, 0);
+  }
 
-void draw(){
-  PImage car = loadImage("redcar.png");
-  PImage output = car.copy();
-  Kernel k3 = new Kernel( new float[][] {
-    {(float) Math.random(), (float) Math.random(), (float) Math.random()},
-    {(float) Math.random(), (float) Math.random(), (float) Math.random()},
-    {(float) Math.random(), (float) Math.random(), (float) Math.random()}
-  } );
-  Kernel k4 = new Kernel( new float[][] {
-    {(float) (Math.random() * 10 - 5), (float) (Math.random() * 10 - 5), (float) (Math.random() * 10 - 5)},
-    {(float) (Math.random() * 10 - 5), (float) (Math.random() * 10 - 5), (float) (Math.random() * 10 - 5)},
-    {(float) (Math.random() * 10 - 5), (float) (Math.random() * 10 - 5), (float) (Math.random() * 10 - 5)}
-  } );
-  kernels = new Kernel[]{k, k2, k3, k4};
-  kernels[MODE].apply(car, output);
-  image(car,0,0);
-  image(output,car.width,0);
-}
+  void setup(){
+    //you will still need your old initialization here
+    //including drawing your starting images.
+    size(1524,495);
+    car = loadImage("redcar.png");
+    names = new String[]{
+      "Identity", "Blur", "Sharpen",
+      "Outline", "Left Sobel", "Right Sobel",
+      "Top Sobel", "Emboss"
+    };
+    currentKernel = 0;
+    destination = car.copy();
+    kernels = new Kernel[] {
+      new Kernel( new float[][] {
+        {0, 0, 0},
+        {0, 1, 0},
+        {0, 0, 0}
+      }) ,
+      new Kernel( new float[][] {
+        {.111, .111, .111},
+        {.111, .111, .111},
+        {.111, .111, .111}
+      }) ,
+      new Kernel( new float[][] {
+        {0, -1, 0},
+        {-1, 5, -1},
+        {0, -1, 0}
+      }) ,
+      new Kernel( new float[][] {
+        {-1, -1, -1},
+        {-1, 8, -1},
+        {-1, -1, -1}
+      }) ,
+      new Kernel( new float[][] {
+        {1, 0, -1},
+        {2, 0, -2},
+        {1, 0, -1}
+      }) ,
+      new Kernel( new float[][] {
+        {-1, 0, 1},
+        {-2, 0, 2},
+        {-1, 0, 1}
+      }) ,
+      new Kernel( new float[][] {
+        {1, 2,  1},
+        {0, 0, 0},
+        {-1, -2, -1}
+      }),
+      new Kernel( new float[][] {
+        {-2, -1,  0},
+        {-1, 1, 1},
+        {0, 1, 2}
+      })
+    };
+    kernels[currentKernel].apply(car, destination);
+    image(car, 0, 0);
+    image(destination, car.width, 0);
+  }
