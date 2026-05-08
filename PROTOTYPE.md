@@ -2,8 +2,8 @@
 
 ## Group Members:
 
-names here.(CHANGE THIS!!!!!)
-       
+Aidan Zeleniy and Ibrahim Attia
+
 # Intentions:
 
 etc..
