@@ -2,7 +2,7 @@
 
 ## Group Members:
 
-names here.(CHANGE THIS!!!!!)
+Ibrahim Attia & Aidan Zeleniy
        
 # IDEA:
 
