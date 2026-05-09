@@ -2,7 +2,7 @@
 
 ## Group Members:
 
-Ibrahim Attia & Aidan Zeleniy
+Aidan Zeleniy and Ibrahim Attia
 
 ## Group Name:
 

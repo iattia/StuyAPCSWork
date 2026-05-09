@@ -2,5 +2,6 @@
 # APCS2 Final Project
 THIS DOCUMENT IS REQUIRED
 ## Group Info
+Aidan Zeleniy and Ibrahim Attia
 ## Overview
 ## Instructions
