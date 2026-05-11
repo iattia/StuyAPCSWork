@@ -30,8 +30,15 @@ We are creating a fully playable version of the board game Monopoly using Java a
 * We want to add a fun visual effect for rolling the dice, making the numbers scramble on the screen before stopping. 
 * For the game rules, we want to add the ability to collect a full set of colors and build houses and hotels. This will make the game much more competitive because the rent will go up a lot. 
 * We also want to include all the rules for going to jail. This includes getting sent to jail, waiting three turns, and trying to roll doubles to get out early. 
-* Lastly, we want to make sure that when a player goes bankrupt, all their properties go back to being unowned so other people can buy them again.
+* Lastly, we want to make sure that when a player goes bankrupt, all their properties go back to being unowned so other people can buy them again. <br> <br>
+
+# UML:
+
+![UML Diagram](assets/UML.png)
+
 
 # Intentions:
+
+
 
 etc..
