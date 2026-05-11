@@ -26,6 +26,7 @@ We are creating a fully playable version of the board game Monopoly using Java a
 
 **Nice to have features:**
 * If we have extra time, we want to show the player tokens actually moving space by space along the board instead of just appearing at their new location. 
+* We will include option for one player game where the user plays against a bot making random moves.
 * We want to add a fun visual effect for rolling the dice, making the numbers scramble on the screen before stopping. 
 * For the game rules, we want to add the ability to collect a full set of colors and build houses and hotels. This will make the game much more competitive because the rent will go up a lot. 
 * We also want to include all the rules for going to jail. This includes getting sent to jail, waiting three turns, and trying to roll doubles to get out early. 
