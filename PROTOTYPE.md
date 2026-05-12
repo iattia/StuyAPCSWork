@@ -32,12 +32,22 @@ We are creating a fully playable version of the board game Monopoly using Java a
 * We also want to include all the rules for going to jail. This includes getting sent to jail, waiting three turns, and trying to roll doubles to get out early. 
 * Lastly, we want to make sure that when a player goes bankrupt, all their properties go back to being unowned so other people can buy them again. <br> <br>
 
-# UML:
+# Project Screen Images
+
+
+
+# Project Design and UML:
 
 ![UML Diagram](assets/UML.png)
 
+The Game class acts as the central part of the game mechanics as it holds references to the Board, both Players and the Dice. Each turn, Game calls roll() on the Dice and then calls move() on the current Player with the result. Once the Player's position updates, Game calls getTile() on the Board to find out which Tile they landed on, then calls landOn() passing the Player in. 
 
-# Intentions:
+From there, the specific Tile subclass handles the logic. For example, if it's a Property, it checks if there's an owner and either prompts a purchase or calls pay() on the Player to transfer rent. After every transaction, checkBankrupt() is called on the Player to see if they've gone below $0, and if so Game eliminates them. 
+
+Board is purely responsible for storing the 40 Tile objects in order and rendering them visually, it holds no game logic itself.
+
+
+# Development Stages / Pacing:
 
 
 
