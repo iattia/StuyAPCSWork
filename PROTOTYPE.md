@@ -34,6 +34,13 @@ We are creating a fully playable version of the board game Monopoly using Java a
 
 # Project Screen Images
 
+![Start Screen](assets/start-screen.png)
+
+![Customization Screen](assets/customization-screen.png)
+
+
+
+![Game Screen](assets/game-screen.png)
 
 
 # Project Design and UML:
