@@ -34,12 +34,13 @@ We are creating a fully playable version of the board game Monopoly using Java a
 
 # Project Screen Images
 
+**Start Screen**
 ![Start Screen](assets/start-screen.png)
 
+**Customization Screen**
 ![Customization Screen](assets/customization-screen.png)
 
-
-
+**Game Screen (Chance/rent/buying will be a popup)**
 ![Game Screen](assets/game-screen.png)
 
 
@@ -56,6 +57,52 @@ Board is purely responsible for storing the 40 Tile objects in order and renderi
 
 # Development Stages / Pacing:
 
+## Phase 1: Core Architecture and Basic Rendering
+* **Objective:** Establish the main classes from the UML diagram and get a visual representation of the empty board on screen.
+* **Tasks:**
+    * Set up the Processing environment and initialize the GitHub repository.
+    * Implement the abstract `Tile` class and its basic subclasses (`Property`, `GoTile`, `JailTile`, `FreeParkingTile`).
+    * Create the `Board` class and initialize an array of 40 standard Monopoly tiles in the correct sequence.
+    * Write the `draw()` method in the `Board` class to render the square track and individual tile outlines around the edge of the window.
+* **Work Split Idea:** Ibrahim can work on setting up the `Tile` hierarchy and the initial object skeletons, while Aidan can handle the Processing coordinates and math required to draw the `Board` layout correctly.
 
+<br><br>
 
-etc..
+## Phase 2: Player Entities and Basic Movement
+* **Objective:** Create player objects that can roll dice and traverse the board indices.
+* **Tasks:**
+    * Create the `Player` class with attributes for money ($1500), position (index 0), and name.
+    * Implement the `Dice` class with a `roll()` function returning a random value between 2 and 12.
+    * Create the `Game` class to manage the array of `Player` objects and track `currentTurn`.
+    * Implement basic movement logic where a dice roll updates a player's position index and loops back to 0 after index 39.
+    * Render basic colored tokens on the board to represent players based on their current tile position.
+* **Work Split Idea:** Aidan can build the `Dice` class and the visual rendering of the player tokens on the board. Ibrahim can implement the `Player` state management and the `Game` class turn loop.
+
+<br><br>
+
+## Phase 3: Interactions, Economy, and UI Screens
+* **Objective:** Implement property purchasing, rent payments, pre-game setup menus, and the core gameplay loop.
+* **Tasks:**
+    * Implement the Start Screen UI with clickable areas for selecting 1 to 4 players.
+        * ![Start Screen Reference](assets/start-screen.png)
+    * Implement the Customization Screen UI to assign specific colors to players.
+        * ![Customization Screen Reference](assets/customization-screen.png)
+    * Program the `landOn()` logic inside the `Property` class to handle unowned (prompt purchase pop-up) and owned (automatically deduct rent) states.
+    * Add logic to the `GoTile` class to add $200 to the player's balance when they land on or pass it.
+    * Implement the `checkBankrupt()` method to eliminate players who drop below $0.
+    * Create the on-screen text display showing all current player balances and whose turn it is.
+        * ![Game Screen Reference](assets/game-screen.png)
+* **Work Split Idea:** Aidan can handle the Start and Customization screens using Processing mouse click events to transition between game states. Ibrahim can implement the financial logic, ownership tracking, and bankruptcy elimination.
+
+<br><br>
+
+## Phase 4: Polish and "Nice to Have" Features
+* **Objective:** Add advanced Monopoly rules, visual animations, and finalize the project.
+* **Tasks:**
+    * Implement jail mechanics (sending a player to index 10, restricting movement for 3 turns unless doubles are rolled).
+    * Add logic to group properties by `colorGroup` to allow house/hotel upgrades and rent multipliers.
+    * Add a system to return properties to an unowned state when a player goes bankrupt.
+    * Animate the dice roll with a scrambling visual effect before settling on the final number.
+    * Animate player token movement space by space along the board instead of instantly appearing at the destination.
+    * Build a basic bot for the single-player mode that makes random purchasing decisions.
+* **Work Split Idea:** Ibrahim can work on the rules for color groups, house building logic, and the bot decision algorithm. Aidan can focus on the visual polish, specifically the animations for the dice and the step-by-step movement.
