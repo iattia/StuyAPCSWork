@@ -63,7 +63,6 @@ From there, the specific <code>Tile</code> subclass handles the logic. For examp
 ## Phase 1: Core Architecture and Basic Rendering
 * **Objective:** Establish the main classes from the UML diagram and get a visual representation of the empty board on screen.
 * **Tasks:**
-    * Set up the Processing environment and initialize the GitHub repository.
     * Implement the abstract `Tile` class and its basic subclasses (`Property`, `GoTile`, `JailTile`, `FreeParkingTile`).
     * Create the `Board` class and initialize an array of 40 standard Monopoly tiles in the correct sequence.
     * Write the `draw()` method in the `Board` class to render the square track and individual tile outlines around the edge of the window.
