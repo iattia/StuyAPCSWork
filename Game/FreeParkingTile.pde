@@ -1,0 +1,11 @@
+public class FreeParkingTile extends Tile {
+  int toCollect = 0;
+  public FreeParkingTile(String name, int position) {
+    super(name, position);
+  }
+
+  @Override
+  public void landOn(Player p) {
+    p.addBalance(toCollect);
+  }
+}
