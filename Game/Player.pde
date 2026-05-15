@@ -7,7 +7,7 @@ public class Player{
   public void move(int steps){
     position += steps;
   }
-  public void pay(int amount){
+  public void pay(int amount, Player p){
 
   }
   public void buyProperty(Property p){
