@@ -4,7 +4,8 @@ This document must be updated daily every time you finish a work session.
 
 ## Aidan Zeleniy
 
-### 2024-01-02 - Brief description
-Expanded description including how much time was spent on task.
+### 2026-05-12 - Worked on UML
+Worked on and finished UML with all classes
 
-### 2024-01-03 - Brief description
+### 2024-05-13 - Wrote description about UML
+Wrote paragraph about the UML and inputted the images into prototype.md

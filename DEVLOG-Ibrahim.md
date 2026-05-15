@@ -15,4 +15,8 @@ Finished making the diagrams, mostly just working out the kinks with dimensions,
 Started working on Tile code, mostly just set up the structure.
 
 ### 2026-05-14 - Finished Board class and visual layout
+<<<<<<< HEAD
 Completed Board.pde. I filled out the array with all 40 tiles with names, prices, rents, and color groups for the properties. I also wrote the draw() method to render the board on the screen.
+=======
+Completed Board.pde. I filled out the array with all 40 tiles with names, prices, rents, and color groups for the properties. I also wrote the draw() method to render the board on the screen.
+>>>>>>> main
