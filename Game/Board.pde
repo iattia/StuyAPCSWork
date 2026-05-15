@@ -51,50 +51,50 @@ public class Board {
     }
 
     public void draw() {
-        float boardSize = min(width, height) * 0.95; 
-        float cornerSize = boardSize * 0.13; 
-        float tileSize = (boardSize - 2 * cornerSize) / 9.0; 
+        float boardSize = min(width, height) * 0.95;
+        float cornerSize = boardSize * 0.13;
+        float tileSize = (boardSize - 2 * cornerSize) / 9.0;
         float startX = (width - boardSize) / 2;
         float startY = (height - boardSize) / 2;
-        fill(240, 255, 240); 
-        rect(startX + cornerSize, startY + cornerSize, boardSize - 2 * cornerSize, boardSize - 2 * cornerSize);       
+        fill(240, 255, 240);
+        rect(startX + cornerSize, startY + cornerSize, boardSize - 2 * cornerSize, boardSize - 2 * cornerSize);
         fill(0);
         textSize(64);
         textAlign(CENTER, CENTER);
         text("MONOPOLY", startX + (boardSize / 2), startY + (boardSize / 2));
         for (int i = 0; i < 40; i++) {
             float x = 0, y = 0, w = 0, h = 0;
-            if (i == 0) { 
-                x = startX + boardSize - cornerSize; 
-                y = startY + boardSize - cornerSize; 
+            if (i == 0) {
+                x = startX + boardSize - cornerSize;
+                y = startY + boardSize - cornerSize;
                 w = cornerSize; h = cornerSize;
-            } else if (i > 0 && i < 10) { 
-                x = startX + boardSize - cornerSize - (i * tileSize); 
-                y = startY + boardSize - cornerSize; 
+            } else if (i > 0 && i < 10) {
+                x = startX + boardSize - cornerSize - (i * tileSize);
+                y = startY + boardSize - cornerSize;
                 w = tileSize; h = cornerSize;
-            } else if (i == 10) { 
-                x = startX; 
-                y = startY + boardSize - cornerSize; 
+            } else if (i == 10) {
+                x = startX;
+                y = startY + boardSize - cornerSize;
                 w = cornerSize; h = cornerSize;
-            } else if (i > 10 && i < 20) { 
-                x = startX; 
-                y = startY + boardSize - cornerSize - ((i - 10) * tileSize); 
+            } else if (i > 10 && i < 20) {
+                x = startX;
+                y = startY + boardSize - cornerSize - ((i - 10) * tileSize);
                 w = cornerSize; h = tileSize;
-            } else if (i == 20) { 
-                x = startX; 
-                y = startY; 
+            } else if (i == 20) {
+                x = startX;
+                y = startY;
                 w = cornerSize; h = cornerSize;
-            } else if (i > 20 && i < 30) { 
-                x = startX + cornerSize + ((i - 20) * tileSize) - tileSize; 
-                y = startY; 
+            } else if (i > 20 && i < 30) {
+                x = startX + cornerSize + ((i - 20) * tileSize) - tileSize;
+                y = startY;
                 w = tileSize; h = cornerSize;
-            } else if (i == 30) { 
-                x = startX + boardSize - cornerSize; 
-                y = startY; 
+            } else if (i == 30) {
+                x = startX + boardSize - cornerSize;
+                y = startY;
                 w = cornerSize; h = cornerSize;
-            } else if (i > 30 && i < 40) { 
-                x = startX + boardSize - cornerSize; 
-                y = startY + cornerSize + ((i - 30) * tileSize) - tileSize; 
+            } else if (i > 30 && i < 40) {
+                x = startX + boardSize - cornerSize;
+                y = startY + cornerSize + ((i - 30) * tileSize) - tileSize;
                 w = cornerSize; h = tileSize;
             }
             stroke(0);
@@ -109,6 +109,6 @@ public class Board {
     }
 
     public Tile getTile(int pos) {
-        return tiles[pos % 40]; 
+        return tiles[pos % 40];
     }
 }
