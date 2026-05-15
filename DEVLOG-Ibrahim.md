@@ -13,3 +13,6 @@ Finished making the diagrams, mostly just working out the kinks with dimensions,
 
 ### 2026-05-13 - Skeleton code for tiles
 Started working on Tile code, mostly just set up the structure.
+
+### 2026-05-14 - Finished Board class and visual layout
+Completed Board.pde. I filled out the array with all 40 tiles with names, prices, rents, and color groups for the properties. I also wrote the draw() method to render the board on the screen.
