@@ -44,10 +44,47 @@ public class Board {
         tiles[38] = new Tile("Luxury Tax", 38) { public void landOn(Player p) {} };
         tiles[39] = new Property("Depth First Search Disaster", 39, 400, 50, "Dark Blue");
     }
-    public void draw() {
+
+    public float[] getTilePosition(int index) {
         float boardSize = min(width, height) * 0.95;
         float cornerSize = boardSize * 0.13;
         float tileSize = (boardSize - 2 * cornerSize) / 9.0;
+        float startX = (width - boardSize) / 2;
+        float startY = (height - boardSize) / 2;
+        float x = 0, y = 0, w = 0, h = 0;
+
+        if (index == 0) {
+            x = startX + boardSize - cornerSize; y = startY + boardSize - cornerSize;
+            w = cornerSize; h = cornerSize;
+        } else if (index < 10) {
+            x = startX + boardSize - cornerSize - (index * tileSize); y = startY + boardSize - cornerSize;
+            w = tileSize; h = cornerSize;
+        } else if (index == 10) {
+            x = startX; y = startY + boardSize - cornerSize;
+            w = cornerSize; h = cornerSize;
+        } else if (index < 20) {
+            x = startX; y = startY + boardSize - cornerSize - ((index - 10) * tileSize);
+            w = cornerSize; h = tileSize;
+        } else if (index == 20) {
+            x = startX; y = startY;
+            w = cornerSize; h = cornerSize;
+        } else if (index < 30) {
+            x = startX + cornerSize + ((index - 20) * tileSize) - tileSize; y = startY;
+            w = tileSize; h = cornerSize;
+        } else if (index == 30) {
+            x = startX + boardSize - cornerSize; y = startY;
+            w = cornerSize; h = cornerSize;
+        } else {
+            x = startX + boardSize - cornerSize; y = startY + cornerSize + ((index - 30) * tileSize) - tileSize;
+            w = cornerSize; h = tileSize;
+        }
+
+        return new float[]{x, y, w, h};
+    }
+
+    public void draw() {
+        float boardSize = min(width, height) * 0.95;
+        float cornerSize = boardSize * 0.13;
         float startX = (width - boardSize) / 2;
         float startY = (height - boardSize) / 2;
         fill(255);
@@ -63,40 +100,11 @@ public class Board {
         fill(0, 102, 204); text("Player 3: $1500", startX + cornerSize + 20, startY + cornerSize + 90);
         fill(153, 0, 255); text("Player 4: $1500", startX + cornerSize + 20, startY + cornerSize + 125);
         for (int i = 0; i < 40; i++) {
-            float x = 0, y = 0, w = 0, h = 0;
-            if (i == 0) {
-                x = startX + boardSize - cornerSize;
-                y = startY + boardSize - cornerSize;
-                w = cornerSize; h = cornerSize;
-            } else if (i > 0 && i < 10) {
-                x = startX + boardSize - cornerSize - (i * tileSize);
-                y = startY + boardSize - cornerSize;
-                w = tileSize; h = cornerSize;
-            } else if (i == 10) {
-                x = startX;
-                y = startY + boardSize - cornerSize;
-                w = cornerSize; h = cornerSize;
-            } else if (i > 10 && i < 20) {
-                x = startX;
-                y = startY + boardSize - cornerSize - ((i - 10) * tileSize);
-                w = cornerSize; h = tileSize;
-            } else if (i == 20) {
-                x = startX;
-                y = startY;
-                w = cornerSize; h = cornerSize;
-            } else if (i > 20 && i < 30) {
-                x = startX + cornerSize + ((i - 20) * tileSize) - tileSize;
-                y = startY;
-                w = tileSize; h = cornerSize;
-            } else if (i == 30) {
-                x = startX + boardSize - cornerSize;
-                y = startY;
-                w = cornerSize; h = cornerSize;
-            } else if (i > 30 && i < 40) {
-                x = startX + boardSize - cornerSize;
-                y = startY + cornerSize + ((i - 30) * tileSize) - tileSize;
-                w = cornerSize; h = tileSize;
-            }
+            float[] t = getTilePosition(i);
+            float x = t[0];
+            float y = t[1];
+            float w = t[2];
+            float h = t[3];
             stroke(0);
             strokeWeight(2);
             fill(235);
@@ -129,6 +137,25 @@ public class Board {
             textSize(10);
             textAlign(CENTER, CENTER);
             text(tiles[i].name, textX, textY, textW, textH);
+        }
+    }
+
+    public void drawPlayers(Player[] players) {
+        int[] playerColors = {
+            color(255, 0, 0),
+            color(34, 139, 34),
+            color(0, 102, 204),
+            color(153, 0, 255)
+        };
+        int[][] offsets = {{-8, -8}, {8, -8}, {-8, 8}, {8, 8}}; 
+
+        for (int i = 0; i < players.length; i++) {
+            float[] t = getTilePosition(players[i].position);
+            float cx = t[0] + t[2] / 2 + offsets[i][0];
+            float cy = t[1] + t[3] / 2 + offsets[i][1];
+            fill(playerColors[i]);
+            noStroke();
+            ellipse(cx, cy, 16, 16);
         }
     }
     public int getColor(String group) {
