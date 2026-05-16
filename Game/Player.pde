@@ -15,7 +15,7 @@ public class Player{
   }
 
   public boolean checkBankrupt(){
-
+    return false;
   }
 
 }
