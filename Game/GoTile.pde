@@ -5,6 +5,6 @@ public class GoTile extends Tile {
 
     @Override
     public void landOn(Player p) {
-        p.addBalance(200);
+        //p.addBalance(200);
     }
 }
