@@ -6,6 +6,6 @@ public class FreeParkingTile extends Tile {
 
   @Override
   public void landOn(Player p) {
-    p.addBalance(toCollect);
+    //p.addBalance(toCollect);
   }
 }
