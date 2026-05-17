@@ -1,16 +1,17 @@
 public class Player{
+  public String name;
   public int money;
   public int position;
   public ArrayList<Property> ownedProperties = new ArrayList<Property>();
-  public String name;
+  public color playerColor;
 
-  public Player(String name) {
+public Player(String name, color playerColor) {
   this.name = name;
+  this.playerColor = playerColor;
   this.money = 1500;
   this.position = 0;
   this.ownedProperties = new ArrayList<Property>();
 }
-
   public void move(int steps) {
     position += steps;
     if (position >= 40) {

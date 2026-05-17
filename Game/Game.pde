@@ -7,13 +7,13 @@ void setup() {
   board = new Board();
   dice = new Dice();
   players = new Player[2];
-  players[0] = new Player("Player 1");
-  players[1] = new Player("Player 2");
+  players[0] = new Player("Player 1", color(255, 0, 0));
+  players[1] = new Player("Player 2", color(34, 139, 34));
 }
 
 void draw() {
   background(255);
-  board.draw();
+  board.draw(players);
   board.drawPlayers(players);
 }
 

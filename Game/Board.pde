@@ -82,7 +82,7 @@ public class Board {
         return new float[]{x, y, w, h};
     }
 
-    public void draw() {
+    public void draw(Player[] players) {
         float boardSize = min(width, height) * 0.95;
         float cornerSize = boardSize * 0.13;
         float startX = (width - boardSize) / 2;
@@ -95,10 +95,12 @@ public class Board {
         text("MONOPOLY", startX + (boardSize / 2), startY + (boardSize / 2));
         textAlign(LEFT, TOP);
         textSize(24);
-        fill(255, 0, 0); text("Player 1: $1500", startX + cornerSize + 20, startY + cornerSize + 20);
-        fill(34, 139, 34); text("Player 2: $1500", startX + cornerSize + 20, startY + cornerSize + 55);
-        fill(0, 102, 204); text("Player 3: $1500", startX + cornerSize + 20, startY + cornerSize + 90);
-        fill(153, 0, 255); text("Player 4: $1500", startX + cornerSize + 20, startY + cornerSize + 125);
+        textAlign(LEFT, TOP);
+        textSize(24);
+        for (int i = 0; i < players.length; i++) {
+            fill(players[i].playerColor);
+            text(players[i].name + ": $" + players[i].money, startX + cornerSize + 20, startY + cornerSize + 20 + (i * 35));
+        }
         for (int i = 0; i < 40; i++) {
             float[] t = getTilePosition(i);
             float x = t[0];
@@ -141,19 +143,12 @@ public class Board {
     }
 
     public void drawPlayers(Player[] players) {
-        int[] playerColors = {
-            color(255, 0, 0),
-            color(34, 139, 34),
-            color(0, 102, 204),
-            color(153, 0, 255)
-        };
         int[][] offsets = {{-8, -8}, {8, -8}, {-8, 8}, {8, 8}}; 
-
         for (int i = 0; i < players.length; i++) {
             float[] t = getTilePosition(players[i].position);
             float cx = t[0] + t[2] / 2 + offsets[i][0];
             float cy = t[1] + t[3] / 2 + offsets[i][1];
-            fill(playerColors[i]);
+            fill(players[i].playerColor);
             noStroke();
             ellipse(cx, cy, 16, 16);
         }
