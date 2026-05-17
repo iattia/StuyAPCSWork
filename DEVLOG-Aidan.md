@@ -13,4 +13,8 @@ Wrote paragraph about the UML and inputted the images into prototype.md
 ### 2026-05-14 - Wrote Dice and Player classes
 Developed Dice and did player class outlines
 
-### 2026-05-15 - 
+### 2026-05-15 - Finalized Player Functionality and GoTile
+Added constructor and fixed all player methods. also included for go to add 200 when landed on
+
+### 2026-05-16 - Added players to the actual board
+Created new list player method and method for getting tile position 
