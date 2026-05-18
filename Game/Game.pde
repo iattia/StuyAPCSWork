@@ -22,7 +22,7 @@ void keyPressed() {
     int roll = dice.roll();
     players[0].move(roll);
     println("Rolled: " + dice.die1 + " + " + dice.die2 + " = " + roll + " | Player 1 on tile: " + players[0].position);
-    board.tiles[players[0].position].landOn(players[0]);
+    board.tiles[players[0].position].landOn(players[0]); 
   }
   if (key == 'f') {
     int roll = dice.roll();
@@ -30,4 +30,7 @@ void keyPressed() {
     println("Rolled: " + dice.die1 + " + " + dice.die2 + " = " + roll + " | Player 2 on tile: " + players[1].position);
     board.tiles[players[1].position].landOn(players[1]);
   }
+  if (key == 'b'){
+      players[0].buyProperty((Property) board.tiles[players[0].position]);
+    }
 }

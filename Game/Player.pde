@@ -30,6 +30,8 @@ public Player(String name, color playerColor) {
   public void buyProperty(Property p){
     money -= p.price;
     ownedProperties.add(p);
+    System.out.println(name + " now owns " + p.name + ". The rent is $" + p.rent );
+
     p.owner = this;
   }
 
