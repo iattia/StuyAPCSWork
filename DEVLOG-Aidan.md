@@ -20,3 +20,7 @@ Added constructor and fixed all player methods. also included for go to add 200 
 Created new list player method and method for getting tile position 
 
 ### 2026-05-17 - Added player movement on the board
+Utilized the keyPress call
+
+### 2026-05-18 - Registered player location on top of property
+Also introduced purchasing capabilities
