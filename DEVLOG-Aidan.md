@@ -22,5 +22,5 @@ Created new list player method and method for getting tile position
 ### 2026-05-17 - Added player movement on the board
 Utilized the keyPress call
 
-### 2026-05-18 - Registered player location on top of property
-Also introduced purchasing capabilities
+### 2026-05-18 - Registered player location on top of property and taking turns
+Also introduced purchasing capabilities and checks if player has rolled yet

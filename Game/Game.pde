@@ -1,6 +1,8 @@
 Board board;
 Player[] players;
 Dice dice;
+int currentTurn = 0;
+boolean hasRolled = false;
 
 void setup() {
   size(900, 900); 
@@ -13,24 +15,28 @@ void setup() {
 
 void draw() {
   background(255);
-  board.draw(players);
+  board.draw(players, currentTurn);
   board.drawPlayers(players);
 }
 
+
 void keyPressed() {
-  if (key == ' ') {
+  if (key == ' ' && !hasRolled) {
     int roll = dice.roll();
-    players[0].move(roll);
-    println("Rolled: " + dice.die1 + " + " + dice.die2 + " = " + roll + " | Player 1 on tile: " + players[0].position);
-    board.tiles[players[0].position].landOn(players[0]); 
+    players[currentTurn].move(roll);
+    println("Rolled: " + dice.die1 + " + " + dice.die2 + " = " + roll + " | " + players[currentTurn].name + " on tile: " + players[currentTurn].position);
+    board.tiles[players[currentTurn].position].landOn(players[currentTurn]);
+    hasRolled = true;
   }
-  if (key == 'f') {
-    int roll = dice.roll();
-    players[1].move(roll);
-    println("Rolled: " + dice.die1 + " + " + dice.die2 + " = " + roll + " | Player 2 on tile: " + players[1].position);
-    board.tiles[players[1].position].landOn(players[1]);
-  }
-  if (key == 'b'){
-      players[0].buyProperty((Property) board.tiles[players[0].position]);
+  if (key == 'b') {
+    Tile t = board.tiles[players[currentTurn].position];
+    if (((Property) t).owner == null) {   
+      players[currentTurn].buyProperty((Property) t);
     }
+  }
+  if (key == 'e' && hasRolled) {
+    currentTurn = (currentTurn + 1) % players.length;
+    hasRolled = false;
+  }
 }
+ 

@@ -28,11 +28,15 @@ public Player(String name, color playerColor) {
     p.money += amount;
   }
   public void buyProperty(Property p){
-    money -= p.price;
-    ownedProperties.add(p);
-    System.out.println(name + " now owns " + p.name + ". The rent is $" + p.rent );
+    if (p.owner == null) {
+      money -= p.price;
+     ownedProperties.add(p);
+      p.owner = this;
+      System.out.println(name + " now owns " + p.name + ". The rent is $" + p.rent );
+    } else {
+      println(p.name + " is already owned by " + p.owner.name);
+    }
 
-    p.owner = this;
   }
 
   public boolean checkBankrupt(){

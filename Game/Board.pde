@@ -82,7 +82,7 @@ public class Board {
         return new float[]{x, y, w, h};
     }
 
-    public void draw(Player[] players) {
+    public void draw(Player[] players, int currentTurn) {
         float boardSize = min(width, height) * 0.95;
         float cornerSize = boardSize * 0.13;
         float startX = (width - boardSize) / 2;
@@ -98,8 +98,12 @@ public class Board {
         textAlign(LEFT, TOP);
         textSize(24);
         for (int i = 0; i < players.length; i++) {
-            fill(players[i].playerColor);
-            text(players[i].name + ": $" + players[i].money, startX + cornerSize + 20, startY + cornerSize + 20 + (i * 35));
+         fill(players[i].playerColor);
+         text(players[i].name + ": $" + players[i].money, startX + cornerSize + 40, startY + cornerSize + 20 + (i * 35));
+         if (i == currentTurn) {
+           fill(players[i].playerColor);
+           ellipse(startX + cornerSize + 25, startY + cornerSize + 32 + (i * 35), 12, 12);
+          }
         }
         for (int i = 0; i < 40; i++) {
             float[] t = getTilePosition(i);
