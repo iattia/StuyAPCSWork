@@ -30,8 +30,10 @@ void keyPressed() {
   }
   if (key == 'b') {
     Tile t = board.tiles[players[currentTurn].position];
-    if (((Property) t).owner == null) {   
-      players[currentTurn].buyProperty((Property) t);
+    if (t instanceof Property) {
+      if (((Property) t).owner == null) {   
+        players[currentTurn].buyProperty((Property) t);
+      }
     }
   }
   if (key == 'e' && hasRolled) {
