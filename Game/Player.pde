@@ -25,7 +25,12 @@ public Player(String name, color playerColor) {
 
   public void pay(int amount, Player p){
     money -= amount;
-    p.money += amount;
+    if (p != null){
+      p.money += amount;
+    }
+  }
+  public void pay(int amount){
+    money -= amount;
   }
   public void buyProperty(Property p){
     if (p.owner == null) {
