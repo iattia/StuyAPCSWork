@@ -4,6 +4,7 @@ public class Player{
   public int position;
   public ArrayList<Property> ownedProperties = new ArrayList<Property>();
   public color playerColor;
+  private boolean bankrupt;
 
 public Player(String name, color playerColor) {
   this.name = name;
@@ -11,6 +12,7 @@ public Player(String name, color playerColor) {
   this.money = 1500;
   this.position = 0;
   this.ownedProperties = new ArrayList<Property>();
+  this.bankrupt = true;
 }
   public void move(int steps) {
     position += steps;
@@ -21,7 +23,6 @@ public Player(String name, color playerColor) {
       }
     }
   }
-
 
   public void pay(int amount, Player p){
     money -= amount;
@@ -44,8 +45,14 @@ public Player(String name, color playerColor) {
 
   }
 
-  public boolean checkBankrupt(){
-    return money < 0;
+  public void setBankrupt(){
+    if (money < 0){
+      bankrupt = true;
+    }
+  }
+
+  public boolean getBankrupt(){
+    return bankrupt;
   }
 
 }

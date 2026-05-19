@@ -11,7 +11,7 @@ public class Board {
           public void landOn(Player p) {
             p.money -= 200;
             System.out.println(p.name + " paid $200 Income Tax.");
-          } 
+          }
         };
         tiles[5] = new Property("Server 1", 5, 200, 25, "Server") {
           public int calculateRent() {
@@ -90,7 +90,7 @@ public class Board {
           public void landOn(Player p) {
             p.money -= 100;
             System.out.println(p.name + " paid $100 Luxury Tax.");
-          } 
+          }
         };
         tiles[39] = new Property("Depth First Search Disaster", 39, 400, 50, "Dark Blue");
     }
@@ -132,7 +132,7 @@ public class Board {
         return new float[]{x, y, w, h};
     }
 
-    public void draw(Player[] players, int currentTurn) {
+    public void draw(ArrayList<players>, int currentTurn) {
         float boardSize = min(width, height) * 0.95;
         float cornerSize = boardSize * 0.13;
         float startX = (width - boardSize) / 2;
@@ -147,11 +147,11 @@ public class Board {
         textSize(24);
         textAlign(LEFT, TOP);
         textSize(24);
-        for (int i = 0; i < players.length; i++) {
-         fill(players[i].playerColor);
-         text(players[i].name + ": $" + players[i].money, startX + cornerSize + 40, startY + cornerSize + 20 + (i * 35));
+        for (int i = 0; i < players.size(); i++) {
+         fill(players.get(i).playerColor);
+         text(players.get(i).name + ": $" + players.get(i).money, startX + cornerSize + 40, startY + cornerSize + 20 + (i * 35));
          if (i == currentTurn) {
-           fill(players[i].playerColor);
+           fill(players.get(i).playerColor);
            ellipse(startX + cornerSize + 25, startY + cornerSize + 32 + (i * 35), 12, 12);
           }
         }
@@ -199,8 +199,8 @@ public class Board {
         }
     }
 
-    public void drawPlayers(Player[] players) {
-        int[][] offsets = {{-8, -8}, {8, -8}, {-8, 8}, {8, 8}}; 
+    public void drawPlayers(ArrayList<Player> players) {
+        int[][] offsets = {{-8, -8}, {8, -8}, {-8, 8}, {8, 8}};
         for (int i = 0; i < players.length; i++) {
             float[] t = getTilePosition(players[i].position);
             float cx = t[0] + t[2] / 2 + offsets[i][0];
