@@ -7,8 +7,23 @@ public class Board {
         tiles[1] = new Property("Scheme", 1, 60, 2, "Brown");
         tiles[2] = new Tile("Community Chest", 2) { public void landOn(Player p) {} };
         tiles[3] = new Property("Dr. Racket", 3, 60, 4, "Brown");
-        tiles[4] = new Tile("Income Tax", 4) { public void landOn(Player p) {} };
-        tiles[5] = new Tile("Server 1", 5) { public void landOn(Player p) {} };
+        tiles[4] = new Tile("Income Tax", 4) {
+          public void landOn(Player p) {
+            p.money -= 200;
+            System.out.println(p.name + " paid $200 Income Tax.");
+          } 
+        };
+        tiles[5] = new Property("Server 1", 5, 200, 25, "Server") {
+          public int calculateRent() {
+            int serversOwned = 0;
+            for (Property prop : owner.ownedProperties) {
+              if (prop.colorGroup.equals("Server")) {
+                serversOwned++;
+              }
+            }
+            return (int) (25 * Math.pow(2, serversOwned - 1));
+          }
+        };
         tiles[6] = new Property("HTML World", 6, 100, 6, "Light Blue");
         tiles[7] = new Tile("Chance", 7) { public void landOn(Player p) {} };
         tiles[8] = new Property("CSS Court", 8, 100, 6, "Light Blue");
@@ -18,7 +33,17 @@ public class Board {
         tiles[12] = new Tile("Stack Overflow", 12) { public void landOn(Player p) {} };
         tiles[13] = new Property("Double Downtown", 13, 140, 10, "Pink");
         tiles[14] = new Property("Boolean Boulevard", 14, 160, 12, "Pink");
-        tiles[15] = new Tile("Server 2", 15) { public void landOn(Player p) {} };
+        tiles[15] = new Property("Server 2", 5, 200, 25, "Server") {
+          public int calculateRent() {
+            int serversOwned = 0;
+            for (Property prop : owner.ownedProperties) {
+              if (prop.colorGroup.equals("Server")) {
+                serversOwned++;
+              }
+            }
+            return (int) (25 * Math.pow(2, serversOwned - 1));
+          }
+        };
         tiles[16] = new Property("Array Avenue", 16, 180, 14, "Orange");
         tiles[17] = new Tile("Community Chest", 17) { public void landOn(Player p) {} };
         tiles[18] = new Property("ArrayList Avenue", 18, 180, 14, "Orange");
@@ -28,7 +53,17 @@ public class Board {
         tiles[22] = new Tile("Chance", 22) { public void landOn(Player p) {} };
         tiles[23] = new Property("HashSet Haven", 23, 220, 18, "Red");
         tiles[24] = new Property("TreeMap Terrace", 24, 240, 20, "Red");
-        tiles[25] = new Tile("Server 3", 25) { public void landOn(Player p) {} };
+        tiles[25] = new Property("Server 3", 5, 200, 25, "Server") {
+          public int calculateRent() {
+            int serversOwned = 0;
+            for (Property prop : owner.ownedProperties) {
+              if (prop.colorGroup.equals("Server")) {
+                serversOwned++;
+              }
+            }
+            return (int) (25 * Math.pow(2, serversOwned - 1));
+          }
+        };
         tiles[26] = new Property("Bubble Sort Boulevard", 26, 260, 22, "Yellow");
         tiles[27] = new Property("Selection Sort Street", 27, 260, 22, "Yellow");
         tiles[28] = new Tile("GitHub Repo", 28) { public void landOn(Player p) {} };
@@ -38,10 +73,25 @@ public class Board {
         tiles[32] = new Property("Merge Sort Motel", 32, 300, 26, "Green");
         tiles[33] = new Tile("Community Chest", 33) { public void landOn(Player p) {} };
         tiles[34] = new Property("Heap Sort Haven", 34, 320, 28, "Green");
-        tiles[35] = new Tile("Server 4", 35) { public void landOn(Player p) {} };
+        tiles[35] = new Property("Server 4", 5, 200, 25, "Server") {
+          public int calculateRent() {
+            int serversOwned = 0;
+            for (Property prop : owner.ownedProperties) {
+              if (prop.colorGroup.equals("Server")) {
+                serversOwned++;
+              }
+            }
+            return (int) (25 * Math.pow(2, serversOwned - 1));
+          }
+        };
         tiles[36] = new Tile("Chance", 36) { public void landOn(Player p) {} };
         tiles[37] = new Property("Breadth First Search Boulevard", 37, 350, 35, "Dark Blue");
-        tiles[38] = new Tile("Luxury Tax", 38) { public void landOn(Player p) {} };
+        tiles[38] = new Tile("Luxury Tax", 38) {
+          public void landOn(Player p) {
+            p.money -= 100;
+            System.out.println(p.name + " paid $100 Luxury Tax.");
+          } 
+        };
         tiles[39] = new Property("Depth First Search Disaster", 39, 400, 50, "Dark Blue");
     }
 
@@ -105,6 +155,9 @@ public class Board {
            ellipse(startX + cornerSize + 25, startY + cornerSize + 32 + (i * 35), 12, 12);
           }
         }
+        fill(0);
+        textSize(28);
+        text("Current Turn: " + players[currentTurn].name, startX + cornerSize + 40, startY + cornerSize + 180);
         for (int i = 0; i < 40; i++) {
             float[] t = getTilePosition(i);
             float x = t[0];
