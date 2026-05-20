@@ -135,9 +135,8 @@ void runGameplayLoop() {
     // Draw current roll in the center of the board
     if (hasRolled) {
         float boardSize = min(width, height) * 0.95;
-        float cornerSize = boardSize * 0.13;
         float startX = (width - boardSize) / 2;
-        float startY = (height - boardSize) / 2;
+        float startY = (height - boardSize) / 2 - 175;
         fill(0);
         textSize(18);
         textAlign(CENTER, CENTER);
@@ -156,7 +155,7 @@ void drawActionPanel() {
     float boardSize = min(width, height) * 0.95;
     float cornerSize = boardSize * 0.13;
     float startX = (width - boardSize) / 2;
-    float startY = (height - boardSize) / 2;
+    float startY = (height - boardSize) / 2 + 110;
     fill(245);
     stroke(0);
     rect(startX + cornerSize + 30, startY + cornerSize + 430, boardSize - 2 * cornerSize - 60, 120);
