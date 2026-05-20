@@ -40,7 +40,11 @@ public class Property extends Tile {
                     utilitiesOwned++;
                 }
             }
-            int lastRoll = (dice != null) ? (dice.die1 + dice.die2) : 7;
+            int defaultRoll = 7;
+            int lastRoll = defaultRoll;
+            if (dice != null) {
+                lastRoll = dice.die1 + dice.die2;
+            }
             if (utilitiesOwned == 2) {
                 return 10 * lastRoll;
             } else {
