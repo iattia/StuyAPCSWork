@@ -1,50 +1,114 @@
+import java.util.ArrayList;
 public class Board {
     public Tile[] tiles;
-
     public Board() {
         tiles = new Tile[40];
         tiles[0] = new GoTile("Go", 0);
         tiles[1] = new Property("Scheme", 1, 60, 2, "Brown");
-        tiles[2] = new Tile("Community Chest", 2) { public void landOn(Player p) {} };
+        tiles[2] = new CommunityChestTile("Community Chest", 2);
         tiles[3] = new Property("Dr. Racket", 3, 60, 4, "Brown");
-        tiles[4] = new Tile("Income Tax", 4) { public void landOn(Player p) {} };
-        tiles[5] = new Tile("Server 1", 5) { public void landOn(Player p) {} };
+        tiles[4] = new Tile("Income Tax", 4) {
+            public void landOn(Player p) {
+                p.pay(200);
+                triggerPopup("Income Tax", p.name + " paid $200 Income Tax.");
+            }
+        };
+        tiles[5] = new Property("Server 1", 5, 200, 25, "Server") {
+            @Override
+            public int calculateRent() {
+                if (owner == null) return this.rent;
+                int serversOwned = 0;
+                for (Property prop : owner.ownedProperties) {
+                    if (prop.colorGroup.equals("Server")) {
+                        serversOwned++;
+                    }
+                }
+                return (int) (25 * Math.pow(2, serversOwned - 1));
+            }
+        };
         tiles[6] = new Property("HTML World", 6, 100, 6, "Light Blue");
-        tiles[7] = new Tile("Chance", 7) { public void landOn(Player p) {} };
+        tiles[7] = new ChanceTile("Chance", 7);
         tiles[8] = new Property("CSS Court", 8, 100, 6, "Light Blue");
         tiles[9] = new Property("Python Place", 9, 120, 8, "Light Blue");
         tiles[10] = new JailTile("Just Visiting / In Jail", 10);
         tiles[11] = new Property("Int International", 11, 140, 10, "Pink");
-        tiles[12] = new Tile("Stack Overflow", 12) { public void landOn(Player p) {} };
+        tiles[12] = new Property("Stack Overflow", 12, 150, 4, "Utility");
         tiles[13] = new Property("Double Downtown", 13, 140, 10, "Pink");
         tiles[14] = new Property("Boolean Boulevard", 14, 160, 12, "Pink");
-        tiles[15] = new Tile("Server 2", 15) { public void landOn(Player p) {} };
+        tiles[15] = new Property("Server 2", 15, 200, 25, "Server") {
+            @Override
+            public int calculateRent() {
+                if (owner == null) return this.rent;
+                int serversOwned = 0;
+                for (Property prop : owner.ownedProperties) {
+                    if (prop.colorGroup.equals("Server")) {
+                        serversOwned++;
+                    }
+                }
+                return (int) (25 * Math.pow(2, serversOwned - 1));
+            }
+        };
         tiles[16] = new Property("Array Avenue", 16, 180, 14, "Orange");
-        tiles[17] = new Tile("Community Chest", 17) { public void landOn(Player p) {} };
+        tiles[17] = new CommunityChestTile("Community Chest", 17);
         tiles[18] = new Property("ArrayList Avenue", 18, 180, 14, "Orange");
         tiles[19] = new Property("LinkedList Living", 19, 200, 16, "Orange");
         tiles[20] = new FreeParkingTile("Free Parking", 20);
-        tiles[21] = new Property("HashMap Highway", 21, 220, 18, "Red");
-        tiles[22] = new Tile("Chance", 22) { public void landOn(Player p) {} };
-        tiles[23] = new Property("HashSet Haven", 23, 220, 18, "Red");
-        tiles[24] = new Property("TreeMap Terrace", 24, 240, 20, "Red");
-        tiles[25] = new Tile("Server 3", 25) { public void landOn(Player p) {} };
+        tiles[21] = new Property("Tree Highway", 21, 220, 18, "Red");
+        tiles[22] = new ChanceTile("Chance", 22);
+        tiles[23] = new Property("Complete Tree Haven", 23, 220, 18, "Red");
+        tiles[24] = new Property("Full Tree Terrace", 24, 240, 20, "Red");
+        tiles[25] = new Property("Server 3", 25, 200, 25, "Server") {
+            @Override
+            public int calculateRent() {
+                if (owner == null) return this.rent;
+                int serversOwned = 0;
+                for (Property prop : owner.ownedProperties) {
+                    if (prop.colorGroup.equals("Server")) {
+                        serversOwned++;
+                    }
+                }
+                return (int) (25 * Math.pow(2, serversOwned - 1));
+            }
+        };
         tiles[26] = new Property("Bubble Sort Boulevard", 26, 260, 22, "Yellow");
         tiles[27] = new Property("Selection Sort Street", 27, 260, 22, "Yellow");
-        tiles[28] = new Tile("GitHub Repo", 28) { public void landOn(Player p) {} };
+        tiles[28] = new Property("GitHub Repo", 28, 150, 4, "Utility");
         tiles[29] = new Property("Insertion Sort International", 29, 280, 24, "Yellow");
-        tiles[30] = new Tile("Go To Jail", 30) { public void landOn(Player p) {} };
+        tiles[30] = new Tile("Go To Jail", 30) {
+            public void landOn(Player p) {
+                p.position = 10;
+                p.inJail = true;
+                p.jailTurnsTracked = 0;
+                triggerPopup("Go to Jail", p.name + " landed on Go to Jail! Sent directly to Jail.");
+            }
+        };
         tiles[31] = new Property("Quick Sort Quizzes", 31, 300, 26, "Green");
         tiles[32] = new Property("Merge Sort Motel", 32, 300, 26, "Green");
-        tiles[33] = new Tile("Community Chest", 33) { public void landOn(Player p) {} };
+        tiles[33] = new CommunityChestTile("Community Chest", 33);
         tiles[34] = new Property("Heap Sort Haven", 34, 320, 28, "Green");
-        tiles[35] = new Tile("Server 4", 35) { public void landOn(Player p) {} };
-        tiles[36] = new Tile("Chance", 36) { public void landOn(Player p) {} };
+        tiles[35] = new Property("Server 4", 35, 200, 25, "Server") {
+            @Override
+            public int calculateRent() {
+                if (owner == null) return this.rent;
+                int serversOwned = 0;
+                for (Property prop : owner.ownedProperties) {
+                    if (prop.colorGroup.equals("Server")) {
+                        serversOwned++;
+                    }
+                }
+                return (int) (25 * Math.pow(2, serversOwned - 1));
+            }
+        };
+        tiles[36] = new ChanceTile("Chance", 36);
         tiles[37] = new Property("Breadth First Search Boulevard", 37, 350, 35, "Dark Blue");
-        tiles[38] = new Tile("Luxury Tax", 38) { public void landOn(Player p) {} };
+        tiles[38] = new Tile("Luxury Tax", 38) {
+            public void landOn(Player p) {
+                p.pay(100);
+                triggerPopup("Luxury Tax", p.name + " paid $100 Luxury Tax.");
+            }
+        };
         tiles[39] = new Property("Depth First Search Disaster", 39, 400, 50, "Dark Blue");
     }
-
     public float[] getTilePosition(int index) {
         float boardSize = min(width, height) * 0.95;
         float cornerSize = boardSize * 0.13;
@@ -52,37 +116,42 @@ public class Board {
         float startX = (width - boardSize) / 2;
         float startY = (height - boardSize) / 2;
         float x = 0, y = 0, w = 0, h = 0;
-
         if (index == 0) {
-            x = startX + boardSize - cornerSize; y = startY + boardSize - cornerSize;
+            x = startX + boardSize - cornerSize;
+            y = startY + boardSize - cornerSize;
             w = cornerSize; h = cornerSize;
         } else if (index < 10) {
-            x = startX + boardSize - cornerSize - (index * tileSize); y = startY + boardSize - cornerSize;
+            x = startX + boardSize - cornerSize - (index * tileSize);
+            y = startY + boardSize - cornerSize;
             w = tileSize; h = cornerSize;
         } else if (index == 10) {
-            x = startX; y = startY + boardSize - cornerSize;
+            x = startX;
+            y = startY + boardSize - cornerSize;
             w = cornerSize; h = cornerSize;
         } else if (index < 20) {
-            x = startX; y = startY + boardSize - cornerSize - ((index - 10) * tileSize);
+            x = startX;
+            y = startY + boardSize - cornerSize - ((index - 10) * tileSize);
             w = cornerSize; h = tileSize;
         } else if (index == 20) {
-            x = startX; y = startY;
+            x = startX;
+            y = startY;
             w = cornerSize; h = cornerSize;
         } else if (index < 30) {
-            x = startX + cornerSize + ((index - 20) * tileSize) - tileSize; y = startY;
+            x = startX + cornerSize + ((index - 20) * tileSize) - tileSize;
+            y = startY;
             w = tileSize; h = cornerSize;
         } else if (index == 30) {
-            x = startX + boardSize - cornerSize; y = startY;
+            x = startX + boardSize - cornerSize;
+            y = startY;
             w = cornerSize; h = cornerSize;
         } else {
-            x = startX + boardSize - cornerSize; y = startY + cornerSize + ((index - 30) * tileSize) - tileSize;
+            x = startX + boardSize - cornerSize;
+            y = startY + cornerSize + ((index - 30) * tileSize) - tileSize;
             w = cornerSize; h = tileSize;
         }
-
         return new float[]{x, y, w, h};
     }
-
-    public void draw(Player[] players, int currentTurn) {
+    public void draw(ArrayList<Player> players, int currentTurn) {
         float boardSize = min(width, height) * 0.95;
         float cornerSize = boardSize * 0.13;
         float startX = (width - boardSize) / 2;
@@ -92,18 +161,25 @@ public class Board {
         fill(0);
         textSize(64);
         textAlign(CENTER, CENTER);
-        text("MONOPOLY", startX + (boardSize / 2), startY + (boardSize / 2));
+        text("MONOPOLY", startX + (boardSize / 2), startY + (boardSize * 0.44));
         textAlign(LEFT, TOP);
         textSize(24);
-        textAlign(LEFT, TOP);
-        textSize(24);
-        for (int i = 0; i < players.length; i++) {
-         fill(players[i].playerColor);
-         text(players[i].name + ": $" + players[i].money, startX + cornerSize + 40, startY + cornerSize + 20 + (i * 35));
-         if (i == currentTurn) {
-           fill(players[i].playerColor);
-           ellipse(startX + cornerSize + 25, startY + cornerSize + 32 + (i * 35), 12, 12);
-          }
+        for (int i = 0; i < players.size(); i++) {
+            fill(players.get(i).playerColor);
+            String pText = players.get(i).name + ": $" + players.get(i).money;
+            if (players.get(i).inJail) {
+                pText += " (JAIL)";
+            }
+            text(pText, startX + cornerSize + 40, startY + cornerSize + 20 + (i * 35));
+            if (i == currentTurn) {
+                fill(players.get(i).playerColor);
+                ellipse(startX + cornerSize + 25, startY + cornerSize + 32 + (i * 35), 12, 12);
+            }
+        }
+        fill(0);
+        textSize(28);
+        if (players.size() > 0 && currentTurn < players.size()) {
+            text("Current Turn: " + players.get(currentTurn).name, startX + cornerSize + 40, startY + cornerSize + 180);
         }
         for (int i = 0; i < 40; i++) {
             float[] t = getTilePosition(i);
@@ -115,10 +191,10 @@ public class Board {
             strokeWeight(2);
             fill(235);
             rect(x, y, w, h);
-            float textX = x + 2;
-            float textY = y + 2;
-            float textW = w - 4;
-            float textH = h - 4;
+            float textX = x + 4;
+            float textY = y + 4;
+            float textW = w - 8;
+            float textH = h - 8;
             if (tiles[i] instanceof Property) {
                 Property p = (Property) tiles[i];
                 fill(getColor(p.colorGroup));
@@ -127,32 +203,57 @@ public class Board {
                     rect(x, y, w, h * bandRatio);
                     textY += h * bandRatio;
                     textH -= h * bandRatio;
+                    textH -= 6;
                 } else if (i > 10 && i < 20) {
                     rect(x + w - (w * bandRatio), y, w * bandRatio, h);
                     textW -= w * bandRatio;
+                    textX += 6;
+                    textW -= 6;
                 } else if (i > 20 && i < 30) {
                     rect(x, y + h - (h * bandRatio), w, h * bandRatio);
                     textH -= h * bandRatio;
+                    textY += 6; 
+                    textH -= 6;
                 } else if (i > 30 && i < 40) {
                     rect(x, y, w * bandRatio, h);
                     textX += w * bandRatio;
                     textW -= w * bandRatio;
+                    textW -= 6;
+                }
+                if (p.owner != null) {
+                    fill(p.owner.playerColor);
+                    if (i > 0 && i < 10) {
+                        rect(x, y + h - 6, w, 6);
+                    } else if (i > 10 && i < 20) {
+                        rect(x, y, 6, h);
+                    } else if (i > 20 && i < 30) {
+                        rect(x, y, w, 6);
+                    } else if (i > 30 && i < 40) {
+                        rect(x + w - 6, y, 6, h);
+                    }
                 }
             }
             fill(0);
-            textSize(10);
+            if (tiles[i].name.length() > 20) {
+                textSize(10);
+            } else if (tiles[i].name.length() > 14) {
+                textSize(12);
+            } else {
+                textSize(13);
+            }
+            
             textAlign(CENTER, CENTER);
             text(tiles[i].name, textX, textY, textW, textH);
         }
     }
-
-    public void drawPlayers(Player[] players) {
-        int[][] offsets = {{-8, -8}, {8, -8}, {-8, 8}, {8, 8}}; 
-        for (int i = 0; i < players.length; i++) {
-            float[] t = getTilePosition(players[i].position);
-            float cx = t[0] + t[2] / 2 + offsets[i][0];
-            float cy = t[1] + t[3] / 2 + offsets[i][1];
-            fill(players[i].playerColor);
+    public void drawPlayers(ArrayList<Player> players) {
+        int[][] offsets = {{-8, -8}, {8, -8}, {-8, 8}, {8, 8}};
+        for (int i = 0; i < players.size(); i++) {
+            Player p = players.get(i);
+            float[] t = getTilePosition(p.position);
+            float cx = t[0] + t[2] / 2 + offsets[i % 4][0];
+            float cy = t[1] + t[3] / 2 + offsets[i % 4][1];
+            fill(p.playerColor);
             noStroke();
             ellipse(cx, cy, 16, 16);
         }
@@ -166,6 +267,7 @@ public class Board {
         if (group.equals("Yellow")) return color(255, 255, 0);
         if (group.equals("Green")) return color(34, 139, 34);
         if (group.equals("Dark Blue")) return color(30, 144, 255);
+        if (group.equals("Utility")) return color(180);
         return color(255);
     }
     public Tile getTile(int pos) {
