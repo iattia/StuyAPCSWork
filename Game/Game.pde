@@ -136,7 +136,7 @@ void runGameplayLoop() {
     if (hasRolled) {
         float boardSize = min(width, height) * 0.95;
         float startX = (width - boardSize) / 2;
-        float startY = (height - boardSize) / 2 - 175;
+        float startY = (height - boardSize) / 2 - 190;
         fill(0);
         textSize(18);
         textAlign(CENTER, CENTER);
@@ -146,7 +146,7 @@ void runGameplayLoop() {
             text("DOUBLES! Press [E] to start your extra turn!", startX + boardSize / 2, startY + boardSize * 0.55);
         }
     }
-    
+
     if (showPopup) {
         drawPopupOverlay();
     }
