@@ -60,25 +60,25 @@ void drawCustomizationScreen() {
     textSize(48);
     textAlign(CENTER, CENTER);
     text("PLAYER SETUP", width / 2, height / 6);
-    
+
     textSize(20);
     text("Click a circle to customize player token colors:", width / 2, height / 4);
-    
+
     color[] colorChoices = { color(255, 0, 0), color(0, 180, 0), color(0, 0, 255), color(200, 0, 200), color(255, 215, 0), color(0, 200, 200) };
-    
+
     for (int i = 0; i < selectedPlayerCount; i++) {
         float rowY = height / 3 + (i * 80);
-        
+
         // Label
         fill(0);
         textSize(22);
         textAlign(LEFT, CENTER);
         text("Player " + (i + 1) + ":", width / 4, rowY);
-        
+
         // Color circles
         for (int c = 0; c < 6; c++) {
             float cx = width / 2 - 50 + (c * 40);
-            
+
             // Highlight if this is the selected color
             if (selectedColors[i] == colorChoices[c]) {
                 stroke(0);
@@ -87,16 +87,16 @@ void drawCustomizationScreen() {
                 stroke(150);
                 strokeWeight(1);
             }
-            
+
             fill(colorChoices[c]);
             ellipse(cx, rowY, 24, 24);
         }
     }
-    
+
     // Reset stroke settings
     stroke(0);
     strokeWeight(2);
-    
+
     // START GAME button
     fill(200);
     rect(width / 2 - 100, height * 3 / 4, 200, 50);
@@ -131,7 +131,7 @@ void runGameplayLoop() {
     board.draw(players, currentTurn);
     board.drawPlayers(players);
     drawActionPanel();
-    
+
     // Draw current roll in the center of the board
     if (hasRolled) {
         float boardSize = min(width, height) * 0.95;

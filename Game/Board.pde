@@ -179,7 +179,7 @@ public class Board {
         fill(0);
         textSize(28);
         if (players.size() > 0 && currentTurn < players.size()) {
-            text("Current Turn: " + players.get(currentTurn).name, startX + cornerSize + 40, startY + cornerSize + 180);
+            text("Current Turn: " + players.get(currentTurn).name, startX + cornerSize + 400, startY + cornerSize + 35);
         }
         for (int i = 0; i < 40; i++) {
             float[] t = getTilePosition(i);
@@ -212,7 +212,7 @@ public class Board {
                 } else if (i > 20 && i < 30) {
                     rect(x, y + h - (h * bandRatio), w, h * bandRatio);
                     textH -= h * bandRatio;
-                    textY += 6; 
+                    textY += 6;
                     textH -= 6;
                 } else if (i > 30 && i < 40) {
                     rect(x, y, w * bandRatio, h);
@@ -241,7 +241,7 @@ public class Board {
             } else {
                 textSize(13);
             }
-            
+
             textAlign(CENTER, CENTER);
             text(tiles[i].name, textX, textY, textW, textH);
         }
