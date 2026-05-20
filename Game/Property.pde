@@ -16,7 +16,8 @@ public class Property extends Tile {
             System.out.println(p.name + " landed on unowned " + this.name + ".");
         } else if (this.owner != p) {
             int amountOwed = calculateRent();
-            p.pay(amountOwed, this.owner);
+             p.pay(amountOwed, this.owner);
+            //this.owner.addBalance(amountOwed);
             System.out.println(p.name + " paid $" + amountOwed + " rent to " + this.owner.name);
             triggerPopup("Rent Payment", p.name + " paid $" + amountOwed + " rent to " + this.owner.name + "!");
         }
