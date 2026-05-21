@@ -22,3 +22,6 @@ Removed unnecessary extra file and started working on a new chance tile class be
 
 ### 2026-05-18 - Worked on game functionality
 Mostly prevented game from crashing. Fixed payment and purchasing logic, especially when trying to buy non-properties or when trying to buy things like utilities or railroads which work a bit differently.
+
+### 2026-05-19 - Added text popups and better property management
+Replaced print statements with an actual text pop up in the center of the screen. Added a color coordination system to make it clearer which token owns each property. Added some chance/community tile possibilities.
