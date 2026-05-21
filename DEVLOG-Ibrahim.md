@@ -25,3 +25,6 @@ Mostly prevented game from crashing. Fixed payment and purchasing logic, especia
 
 ### 2026-05-19 - Added text popups and better property management
 Replaced print statements with an actual text pop up in the center of the screen. Added a color coordination system to make it clearer which token owns each property. Added some chance/community tile possibilities.
+
+### 2026-05-20 - Completed README
+Added project description, compilation/running instructions, usage and controls instructions, and a few known issues. Also added placeholder for the video presentation link.
