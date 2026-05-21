@@ -2,6 +2,15 @@ int START_MENU = 0;
 int CUSTOMIZATION = 1;
 int PLAYING = 2;
 int GAME_OVER = 3;
+
+int TEST_RENT = 4;
+int TEST_CHANCE = 5;
+int TEST_JAIL = 6;
+int TEST_DOUBLES = 7;
+int TEST_BANKRUPT = 8;
+int TEST_ENDGAME = 9;
+int TEST_RENT_MULTIPLIER = 10;
+
 int state = START_MENU;
 Board board;
 ArrayList<Player> players;
@@ -288,6 +297,27 @@ void mousePressed() {
     }
 }
 void keyPressed() {
+    if (key == '1'){
+        state = TEST_RENT;
+    }
+    if (key == '2'){
+        state = TEST_JAIL;
+    }
+    if (key == '3'){
+        state = TEST_CHANCE;
+    }
+    if (key == '4'){
+        state = TEST_DOUBLES;
+    }
+    if (key == '5'){
+        state = TEST_RENT_MULTIPLIER;
+    }
+    if (key == '6'){
+        state = TEST_ENDGAME;
+    }
+    if (key == '7'){
+        state = TEST_BANKRUPT;
+    }
     if (state == GAME_OVER) {
         if (key == 'r' || key == 'R') {
             resetGame();
