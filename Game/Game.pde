@@ -81,17 +81,16 @@ void drawCustomizationScreen() {
     for (int i = 0; i < selectedPlayerCount; i++) {
         float rowY = height / 3 + (i * 80);
 
-        // Label
         fill(0);
         textSize(22);
         textAlign(LEFT, CENTER);
         text("Player " + (i + 1) + ":", width / 4, rowY);
 
-        // Color circles
+        // color circles
         for (int c = 0; c < 6; c++) {
             float cx = width / 2 - 50 + (c * 40);
 
-            // Highlight if this is the selected color
+            // highlight if this is the selected color
             if (selectedColors[i] == colorChoices[c]) {
                 stroke(0);
                 strokeWeight(4);
@@ -105,7 +104,6 @@ void drawCustomizationScreen() {
         }
     }
 
-    // Reset stroke settings
     stroke(0);
     strokeWeight(2);
 
@@ -153,7 +151,6 @@ void runGameplayLoop() {
     textAlign(CENTER, CENTER);
     text(activeTestMessage, startX + boardSize / 2, startY + boardSize * 0.28);
 }
-    // Draw current roll in the center of the board
     if (hasRolled) {
         float boardSize = min(width, height) * 0.95;
         float startX = (width - boardSize) / 2;
@@ -449,6 +446,7 @@ void resetGame() {
     wasMovedByCard = false;
     activePropertyPrompt = null;
     activeChanceTilePrompt = null;
+    activeTestMessage = "";
     for (Tile t : board.tiles) {
         if (t instanceof Property) {
             ((Property) t).owner = null;
