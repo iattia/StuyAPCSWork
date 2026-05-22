@@ -490,8 +490,9 @@ void testRent() {
     setupTest();
     Property p = (Property) board.tiles[1];
     players.get(0).buyProperty(p);
+    players.get(0).move(1);
     players.get(1).position = 1;
-    activeTestMessage = "TESTING RENT\nPlayer 2 is landing on Player 1's owned property.";
+    activeTestMessage = "TESTING RENT\nPlayer 2 is landing on Player 1's owned property.\n (Player 1 spent $60, but gained $2 and Player 2 lost $2)";
     board.tiles[1].landOn(players.get(1));
 }
 void testJail() {
@@ -517,7 +518,7 @@ void testEndgame() {
         players.get(0).ownedProperties.add(p);
     }
     players.get(1).position = 21;
-    activeTestMessage = "TESTING ENDGAME\nPlayer 2 is broke and will probably lose soon.";
+    activeTestMessage = "TESTING ENDGAME\nPlayer 2 is broke and will probably lose soon after Player 1's turn.\n If he gets lucky, press '6' to test again.";
 }
 void testBankrupt() {
     setupTest();
