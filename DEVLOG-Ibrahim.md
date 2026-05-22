@@ -28,3 +28,6 @@ Replaced print statements with an actual text pop up in the center of the screen
 
 ### 2026-05-20 - Completed README
 Added project description, compilation/running instructions, usage and controls instructions, and a few known issues. Also added placeholder for the video presentation link.
+
+### 2026-05-21 - Added testing environments
+Implemented full testing environments for testing rent, rent multipliers, chance cards, jail, doubles, bankruptcy, and end game.
