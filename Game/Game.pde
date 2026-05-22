@@ -26,6 +26,9 @@ boolean showPopup = false;
 Property activePropertyPrompt = null;
 ChanceTile activeChanceTilePrompt = null;
 boolean wasMovedByCard = false;
+String activeTestMessage = "";
+boolean forceNextDouble = false;
+
 void setup() {
     size(1000, 1000);
     board = new Board();
@@ -141,6 +144,15 @@ void runGameplayLoop() {
     board.drawPlayers(players);
     drawActionPanel();
 
+    if (!activeTestMessage.equals("")) {
+    float boardSize = min(width, height) * 0.95;
+    float startX = (width - boardSize) / 2;
+    float startY = (height - boardSize) / 2;
+    fill(200, 0, 0);
+    textSize(24);
+    textAlign(CENTER, CENTER);
+    text(activeTestMessage, startX + boardSize / 2, startY + boardSize * 0.28);
+}
     // Draw current roll in the center of the board
     if (hasRolled) {
         float boardSize = min(width, height) * 0.95;
@@ -297,26 +309,26 @@ void mousePressed() {
     }
 }
 void keyPressed() {
-    if (key == '1'){
-        state = TEST_RENT;
+    if (key == '1') {
+        testRent();
     }
-    if (key == '2'){
-        state = TEST_JAIL;
+    if (key == '2') {
+        testJail();
     }
-    if (key == '3'){
-        state = TEST_CHANCE;
+    if (key == '3') {
+        testChance();
     }
-    if (key == '4'){
-        state = TEST_DOUBLES;
+    if (key == '4') {
+        testDoubles();
     }
-    if (key == '5'){
-        state = TEST_RENT_MULTIPLIER;
+    if (key == '5') {
+        testRentMultiplier();
     }
-    if (key == '6'){
-        state = TEST_ENDGAME;
+    if (key == '6') {
+        testEndgame();
     }
-    if (key == '7'){
-        state = TEST_BANKRUPT;
+    if (key == '7') {
+        testBankrupt();
     }
     if (state == GAME_OVER) {
         if (key == 'r' || key == 'R') {
@@ -328,6 +340,12 @@ void keyPressed() {
     Player p = players.get(currentTurn);
     if (key == ' ' && !hasRolled) {
         int roll = dice.roll();
+        if (forceNextDouble) {
+            dice.die1 = (int)(Math.random() * 6) + 1;
+            dice.die2 = dice.getDie1();
+            roll = dice.getDie1() + dice.getDie2();
+            forceNextDouble = false;
+        }
         boolean isDoubleRolled = (dice.die1 == dice.die2);
         hasRolled = true;
         if (p.inJail) {
@@ -437,4 +455,82 @@ void resetGame() {
         }
     }
     state = START_MENU;
+}
+
+void setupTest() {
+    players.clear();
+    players.add(new Player("Player 1", color(255, 0, 0)));
+    players.add(new Player("Player 2", color(0, 180, 0)));
+    for (Tile t : board.tiles) {
+        if (t instanceof Property) {
+            ((Property) t).owner = null;
+        }
+    }
+    currentTurn = 0;
+    state = PLAYING;
+    activeTestMessage = "";
+    forceNextDouble = false;
+    hasRolled = false;
+    canRollAgain = false;
+    showPopup = false;
+    wasMovedByCard = false;
+}
+void testDoubles() {
+    setupTest();
+    forceNextDouble = true;
+    activeTestMessage = "TESTING DOUBLES\nNext roll forced to be doubles. You should get an extra turn.";
+}
+void testRentMultiplier() {
+    setupTest();
+    Property p1 = (Property) board.tiles[37];
+    Property p2 = (Property) board.tiles[39];
+    players.get(0).buyProperty(p1);
+    players.get(0).buyProperty(p2);
+    players.get(1).position = 37;
+    activeTestMessage = "TESTING MULTIPLIER\nPlayer 2 landing on Dark Blue. Rent should double from $35 to $70.";
+    board.tiles[37].landOn(players.get(1));
+}
+void testRent() {
+    setupTest();
+    Property p = (Property) board.tiles[1];
+    players.get(0).buyProperty(p);
+    players.get(1).position = 1;
+    activeTestMessage = "TESTING RENT\nPlayer 2 is landing on Player 1's owned property.";
+    board.tiles[1].landOn(players.get(1));
+}
+void testJail() {
+    setupTest();
+    players.get(0).position = 10;
+    players.get(0).inJail = true;
+    players.get(0).jailTurnsTracked = 0;
+    activeTestMessage = "TESTING JAIL\nPlayer 1 is starting their turn in Jail.";
+}
+void testChance() {
+    setupTest();
+    players.get(0).position = 7;
+    activeTestMessage = "TESTING CHANCE\nPlayer 1 is landing on a Chance tile.";
+    board.tiles[7].landOn(players.get(0));
+}
+void testEndgame() {
+    setupTest();
+    players.get(1).money = 10;
+    int[] propIndices = {23, 24, 25, 26, 27, 28, 29, 31, 32};
+    for (int i : propIndices) {
+        Property p = (Property) board.tiles[i];
+        p.owner = players.get(0);
+        players.get(0).ownedProperties.add(p);
+    }
+    players.get(1).position = 21;
+    activeTestMessage = "TESTING ENDGAME\nPlayer 2 is broke and will probably lose soon.";
+}
+void testBankrupt() {
+    setupTest();
+    players.get(1).money = 0;
+    Property p1 = (Property) board.tiles[6];
+    players.get(1).buyProperty(p1);
+    Property p2 = (Property) board.tiles[39];
+    players.get(0).buyProperty(p2);
+    players.get(1).position = 39;
+    activeTestMessage = "TESTING BANKRUPT\nPlayer 2 has $0 and is landing on Player 1's property.";
+    board.tiles[39].landOn(players.get(1));
 }
