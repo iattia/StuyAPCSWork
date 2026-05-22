@@ -28,7 +28,14 @@ The game utilizes both mouse and keyboard inputs to navigate the interface and p
 **Game Controls:**
 * **Spacebar:** Roll the dice for the current active player.
 * **E:** End the current player's turn and pass to the next player.
-* **R:** Return to the Start Menu from the Game Over screen.
+* **R:** Return to the Start Menu.
+* **1:** Testing Rent, Player 1 owns Scheme property and Player 2 lands on it.
+* **2:** Testing Jail, Player 1 is in Jail, can't move until he rolls a double or three turns pass.
+* **3:** Testing Chance, Player 1 draws a random Chance card and has the scenario occur.
+* **4:** Testing Doubles, Player 1's next roll is a forced double, he will roll again after.
+* **5:** Testing Multiplier, Player 1 owns both dark blue properties, Player 2 pays double rent if he lands on them.
+* **6:** Testing Endgame, Player 2 is low on money and will most likely land on one of the properties that player 1 owns. (Not a guaranteed loss in next move but soon.)
+* **7:** Testing Victory Screen, Player 1 won the game because Player 2 went bankrupt.
 
 ## Major Bugs and Known Issues
 * **Text Readability:** The board text for certain properties are a bit small and could be difficult to read.
