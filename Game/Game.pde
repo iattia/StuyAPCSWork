@@ -327,10 +327,8 @@ void keyPressed() {
     if (key == '7') {
         testBankrupt();
     }
-    if (state == GAME_OVER) {
-        if (key == 'r' || key == 'R') {
-            resetGame();
-        }
+    if (key == 'r' || key == 'R') {
+        resetGame();
         return;
     }
     if (state != PLAYING || showPopup) return;
