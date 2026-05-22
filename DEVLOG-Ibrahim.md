@@ -31,3 +31,6 @@ Added project description, compilation/running instructions, usage and controls 
 
 ### 2026-05-21 - Added testing environments
 Implemented full testing environments for testing rent, rent multipliers, chance cards, jail, doubles, bankruptcy, and end game.
+
+### 2026-05-22 - Fixed testing environment
+No longer required game state to be over to restart the game, makes it easier for testing. Explained the rent and end game testing environments further to avoid any confusion.
