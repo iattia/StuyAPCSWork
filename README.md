@@ -10,7 +10,7 @@ We created a game in Processing similar to Monopoly, which features a full 40-ti
 To play, select the number of players you would like to play with, ranging from 2 to 4 players. From there, you can select custom colors for each player. Once you start, players will roll their dice and try to balance their game in properties and balance. Once a player goes below $0, they instantly lose and are out of the game. The last player remaining wins.
 
 ## Video Presentation
-[Link to Video Presentation](ADD_WHEN_DONE)
+[Link to Video Presentation](https://www.youtube.com/watch?v=TfjsBp52PvI)
 
 ## Compiling and Running
 1. Download and install Processing.
