@@ -12,7 +12,7 @@ BurnTrees treeSim;
 int ROWS;
 int COLS;
 int SQUARESIZE;
-boolean isStack;
+int MODE;
 
 void setup() {
   size(600, 500);
@@ -26,8 +26,7 @@ void setup() {
    */
 
   //width is cols, or x.
-  isStack = Math.random() < 0.5;
-  treeSim = new BurnTrees(COLS, ROWS, isStack);
+  treeSim = new BurnTrees(COLS, ROWS, MODE);
 
   /**question 2 *********************************
    *Given that you can change the size() and the number of ROWS and COLS,
@@ -84,8 +83,8 @@ void mouseClicked() {
    *Please use the same values that it was initialized with in the setup.
    * ANSWER: UPDATE THE NEXT LINE THEN COPY IT TO THE TOP IN ANSWER SLOT 4.
    */
-  isStack = Math.random() < 0.5;
-  treeSim = new BurnTrees(COLS, ROWS, isStack);
+  MODE = MODE++ % 3;
+  treeSim = new BurnTrees(COLS, ROWS, MODE);
 }
 
 
