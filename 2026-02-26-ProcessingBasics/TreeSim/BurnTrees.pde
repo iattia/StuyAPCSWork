@@ -30,14 +30,15 @@ class BurnTrees{
 
   public void tick(){
     ticks++;
-    int[] current = frontier.remove();
+    int[] current = frontier.remove().getPosition();
     int r = current[0];
     int c = current[1];
     if (map[r][c] == FIRE) {
       if (r + 1 < map.length){
         if (map[r + 1][c] == TREE){
           map[r + 1][c] = FIRE;
-          frontier.add(new int[]{r + 1, c});
+          int dend = (endRow - (r + 1)) + (endCol - (c));
+          frontier.add(new Location(new int[]{r + 1, c}, dend));
           cameFrom[r + 1][c] = new int[]{r, c};
         }
         else if (map[r + 1][c] == END){
@@ -49,7 +50,8 @@ class BurnTrees{
       if (r - 1 > -1){
         if (map[r - 1][c] == TREE){
           map[r - 1][c] = FIRE;
-          frontier.add(new int[]{r - 1, c});
+          int dend = (endRow - (r - 1)) + (endCol - (c));
+          frontier.add(new Location(new int[]{r - 1, c}, dend));
           cameFrom[r - 1][c] = new int[]{r, c};
         }
         else if (map[r - 1][c] == END){
@@ -61,7 +63,8 @@ class BurnTrees{
       if (c + 1 < map[r].length){
         if (map[r][c + 1] == TREE){
           map[r][c + 1] = FIRE;
-          frontier.add(new int[]{r, c + 1});
+          int dend = (endRow - (r)) + (endCol - (c + 1));
+          frontier.add(new Location(new int[]{r, c + 1}, dend));
           cameFrom[r][c + 1] = new int[]{r, c};
         }
         else if (map[r][c + 1] == END){
@@ -73,7 +76,8 @@ class BurnTrees{
       if (c - 1 > -1){
         if (map[r][c - 1] == TREE){
           map[r][c - 1] = FIRE;
-          frontier.add(new int[]{r, c - 1});
+          int dend = (endRow - (r)) + (endCol - (c - 1));
+          frontier.add(new Location(new int[]{r, c - 1}, dend));
           cameFrom[r][c - 1] = new int[]{r, c};
         }
         else if (map[r][c - 1] == END){
@@ -92,9 +96,8 @@ class BurnTrees{
    *If you add more instance variables you can add more here,
    *otherwise it is complete
    */
-  public BurnTrees(int width,int height, boolean isStack){
-    this.isStack = isStack;
-    frontier = new Frontier(this.isStack);
+  public BurnTrees(int width,int height, int mode){
+    frontier = new Frontier(mode);
     map = new int[height][width];
     cameFrom = new int[height][width][2];
     for (int i = 0; i < map.length; i++){
@@ -184,7 +187,7 @@ class BurnTrees{
     //If you add more instance variables you can add more here,
     //otherwise it is complete.
     map[startRow][startCol] = FIRE;
-    frontier.add(new int[]{startRow, startCol});
+    frontier.add(new Location(new int[]{startRow, startCol}, endRow + endCol));
   }
 
 /*
