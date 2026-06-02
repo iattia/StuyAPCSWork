@@ -162,6 +162,8 @@ class BurnTrees{
           col = map[0].length - 2;
           if (map[row][col] == TREE){
             map[row][col] = END;
+            endRow = row;
+            endCol = col;
             return;
           }
         }
