@@ -16,7 +16,10 @@ class BurnTrees{
   private int[][][] cameFrom;
   private int endRow;
   private int endCol;
-
+  private int MODE;
+  private static final int GREEDY = 2;
+  private static final int AS = 3;
+  
   /*Determine if the simulation is still burning
    *@return false if any fires are still burning, true otherwise
    */
@@ -33,11 +36,18 @@ class BurnTrees{
     int[] current = frontier.remove().getPosition();
     int r = current[0];
     int c = current[1];
+    int dend = 0;
+    int dstart = 0;
     if (map[r][c] == FIRE) {
       if (r + 1 < map.length){
         if (map[r + 1][c] == TREE){
           map[r + 1][c] = FIRE;
-          int dend = (endRow - (r + 1)) + (endCol - (c));
+          dend = Math.abs((endRow - (r + 1))) + Math.abs((endCol - (c)));
+          if (MODE == AS){
+            dstart = Math.abs((startRow - (r + 1))) + Math.abs((startCol - (c)));
+          } else{
+            dstart = 0;
+          }
           frontier.add(new Location(new int[]{r + 1, c}, dend));
           cameFrom[r + 1][c] = new int[]{r, c};
         }
@@ -50,8 +60,12 @@ class BurnTrees{
       if (r - 1 > -1){
         if (map[r - 1][c] == TREE){
           map[r - 1][c] = FIRE;
-          int dend = (endRow - (r - 1)) + (endCol - (c));
-          frontier.add(new Location(new int[]{r - 1, c}, dend));
+          if (MODE == AS){
+            dend = Math.abs((endRow - (r - 1))) + Math.abs((endCol - (c)));
+          } else{
+            dstart = Math.abs((startRow - (r - 1))) + Math.abs((startCol - (c)));
+          }
+          frontier.add(new Location(new int[]{r - 1, c}, dend, dstart));
           cameFrom[r - 1][c] = new int[]{r, c};
         }
         else if (map[r - 1][c] == END){
@@ -63,8 +77,12 @@ class BurnTrees{
       if (c + 1 < map[r].length){
         if (map[r][c + 1] == TREE){
           map[r][c + 1] = FIRE;
-          int dend = (endRow - (r)) + (endCol - (c + 1));
-          frontier.add(new Location(new int[]{r, c + 1}, dend));
+          if (MODE == AS){
+            dend = Math.abs((endRow - (r))) + Math.abs((endCol - (c + 1)));
+          } else{
+            dstart = Math.abs((startRow - (r))) + Math.abs((startCol - (c + 1)));
+          }
+          frontier.add(new Location(new int[]{r, c + 1}, dend, dstart));
           cameFrom[r][c + 1] = new int[]{r, c};
         }
         else if (map[r][c + 1] == END){
@@ -76,7 +94,11 @@ class BurnTrees{
       if (c - 1 > -1){
         if (map[r][c - 1] == TREE){
           map[r][c - 1] = FIRE;
-          int dend = (endRow - (r)) + (endCol - (c - 1));
+          if (MODE == AS){
+            dend = Math.abs((endRow - (r))) + Math.abs((endCol - (c - 1)));
+          } else{
+            dstart = Math.abs((startRow - (r))) + Math.abs((startCol - (c - 1)));
+          }
           frontier.add(new Location(new int[]{r, c - 1}, dend));
           cameFrom[r][c - 1] = new int[]{r, c};
         }
@@ -98,6 +120,7 @@ class BurnTrees{
    */
   public BurnTrees(int width,int height, int mode){
     frontier = new Frontier(mode);
+    this.MODE = mode;
     map = new int[height][width];
     cameFrom = new int[height][width][2];
     for (int i = 0; i < map.length; i++){
