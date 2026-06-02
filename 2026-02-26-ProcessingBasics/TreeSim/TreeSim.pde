@@ -83,7 +83,7 @@ void mouseClicked() {
    *Please use the same values that it was initialized with in the setup.
    * ANSWER: UPDATE THE NEXT LINE THEN COPY IT TO THE TOP IN ANSWER SLOT 4.
    */
-  MODE = (MODE + 1) % 3;
+  MODE = (MODE + 1) % 4;
   treeSim = new BurnTrees(COLS, ROWS, MODE);
 }
 
