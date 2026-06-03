@@ -28,6 +28,9 @@ public class Location implements Comparable<Location>{
    distToStart = dstart;
   }
 
+  public int getDistToStart() {
+    return distToStart;
+  }
   /**Do not use this version for greedy or A*
   */
   public Location(int [] coord){
