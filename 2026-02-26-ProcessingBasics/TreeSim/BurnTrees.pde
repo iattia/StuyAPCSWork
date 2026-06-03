@@ -1,6 +1,7 @@
 import java.util.*;
 class BurnTrees{
   private int[][]map;
+  private int[][] distances;
   private int ticks;
   private static final int TREE = -2;
   private static final int FIRE = 10;
@@ -54,6 +55,7 @@ class BurnTrees{
             if (MODE == AS) {
               dstart = currentDist + 1;
             }
+            distances[nr][nc] = dend + dstart;
             frontier.add(new Location(new int[]{nr, nc}, dend, dstart));
             cameFrom[nr][nc] = new int[]{r, c};
           } else if (map[nr][nc] == END) {
@@ -77,6 +79,7 @@ class BurnTrees{
     frontier = new Frontier(mode);
     this.MODE = mode;
     map = new int[height][width];
+    distances = new int[height][width];
     cameFrom = new int[height][width][2];
     for (int i = 0; i < map.length; i++){
       Arrays.fill(map[i], SPACE);
@@ -229,5 +232,9 @@ class BurnTrees{
       System.out.println(toString());
     }
     return getTicks();
+  }
+  
+  public int getDistance(int r, int c){
+    return distances[r][c];
   }
 }

@@ -15,7 +15,7 @@ int SQUARESIZE;
 int MODE;
 
 void setup() {
-  size(600, 500);
+  size(1200, 1000);
   ROWS = 50;
   COLS = 60;
   /**question 1 *********************************
@@ -117,6 +117,11 @@ void drawSquares(BurnTrees treeSim) {
         fill(0, 0, 0); 
       }
       rect(c * SQUARESIZE, r * SQUARESIZE, SQUARESIZE, SQUARESIZE);
-    }
+      if (MODE == 2 || MODE == 3){
+        textSize(15);
+        fill(255);
+        text(treeSim.getDistance(r, c), c * SQUARESIZE + 3, r * SQUARESIZE + SQUARESIZE/2 + 3);
+      }
   }
+}
 }
