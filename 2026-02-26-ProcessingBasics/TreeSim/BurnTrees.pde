@@ -31,84 +31,36 @@ class BurnTrees{
     return frontier.size() == 0 || done;
   }
 
-  public void tick(){
+  public void tick() {
     ticks++;
-    int[] current = frontier.remove().getPosition();
+    Location currentLoc = frontier.remove();
+    int[] current = currentLoc.getPosition();
     int r = current[0];
     int c = current[1];
-    int dend = 0;
-    int dstart = 0;
+    int currentDist = 0;
+    if (MODE == AS) {
+      currentDist = currentLoc.getDistToStart();
+    }
     if (map[r][c] == FIRE) {
-      if (r + 1 < map.length){
-        if (map[r + 1][c] == TREE){
-          map[r + 1][c] = FIRE;
-          dend = Math.abs((endRow - (r + 1))) + Math.abs((endCol - (c)));
-          if (MODE == AS){
-            dstart = Math.abs((startRow - (r + 1))) + Math.abs((startCol - (c)));
-          } else{
-            dstart = 0;
+      int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+      for (int[] dir : directions) {
+        int nr = r + dir[0];
+        int nc = c + dir[1];
+        if (nr >= 0 && nr < map.length && nc >= 0 && nc < map[r].length) {
+          if (map[nr][nc] == TREE) {
+            map[nr][nc] = FIRE;
+            int dend = Math.abs(endRow - nr) + Math.abs(endCol - nc);
+            int dstart = 0;
+            if (MODE == AS) {
+              dstart = currentDist + 1;
+            }
+            frontier.add(new Location(new int[]{nr, nc}, dend, dstart));
+            cameFrom[nr][nc] = new int[]{r, c};
+          } else if (map[nr][nc] == END) {
+            cameFrom[nr][nc] = new int[]{r, c};
+            done = true;
+            retracePath(nr, nc);
           }
-          frontier.add(new Location(new int[]{r + 1, c}, dend));
-          cameFrom[r + 1][c] = new int[]{r, c};
-        }
-        else if (map[r + 1][c] == END){
-          cameFrom[r + 1][c] = new int[]{r, c};
-          done = true;
-          retracePath(r + 1, c);
-        }
-      }
-      if (r - 1 > -1){
-        if (map[r - 1][c] == TREE){
-          map[r - 1][c] = FIRE;
-          dend = Math.abs((endRow - (r - 1))) + Math.abs((endCol - (c)));
-          if (MODE == AS){
-            dstart = Math.abs((startRow - (r - 1))) + Math.abs((startCol - (c)));
-          } else{
-            dstart = 0;
-          }
-          frontier.add(new Location(new int[]{r - 1, c}, dend, dstart));
-          cameFrom[r - 1][c] = new int[]{r, c};
-        }
-        else if (map[r - 1][c] == END){
-          cameFrom[r - 1][c] = new int[]{r, c};
-          done = true;
-          retracePath(r - 1, c);
-        }
-      }
-      if (c + 1 < map[r].length){
-        if (map[r][c + 1] == TREE){
-          map[r][c + 1] = FIRE;
-          dend = Math.abs((endRow - (r))) + Math.abs((endCol - (c + 1)));
-          if (MODE == AS){
-            dstart = Math.abs((startRow - (r))) + Math.abs((startCol - (c + 1)));
-          } else{
-            dstart = 0;
-          }
-          frontier.add(new Location(new int[]{r, c + 1}, dend, dstart));
-          cameFrom[r][c + 1] = new int[]{r, c};
-        }
-        else if (map[r][c + 1] == END){
-          cameFrom[r][c + 1] = new int[]{r, c};
-          done = true;
-          retracePath(r, c + 1);
-        }
-      }
-      if (c - 1 > -1){
-        if (map[r][c - 1] == TREE){
-          map[r][c - 1] = FIRE;
-          dend = Math.abs((endRow - (r))) + Math.abs((endCol - (c - 1)));
-          if (MODE == AS){
-            dstart = Math.abs((startRow - (r))) + Math.abs((startCol - (c - 1)));
-          } else{
-            dstart = 0;
-          }
-          frontier.add(new Location(new int[]{r, c - 1}, dend));
-          cameFrom[r][c - 1] = new int[]{r, c};
-        }
-        else if (map[r][c - 1] == END){
-          cameFrom[r][c - 1] = new int[]{r, c};
-          done = true;
-          retracePath(r, c - 1);
         }
       }
       map[r][c] = ASH;
@@ -215,7 +167,8 @@ class BurnTrees{
     //If you add more instance variables you can add more here,
     //otherwise it is complete.
     map[startRow][startCol] = FIRE;
-    frontier.add(new Location(new int[]{startRow, startCol}, endRow + endCol));
+    int initialDend = Math.abs(endRow - startRow) + Math.abs(endCol - startCol);
+    frontier.add(new Location(new int[]{startRow, startCol}, initialDend, 0));
   }
 
 /*
