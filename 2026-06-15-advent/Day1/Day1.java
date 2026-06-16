@@ -1,5 +1,5 @@
 import java.io.*;
-import java.util.*;
+import java.util.Scanner;
 public class Day1{
   private static int start = 50;
   private static int count = 0;
@@ -8,30 +8,33 @@ public class Day1{
       Scanner sc = new Scanner(new File("cases.txt"));
       while(sc.hasNextLine()){
         String current = sc.nextLine();
-        String direction = current.substring(0, 1);
+        String stringDir = current.substring(0, 1);
         int rotation = Integer.parseInt(current.substring(1));
-        rotate(start, direction, rotation);
+        rotate(start, stringDir, rotation);
+        start = (start + dir * rotation + 100) % 100;
       }
     }
-    catch(Exception e){
+    catch(FileNotFoundException e){
       System.out.println("file not there");
     }
     System.out.println(count);
   }
-  public static void rotate(int start, String direction, int rotation){
-    int dir;
-    if(direction.equals("L")){
+  public static void rotate(int start, String stringDir, int rotation){
+    int dir = 1;
+    if(stringDir.equals("L")){
       dir = -1;
-    } else{
-      dir = 1;
     }
-    int turned = start + dir * rotation;
-    if (turned < -100 || turned > 100){
-      count+= Math.abs(turned/100);
-    } else if (turned <= 0){
-      count++;
+    int pointing = start + dir * rotation;
+    int revolutions = Math.abs(pointing/100);
+    if(pointing <= 0){
+      count += -pointing/100 + 1;
+      if (start == 0){
+        count--;
+      }
+    } else if(pointing > 100){
+      count += pointing/100;
     }
-    start = (turned + 100) % 100;
-  }
 
+    System.out.println(stringDir + ", " + rotation + ", " + start + ", " + count);
+  }
 }
