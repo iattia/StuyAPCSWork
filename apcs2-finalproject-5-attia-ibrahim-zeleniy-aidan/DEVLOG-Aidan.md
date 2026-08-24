@@ -1,0 +1,35 @@
+# Dev Log:
+
+This document must be updated daily every time you finish a work session.
+
+## Aidan Zeleniy
+
+### 2026-05-12 - Worked on UML
+Worked on and finished UML with all classes
+
+### 2026-05-13 - Wrote description about UML
+Wrote paragraph about the UML and inputted the images into prototype.md
+
+### 2026-05-14 - Wrote Dice and Player classes
+Developed Dice and did player class outlines
+
+### 2026-05-15 - Finalized Player Functionality and GoTile
+Added constructor and fixed all player methods. also included for go to add 200 when landed on
+
+### 2026-05-16 - Added players to the actual board
+Created new list player method and method for getting tile position
+
+### 2026-05-17 - Added player movement on the board
+Utilized the keyPress call
+
+### 2026-05-18 - Registered player location on top of property and taking turns
+Also introduced purchasing capabilities and checks if player has rolled yet
+
+### 2026-05-19 - Fixed merge errors
+We accidentally lost lots of progress so I had to go through commits to fix
+
+### 2026-05-20 - Updated communityChestTile and chanceTile
+Wrote all possible scenarios and consequences relating to them.
+
+### 2026-05-22 - Fixed testing errors and updated readME.
+Cleared text scenario text after restart.
